@@ -472,7 +472,7 @@ export default function Team() {
               <div className="absolute inset-0 bg-white/0 group-hover:bg-white/[0.03] transition-colors pointer-events-none" />
 
               <div className="w-14 h-14 overflow-hidden mb-4 border border-panel-line group-hover:border-weld/40 transition-colors">
-                <img src={m.img} alt={m.name} className="w-full h-full object-cover object-top" />
+                <img src={m.img} alt={m.name} loading="lazy" className="w-full h-full object-cover object-top" />
               </div>
 
               <p className="font-mono text-[9px] tracking-[0.2em] text-steel-light uppercase mb-1">{m.role}</p>

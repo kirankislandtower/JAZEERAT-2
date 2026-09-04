@@ -1,31 +1,15 @@
 import { motion, AnimatePresence } from 'framer-motion'
-import { NavLink } from 'react-router-dom'
 import { useState, useEffect, useCallback } from 'react'
-import { Layers, Home, Truck, ShieldCheck, Factory, ArrowUpRight, X, ArrowLeft, ArrowRight } from 'lucide-react'
+import { Layers, Home, Truck, ShieldCheck, Factory, X, ArrowLeft, ArrowRight } from 'lucide-react'
 import SectionLabel from '../components/SectionLabel'
 import Cutline from '../components/Cutline'
 import SEO from '../components/SEO'
-import VideoHero from '../components/VideoHero'
+import CtaBanner from '../components/CtaBanner'
 
 import { supabase } from '../lib/supabase'
 
 const iconMap = {
   Factory, Home, Truck, ShieldCheck, Layers
-}
-const fadeUp = {
-  hidden: { opacity: 0, y: 36 },
-  visible: (i = 0) => ({
-    opacity: 1, y: 0,
-    transition: { duration: 0.6, delay: i * 0.06, ease: 'easeOut' },
-  }),
-}
-
-const projectFadeInLeft = {
-  hidden: { opacity: 0, x: -50 },
-  visible: (i = 0) => ({
-    opacity: 1, x: 0,
-    transition: { duration: 1.2, delay: 5.0 + i * 0.2, ease: 'easeOut' },
-  }),
 }
 
 function ProjectModal({ project, index, total, onClose, onPrev, onNext }) {
@@ -107,7 +91,7 @@ function ProjectModal({ project, index, total, onClose, onPrev, onNext }) {
                     onClick={() => setImgIndex(idx)}
                     className={`w-12 h-8 border transition-all overflow-hidden ${idx === imgIndex ? 'border-weld scale-105 opacity-100' : 'border-panel-line opacity-50 hover:opacity-100'}`}
                   >
-                    <img src={img} alt="thumb" className="w-full h-full object-cover" />
+                    <img src={img} alt="thumb" loading="lazy" className="w-full h-full object-cover" />
                   </button>
                 ))}
               </div>
@@ -211,14 +195,14 @@ export default function Projects() {
         title="Steel Fabrication Projects | GCC Region"
         description="Browse Jazeerat Al Hadeed's steel fabrication project gallery: industrial structures, oil & gas platforms, logistics hubs and architectural steelwork delivered across UAE, Oman, Qatar and Saudi Arabia."
         path="/projects"
-        image="https://jazeerat-2.vercel.app/assets/slides/slide-2.webp"
+        image="https://jazeerat-2.vercel.app/assets/project-sobha-rendering.webp"
       />
       <section className="relative pt-56 pb-32 lg:pt-64 lg:pb-40 overflow-hidden">
         {/* Clean Static Background Image */}
         <div className="absolute inset-0 z-0">
           <div
             className="w-full h-full bg-cover bg-center"
-            style={{ backgroundImage: `url('/assets/project-sobha-aerial.jpg')` }}
+            style={{ backgroundImage: `url('/assets/project-sobha-aerial.webp')` }}
           />
           {/* Heavy gradient overlay to make the massive white text pop flawlessly */}
           <div className="absolute inset-0 bg-gradient-to-b from-graphite via-graphite/80 to-graphite" />
@@ -252,19 +236,8 @@ export default function Projects() {
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 relative h-16 flex items-center">
-        {/* Animated Line Intro Synchronized */}
-        <svg className="w-full h-full absolute inset-0 pointer-events-none" viewBox="0 0 1000 60" preserveAspectRatio="none">
-          <line x1="0" y1="30" x2="1000" y2="30" stroke="#2a2e34" strokeWidth="1" />
-          <motion.line
-            x1="0" y1="30" x2="1000" y2="30"
-            stroke="#c7cdd3" strokeWidth="2"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 1.5, ease: "circOut", delay: 0.4 }}
-          />
-        </svg>
-
+      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <Cutline label="Selected Work" />
       </div>
 
       <section className="py-32 lg:py-48 overflow-hidden">
@@ -316,13 +289,21 @@ export default function Projects() {
                   visible: { opacity: 1, y: 0, transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1] } }
                 }}
                 className={`group relative overflow-hidden bg-graphite flex flex-col cursor-pointer ${colSpan} ${minHeight}`}
+                role="button"
+                tabIndex={0}
+                aria-label={`View project: ${project.title}`}
                 onClick={() => openModal(i)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(i) }
+                }}
               >
                 {/* Ken Burns effect image container */}
                 <div className="absolute inset-0 z-0 overflow-hidden">
-                  <div
-                    className="w-full h-full bg-cover bg-center transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
-                    style={{ backgroundImage: `url('${project.image}')` }}
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
                   />
                   {/* Dynamic gradient overlay that lightens on hover */}
                   <div className="absolute inset-0 transition-opacity duration-700 bg-gradient-to-t from-graphite-light via-graphite-light/50 to-transparent opacity-95 group-hover:opacity-75" />
@@ -372,23 +353,11 @@ export default function Projects() {
         </AnimatePresence>
       </section>
 
-      <section className="py-24 lg:py-32 bg-graphite-light">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0} variants={fadeUp}
-            className="font-display font-extrabold uppercase text-4xl sm:text-5xl text-steel-light"
-          >
-            See your next project move from drawing to delivery.
-          </motion.h2>
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1} variants={fadeUp} className="mt-10">
-            <NavLink
-              to="/contact"
-              className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-white text-graphite px-8 py-4 hover:bg-steel-light transition-colors"
-            >
-              Talk to Sales
-            </NavLink>
-          </motion.div>
-        </div>
-      </section>
+      <CtaBanner
+        heading="See your next project"
+        headingAccent="move from drawing to delivery."
+        ctaLabel="Talk to Sales"
+      />
     </motion.main>
   )
 }

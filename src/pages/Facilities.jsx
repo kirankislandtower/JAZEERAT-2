@@ -2,28 +2,28 @@ import { motion } from 'framer-motion'
 import { Factory, Wrench, ShieldCheck, Truck, Boxes, Flame } from 'lucide-react'
 import SectionLabel from '../components/SectionLabel'
 import Cutline from '../components/Cutline'
-import { NavLink } from 'react-router-dom'
 import SEO from '../components/SEO'
 import VideoHero from '../components/VideoHero'
+import CtaBanner from '../components/CtaBanner'
 
 const facilities = [
   {
     icon: Factory,
     title: 'CNC Plasma Cutting',
     desc: 'High-capacity plate cutting for structural steel profiles and architectural components.',
-    image: '/assets/assetsJazeerat/IMG_9079.jpg',
+    image: '/assets/assetsJazeerat/IMG_9079.webp',
   },
   {
     icon: Flame,
     title: 'CNC Laser & Fiber Cutting',
     desc: 'Fine-detail cutting for precision work, openings, and intricate fabrication pieces.',
-    image: '/assets/assetsJazeerat/IMG_9084.jpg',
+    image: '/assets/assetsJazeerat/IMG_9084.webp',
   },
   {
     icon: Wrench,
     title: 'CNC Machine Workshop',
     desc: 'Drilling, boring, and machining with digital tolerance control in one facility.',
-    image: '/assets/assetsJazeerat/IMG_9087.jpg',
+    image: '/assets/assetsJazeerat/IMG_9087.webp',
   },
   {
     icon: ShieldCheck,
@@ -41,7 +41,7 @@ const facilities = [
     icon: Truck,
     title: 'Logistics & Storage',
     desc: 'Site-ready staging, secure storage and coordinated transport from the workshop.',
-    image: '/assets/assetsJazeerat/IMG_8609.jpg',
+    image: '/assets/assetsJazeerat/IMG_8609.webp',
   },
 ]
 
@@ -64,7 +64,7 @@ export default function Facilities() {
       <VideoHero
         pageKey="facilities"
         videoSrc="/assets/facilities-hero.mp4"
-        poster="/assets/assetsJazeerat/IMG_8960.jpg"
+        poster="/assets/assetsJazeerat/IMG_8960.webp"
         showSparks={false}
         className="pt-40 pb-20 lg:pt-48 lg:pb-28"
       >
@@ -93,17 +93,17 @@ export default function Facilities() {
             const Icon = facility.icon
             return (
               <motion.div key={facility.title} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-40px' }} custom={i} variants={fadeUp}
-                className="rounded-3xl border border-panel-line bg-graphite p-8 hover:border-weld transition-colors"
+                className="border border-panel-line bg-graphite p-8 hover:border-weld transition-colors"
               >
-                <div className="mb-6 overflow-hidden rounded-xl">
-                  <div className="h-40 bg-cover bg-center" style={{ backgroundImage: `url('${facility.image}')` }} />
+                <div className="mb-6 overflow-hidden">
+                  <img src={facility.image} alt={facility.title} loading="lazy" className="h-40 w-full object-cover" />
                 </div>
                 <div className="flex items-center justify-between gap-4 mb-6">
                   <div>
                     <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-steel-light">Facility</p>
                     <h3 className="mt-3 font-display text-2xl uppercase text-steel-light">{facility.title}</h3>
                   </div>
-                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/5 border border-panel-line text-white">
+                  <span className="flex h-12 w-12 items-center justify-center bg-white/5 border border-panel-line text-white shrink-0">
                     <Icon size={24} />
                   </span>
                 </div>
@@ -114,23 +114,11 @@ export default function Facilities() {
         </div>
       </section>
 
-      <section className="py-24 lg:py-32 bg-graphite-light">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0} variants={fadeUp}
-            className="font-display font-extrabold uppercase text-4xl sm:text-5xl text-steel-light"
-          >
-            Visit the workshop or request a facility tour.
-          </motion.h2>
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1} variants={fadeUp} className="mt-10">
-            <NavLink
-              to="/contact"
-              className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-white text-graphite px-8 py-4 hover:bg-steel-light transition-colors"
-            >
-              Schedule a Tour
-            </NavLink>
-          </motion.div>
-        </div>
-      </section>
+      <CtaBanner
+        heading="Visit the workshop"
+        headingAccent="or request a tour."
+        ctaLabel="Schedule a Tour"
+      />
     </motion.main>
   )
 }

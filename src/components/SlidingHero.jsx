@@ -1,20 +1,55 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { NavLink } from 'react-router-dom'
-import { ArrowLeft, ArrowRight, ArrowUpRight, ChevronsDown } from 'lucide-react'
+import { ArrowUpRight, ChevronsDown } from 'lucide-react'
 
 const HeroVideo = ({ src, isActive, isAdjacent, animate, transition, style }) => {
   const videoRef = useRef(null)
 
   useEffect(() => {
-    if (videoRef.current) {
+    const video = videoRef.current
+    if (!video) return
+
+    video.muted = true
+    video.playsInline = true
+
+    let isMounted = true
+
+    const attemptPlay = () => {
+      if (!isMounted || !video) return
       if (isActive) {
-        videoRef.current.play().catch(() => {})
+        const playPromise = video.play()
+        if (playPromise !== undefined) {
+          playPromise.catch((err) => {
+            console.warn('Video play interrupted or waiting for buffer:', err)
+          })
+        }
       } else {
-        videoRef.current.pause()
+        video.pause()
       }
     }
-  }, [isActive])
+
+    if (isActive) {
+      attemptPlay()
+    } else {
+      video.pause()
+    }
+
+    const handleCanPlay = () => {
+      if (isActive && isMounted) {
+        attemptPlay()
+      }
+    }
+
+    video.addEventListener('canplay', handleCanPlay)
+    video.addEventListener('loadeddata', handleCanPlay)
+
+    return () => {
+      isMounted = false
+      video.removeEventListener('canplay', handleCanPlay)
+      video.removeEventListener('loadeddata', handleCanPlay)
+    }
+  }, [isActive, src])
 
   if (!isActive && !isAdjacent) return null
 
@@ -23,10 +58,11 @@ const HeroVideo = ({ src, isActive, isAdjacent, animate, transition, style }) =>
       ref={videoRef}
       src={src}
       className="w-full h-full object-cover"
+      autoPlay
       muted
       loop
       playsInline
-      preload={isActive ? "auto" : "metadata"}
+      preload="auto"
       animate={animate}
       transition={transition}
       style={style}
@@ -38,22 +74,31 @@ export default function SlidingHero({ slides }) {
   const allSlides = slides || []
   const [index, setIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const startX = useRef(0)
   const isPointerDown = useRef(false)
   const containerRef = useRef(null)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.matchMedia('(max-width: 768px)').matches)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile, { passive: true })
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end start'],
   })
-  // Momentum-based vertical scroll moving slightly upwards as user scrolls down
-  const bgY = useTransform(scrollYProgress, [0, 1], [0, -150])
-  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.15])
-  const overlayY = useTransform(scrollYProgress, [0, 1], [0, -180])
+
+  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.12])
+  const overlayY = useTransform(scrollYProgress, [0, 1], [0, -120])
   const overlayOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0])
 
   useEffect(() => {
-    if (isPaused || allSlides.length === 0) return undefined
+    if (isPaused || allSlides.length <= 1) return undefined
     const t = setInterval(() => setIndex(i => (i + 1) % allSlides.length), 6000)
     return () => clearInterval(t)
   }, [isPaused, allSlides.length])
@@ -89,7 +134,7 @@ export default function SlidingHero({ slides }) {
       aria-roledescription="carousel"
       aria-label="Hero carousel"
       tabIndex={0}
-      className="relative w-full min-h-[99vh] max-h-screen overflow-hidden bg-graphite"
+      className="relative w-full min-h-[99vh] max-h-screen overflow-hidden bg-graphite select-none"
       onKeyDown={handleKeyDown}
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
@@ -100,237 +145,173 @@ export default function SlidingHero({ slides }) {
       onFocus={() => setIsPaused(true)}
       onBlur={() => setIsPaused(false)}
     >
-      {/* ── film grain SVG filter (applied via className) */}
-      <svg width="0" height="0" className="absolute">
-        <defs>
-          <filter id="film-grain" x="0%" y="0%" width="100%" height="100%" colorInterpolationFilters="sRGB">
-            <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" result="noise" />
-            <feColorMatrix type="saturate" values="0" in="noise" result="grayNoise" />
-            <feBlend in="SourceGraphic" in2="grayNoise" mode="overlay" result="blend" />
-            <feComposite in="blend" in2="SourceGraphic" operator="in" />
-          </filter>
-        </defs>
-      </svg>
-
       {/* ═══════════════════════════════════════════
-          LAYER 1 — Slide images with parallax
+          LAYER 1 — Fullscreen Background Video/Image
       ═══════════════════════════════════════════ */}
-      {allSlides.map((s, i) => (
-        <motion.div
-          key={i}
-          className={`absolute inset-0 ${i === index ? 'z-10' : 'z-0'}`}
-          animate={{ opacity: i === index ? 1 : 0 }}
-          transition={{ duration: 1.2, ease: 'easeInOut' }}
-          style={{ scale: i === index ? bgScale : 1 }}
-        >
-          {/* Ken Burns zoom on active slide */}
-          {(s.type === 'video' || s.src?.match(/\.(mp4|webm)$/i)) ? (
-            <HeroVideo
-              src={s.src}
-              isActive={i === index}
-              isAdjacent={Math.abs(i - index) === 1 || (index === 0 && i === allSlides.length - 1) || (index === allSlides.length - 1 && i === 0)}
-              animate={i === index ? { scale: [1, 1.06] } : { scale: 1 }}
-              transition={{ duration: 6.5, ease: 'easeOut' }}
-              style={{ y: i === index ? bgY : 0 }}
-            />
-          ) : (
-            <motion.img
-              src={s.src}
-              alt={s.caption}
-              className="w-full h-full object-cover"
-              loading={i === 0 ? 'eager' : 'lazy'}
-              decoding="async"
-              fetchPriority={i === 0 ? 'high' : 'auto'}
-              animate={i === index ? { scale: [1, 1.06] } : { scale: 1 }}
-              transition={{ duration: 6.5, ease: 'easeOut' }}
-              style={{ y: i === index ? bgY : 0 }}
-            />
-          )}
-        </motion.div>
-      ))}
+      {allSlides.map((s, i) => {
+        const isVideoSlide = (
+          s.type === 'video' ||
+          s.src?.toLowerCase().includes('.mp4') ||
+          s.src?.toLowerCase().includes('.webm') ||
+          s.src?.toLowerCase().includes('/videos/')
+        )
+        const fallbackPoster = s.poster || s.image || '/assets/assetsJazeerat/sobha-one-element-tower-dubai.webp'
+
+        return (
+          <motion.div
+            key={i}
+            className={`absolute inset-0 ${i === index ? 'z-10' : 'z-0'}`}
+            animate={{ opacity: i === index ? 1 : 0 }}
+            transition={{ duration: 1.2, ease: 'easeInOut' }}
+            style={{ scale: i === index ? bgScale : 1 }}
+          >
+            {isVideoSlide && !isMobile ? (
+              <HeroVideo
+                src={s.src}
+                isActive={i === index}
+                isAdjacent={Math.abs(i - index) === 1 || (index === 0 && i === allSlides.length - 1) || (index === allSlides.length - 1 && i === 0)}
+                animate={i === index ? { scale: [1, 1.05] } : { scale: 1 }}
+                transition={{ duration: 6.5, ease: 'easeOut' }}
+              />
+            ) : (
+              <motion.img
+                src={isVideoSlide ? fallbackPoster : s.src}
+                alt={s.caption}
+                className="w-full h-full object-cover"
+                loading={i === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+                fetchPriority={i === 0 ? 'high' : 'auto'}
+                animate={i === index ? { scale: [1, 1.05] } : { scale: 1 }}
+                transition={{ duration: 6.5, ease: 'easeOut' }}
+              />
+            )}
+          </motion.div>
+        )
+      })}
 
       {/* ═══════════════════════════════════════════
-          LAYER 2 — Cinematic shading stack
+          LAYER 2 — Architectural Vignette & Darkening Scrim
       ═══════════════════════════════════════════ */}
-
-      {/* 2a. Primary base dark scrim */}
-      <div className="absolute inset-0 z-20 bg-black/35 pointer-events-none" />
-
-      {/* 2b. Left-side directional vignette — text side gets deeper shadow */}
+      <div className="absolute inset-0 z-20 bg-black/30 pointer-events-none" />
       <div
         className="absolute inset-0 z-20 pointer-events-none"
-        style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.35) 45%, transparent 100%)' }}
+        style={{ background: 'radial-gradient(ellipse 90% 80% at 50% 50%, rgba(0,0,0,0.1) 0%, rgba(13,15,19,0.75) 100%)' }}
       />
-
-      {/* 2c. Bottom vignette — ground the composition */}
-      <div
-        className="absolute inset-0 z-20 pointer-events-none"
-        style={{ background: 'linear-gradient(to top, rgba(13,15,19,0.92) 0%, rgba(13,15,19,0.5) 20%, transparent 55%)' }}
-      />
-
-      {/* 2d. Top vignette — cinematic sky darkening */}
-      <div
-        className="absolute inset-0 z-20 pointer-events-none"
-        style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.60) 0%, rgba(0,0,0,0.15) 18%, transparent 40%)' }}
-      />
-
-      {/* 2e. Radial center-reveal — brightens just the focal point */}
-      <div
-        className="absolute inset-0 z-20 pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse 60% 55% at 62% 48%, transparent 0%, rgba(0,0,0,0.28) 100%)' }}
-      />
-
-      {/* 2f. Orange weld-tone tint — very subtle brand colour warmth */}
-      <div
-        className="absolute inset-0 z-20 pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse 80% 60% at 0% 100%, rgba(214,47,34,0.10) 0%, transparent 55%)' }}
-      />
-
-      {/* 2g. Film grain overlay */}
-      <div
-        className="absolute inset-0 z-20 pointer-events-none opacity-[0.12] mix-blend-overlay"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
-          backgroundSize: '200px 200px',
-        }}
-      />
-
-      {/* 2h. Letterbox bars — classic cinematic 2.39:1 crop bars */}
-      <div className="absolute top-0 left-0 right-0 h-[5.5vh] z-21 pointer-events-none"
-        style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.0) 100%)' }}
-      />
-      <div className="absolute bottom-0 left-0 right-0 h-[12vh] z-21 pointer-events-none"
-        style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.35) 50%, transparent 100%)' }}
-      />
-
-      {/* 2i. Slide-transition chromatic flash */}
-      <AnimatePresence>
-        <motion.div
-          key={`flash-${index}`}
-          className="absolute inset-0 z-[22] pointer-events-none bg-white/5"
-          initial={{ opacity: 0.4 }}
-          animate={{ opacity: 0 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.7 }}
-        />
-      </AnimatePresence>
+      <div className="absolute inset-0 z-20 bp-grid-fine opacity-10 pointer-events-none" />
 
       {/* ═══════════════════════════════════════════
-          LAYER 3 — Hero text content
+          LAYER 3 — Centered High-Impact Architectural Content
       ═══════════════════════════════════════════ */}
       <motion.div
-        className="absolute inset-0 z-30 flex items-center"
+        className="absolute inset-0 z-30 flex items-center justify-center text-center px-6"
         style={{ y: overlayY, opacity: overlayOpacity }}
       >
-        <div className="max-w-6xl mx-auto px-6 lg:px-10 w-full">
-          <div className="max-w-2xl">
+        <div className="max-w-4xl mx-auto flex flex-col items-center justify-center pt-16">
 
-            {/* slide tag pill */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={`tag-${index}`}
-                initial={{ opacity: 0, x: -24, filter: 'blur(8px)' }}
-                animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-                exit={{ opacity: 0, x: 24, filter: 'blur(8px)' }}
-                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="inline-flex items-center gap-2 mb-6"
-              >
-                <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-                <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-white/70">
-                  {allSlides[index].tag}
-                </span>
-              </motion.div>
-            </AnimatePresence>
-
-            {/* orange accent bar + headline */}
-            <div className="flex items-start gap-5">
-              <motion.div
-                className="w-[3px] bg-white/80 rounded-sm mt-2 shrink-0"
-                initial={{ height: 0 }}
-                animate={{ height: 160 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              />
-              <AnimatePresence mode="wait">
-                <motion.h1
-                  key={`h1-${index}`}
-                  initial={{ opacity: 0, y: 30, filter: 'blur(12px)', scale: 0.98 }}
-                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)', scale: 1 }}
-                  exit={{ opacity: 0, y: -20, filter: 'blur(12px)', scale: 1.02 }}
-                  transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-                  className="font-display font-extrabold uppercase text-4xl sm:text-5xl lg:text-[3.5rem] leading-[1.0] text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.6)]"
-                >
-                  {allSlides[index].caption}
-                </motion.h1>
-              </AnimatePresence>
-            </div>
-
-            {/* subtitle */}
-            <AnimatePresence mode="wait">
-              <motion.p
-                key={`sub-${index}`}
-                initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
-                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                exit={{ opacity: 0, filter: 'blur(8px)' }}
-                transition={{ duration: 0.75, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-                className="mt-6 ml-8 text-white/75 text-[15px] leading-relaxed max-w-md"
-              >
-                {allSlides[index].sub}
-              </motion.p>
-            </AnimatePresence>
-
-            {/* CTA buttons */}
+          {/* Minimalist Tag Badge */}
+          <AnimatePresence mode="wait">
             <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={{
-                hidden: { opacity: 0 },
-                visible: {
-                  opacity: 1,
-                  transition: { staggerChildren: 0.15, delayChildren: 0.4 }
-                }
-              }}
-              className="mt-9 ml-8 flex flex-wrap items-center gap-3"
+              key={`tag-${index}`}
+              initial={{ opacity: 0, y: -15, filter: 'blur(6px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, y: 15, filter: 'blur(6px)' }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-6 sm:mb-8 max-w-full"
             >
-              <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } } }}>
-                <NavLink
-                  to="/contact"
-                  className="inline-flex items-center gap-2 bg-white text-graphite font-display uppercase font-semibold tracking-wide px-6 py-3 text-sm hover:bg-steel-light transition-colors"
-                >
-                  Start a Project <ArrowUpRight size={16} />
-                </NavLink>
-              </motion.div>
-              <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } } }}>
-                <NavLink
-                  to="/services"
-                  className="inline-flex items-center gap-2 border border-white/40 text-white font-display uppercase tracking-wide px-6 py-3 text-sm hover:border-white hover:text-graphite hover:bg-white transition-colors backdrop-blur-sm"
-                >
-                  Our Services
-                </NavLink>
-              </motion.div>
-              <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } } }}>
-                <NavLink
-                  to="/projects"
-                  className="inline-flex items-center gap-2 border border-white/40 text-white font-display uppercase tracking-wide px-6 py-3 text-sm hover:border-white hover:text-graphite hover:bg-white transition-colors backdrop-blur-sm"
-                >
-                  View Projects
-                </NavLink>
-              </motion.div>
+              <span className="w-2 h-2 rounded-full bg-weld animate-pulse shrink-0" />
+              <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.2em] sm:tracking-[0.35em] text-white/90 font-semibold truncate">
+                {allSlides[index].tag || 'GCC REGIONAL FABRICATION'}
+              </span>
             </motion.div>
+          </AnimatePresence>
 
-          </div>
+          {/* Centered Headline with Thinner Font & Vertical Fading White Gradient */}
+          <AnimatePresence mode="wait">
+            <motion.h1
+              key={`h1-${index}`}
+              initial={{ opacity: 0, y: 24, filter: 'blur(12px)', scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)', scale: 1 }}
+              exit={{ opacity: 0, y: -20, filter: 'blur(12px)', scale: 1.02 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="font-display font-medium uppercase text-3xl sm:text-5xl md:text-6xl lg:text-[4.2rem] leading-[1.1] sm:leading-[1.08] tracking-[0.03em] sm:tracking-[0.04em] text-transparent bg-clip-text bg-gradient-to-b from-white via-white/95 to-white/35 drop-shadow-[0_4px_30px_rgba(0,0,0,0.6)] max-w-4xl px-2"
+            >
+              {allSlides[index].caption}
+            </motion.h1>
+          </AnimatePresence>
+
+          {/* Subtitle */}
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={`sub-${index}`}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.7, delay: 0.15 }}
+              className="mt-4 sm:mt-6 text-steel-light/90 text-sm sm:text-lg md:text-xl leading-relaxed max-w-2xl font-body px-2"
+            >
+              {allSlides[index].sub}
+            </motion.p>
+          </AnimatePresence>
+
+          {/* Floating Glassmorphic Action Bar (Responsive Mobile/Desktop) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="mt-8 sm:mt-10 p-1.5 sm:p-2 rounded-2xl sm:rounded-full bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl flex flex-col sm:flex-row items-center justify-center gap-2 w-full sm:w-auto"
+          >
+            <NavLink
+              to="/contact"
+              className="group inline-flex items-center justify-center gap-2 bg-white text-graphite font-display uppercase font-bold tracking-wider px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl sm:rounded-full text-xs sm:text-sm hover:bg-steel-light transition-all shadow-md w-full sm:w-auto"
+            >
+              <span>Start a Project</span>
+              <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </NavLink>
+
+            <div className="flex items-center justify-center gap-2 w-full sm:w-auto">
+              <NavLink
+                to="/services"
+                className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3.5 rounded-xl sm:rounded-full text-xs sm:text-sm font-display uppercase tracking-wider text-white hover:bg-white/15 transition-colors flex-1 sm:flex-none text-center"
+              >
+                Services
+              </NavLink>
+
+              <NavLink
+                to="/projects"
+                className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3.5 rounded-xl sm:rounded-full text-xs sm:text-sm font-display uppercase tracking-wider text-white hover:bg-white/15 transition-colors flex-1 sm:flex-none text-center"
+              >
+                Projects
+              </NavLink>
+            </div>
+          </motion.div>
+
         </div>
       </motion.div>
 
-      {/* scroll cue — bottom center */}
-      <motion.div style={{ opacity: overlayOpacity }} className="absolute bottom-[6.5rem] left-0 right-0 z-40 flex flex-col items-center gap-1 text-white/50 text-[10px] uppercase tracking-[0.35em]">
+      {/* ═══════════════════════════════════════════
+          LAYER 4 — Centered Minimalist Pagination Dots
+      ═══════════════════════════════════════════ */}
+      {allSlides.length > 1 && (
+        <div className="absolute bottom-12 left-0 right-0 z-40 flex items-center justify-center gap-3">
+          {allSlides.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => go(i)}
+              className={`h-2 rounded-full transition-all duration-500 ${i === index ? 'w-10 bg-weld' : 'w-2 bg-white/40 hover:bg-white/80'}`}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Scroll indicator */}
+      <motion.div style={{ opacity: overlayOpacity }} className="absolute bottom-4 left-0 right-0 z-40 flex flex-col items-center gap-1 text-white/50 text-[9px] uppercase tracking-[0.35em] pointer-events-none">
         <span>Scroll</span>
-        <motion.div animate={{ y: [0, 5, 0] }} transition={{ duration: 1.4, repeat: Infinity }}>
-          <ChevronsDown size={16} className="text-white/70" />
+        <motion.div animate={{ y: [0, 4, 0] }} transition={{ duration: 1.4, repeat: Infinity }}>
+          <ChevronsDown size={14} className="text-white/70" />
         </motion.div>
       </motion.div>
-
-      {/* aria-live (screen readers) */}
-      <div aria-live="polite" className="sr-only">{allSlides[index].caption}</div>
     </section>
   )
 }
+

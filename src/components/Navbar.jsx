@@ -16,7 +16,6 @@ const links = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
     if (open) {
@@ -28,12 +27,6 @@ export default function Navbar() {
       document.body.style.overflow = ''
     }
   }, [open])
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24)
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
 
   return (
     <header

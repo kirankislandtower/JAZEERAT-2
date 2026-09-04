@@ -21,6 +21,8 @@ export default function Footer() {
               ['Home', '/'],
               ['About', '/about'],
               ['Services', '/services'],
+              ['Facilities', '/facilities'],
+              ['Projects', '/projects'],
               ['Insights', '/blogs'],
               ['Contact', '/contact'],
             ].map(([label, to]) => (
@@ -42,7 +44,7 @@ export default function Footer() {
             </li>
             <li className="flex items-center gap-2">
               <Phone size={16} className="text-steel-light shrink-0" />
-              <span>+971 4 XXX XXXX</span>
+              <a href="tel:+971543058357" className="hover:text-white transition-colors">+971 54 305 8357</a>
             </li>
             <li className="flex items-center gap-2">
               <Mail size={16} className="text-steel-light shrink-0" />

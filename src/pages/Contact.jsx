@@ -64,7 +64,7 @@ export default function Contact() {
       <VideoHero
         pageKey="contact"
         videoSrc="/assets/contact-hero.mp4"
-        poster="/assets/assetsJazeerat/contact-hero.png"
+        poster="/assets/assetsJazeerat/IMG_8971.webp"
         showSparks={false}
         className="pt-40 pb-20 lg:pt-48 lg:pb-24"
       >
@@ -104,14 +104,14 @@ export default function Contact() {
               <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="grid sm:grid-cols-2 gap-8">
                   <div>
-                    <label className="font-mono text-[11px] text-steel uppercase tracking-widest">Name</label>
+                    <label className="font-mono text-[11px] text-steel uppercase tracking-widest">Name <span className="text-weld">*</span></label>
                     <input
                       required name="name" value={form.name} onChange={handleChange}
                       placeholder="Your full name" className={inputClass}
                     />
                   </div>
                   <div>
-                    <label className="font-mono text-[11px] text-steel uppercase tracking-widest">Email</label>
+                    <label className="font-mono text-[11px] text-steel uppercase tracking-widest">Email <span className="text-weld">*</span></label>
                     <input
                       required type="email" name="email" value={form.email} onChange={handleChange}
                       placeholder="you@company.com" className={inputClass}
@@ -119,14 +119,14 @@ export default function Contact() {
                   </div>
                 </div>
                 <div>
-                  <label className="font-mono text-[11px] text-steel uppercase tracking-widest">Company</label>
+                  <label className="font-mono text-[11px] text-steel uppercase tracking-widest">Company <span className="text-steel/50 normal-case">(optional)</span></label>
                   <input
                     name="company" value={form.company} onChange={handleChange}
                     placeholder="Company / contractor name" className={inputClass}
                   />
                 </div>
                 <div>
-                  <label className="font-mono text-[11px] text-steel uppercase tracking-widest">Project details</label>
+                  <label className="font-mono text-[11px] text-steel uppercase tracking-widest">Project details <span className="text-weld">*</span></label>
                   <textarea
                     required rows={5} name="message" value={form.message} onChange={handleChange}
                     placeholder="Tell us about scope, materials, tolerances and timeline"

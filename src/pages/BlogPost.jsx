@@ -5,6 +5,8 @@ import { ArrowLeft, Clock, User, Share2, ArrowRight } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import SEO from '../components/SEO'
 import TiltImage from '../components/TiltImage'
+import Newsletter from '../components/Newsletter'
+import { getCategoryColor } from '../data/blogCategories'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -13,15 +15,6 @@ const fadeUp = {
     transition: { duration: 0.6, delay: i * 0.1, ease: 'easeOut' },
   }),
 }
-
-const categoryColors = {
-  'Technical Insights': 'bg-[#ed91fa] text-black',
-  'Industry News': 'bg-[#ffc828] text-black',
-  'Company Updates': 'bg-black text-white border border-white/20',
-  'default': 'bg-weld text-white'
-}
-
-const getCategoryColor = (category) => categoryColors[category] || categoryColors.default
 
 export default function BlogPost() {
   const { slug } = useParams()
@@ -134,7 +127,7 @@ export default function BlogPost() {
 
         <div className="relative z-10 w-full max-w-5xl mx-auto px-6 lg:px-10">
           <motion.div initial="hidden" animate="visible" variants={fadeUp} custom={0}>
-            <span className={`inline-block font-mono text-xs uppercase tracking-widest px-4 py-2 font-bold rounded-full mb-8 ${getCategoryColor(post.category)}`}>
+            <span className={`inline-block font-mono text-xs uppercase tracking-widest px-4 py-2 font-bold mb-8 ${getCategoryColor(post.category)}`}>
               {post.category}
             </span>
           </motion.div>
@@ -239,7 +232,7 @@ export default function BlogPost() {
                     <div className="relative aspect-video w-full shrink-0 z-0">
                       <TiltImage src={blog.image_url} alt={blog.title} />
                       <div className="absolute top-4 left-4 z-20 pointer-events-none">
-                        <span className={`font-mono text-[10px] uppercase tracking-widest px-3 py-1 font-bold shadow-lg rounded-full ${getCategoryColor(blog.category)}`}>
+                        <span className={`font-mono text-[10px] uppercase tracking-widest px-3 py-1 font-bold shadow-lg ${getCategoryColor(blog.category)}`}>
                           {blog.category}
                         </span>
                       </div>
@@ -271,34 +264,7 @@ export default function BlogPost() {
         </section>
       )}
 
-      {/* Newsletter Section */}
-      <section className="py-20 lg:py-28 bg-graphite-light relative overflow-hidden border-t border-panel-line">
-        <div className="max-w-3xl mx-auto px-6 lg:px-10 text-center relative z-10">
-          <h3 className="font-display font-bold uppercase text-2xl lg:text-3xl text-steel-light mb-4">
-            Get the latest <span className="text-weld">insights.</span>
-          </h3>
-          <p className="text-steel text-sm max-w-lg mx-auto mb-8 leading-relaxed">
-            Subscribe for technical breakdowns and industry news from the team building MENA's critical infrastructure.
-          </p>
-          <form 
-            className="flex flex-col sm:flex-row max-w-md mx-auto gap-3"
-            onSubmit={(e) => { e.preventDefault(); alert('Subscribed!') }}
-          >
-            <input 
-              type="email" 
-              required
-              placeholder="Enter your email" 
-              className="flex-1 bg-graphite border border-panel-line focus:border-weld outline-none px-5 py-3 text-steel-light placeholder:text-steel/50 font-mono text-sm rounded-full"
-            />
-            <button 
-              type="submit"
-              className="font-display uppercase tracking-wide font-semibold bg-white text-graphite px-6 py-3 rounded-full hover:bg-steel-light transition-colors whitespace-nowrap text-sm"
-            >
-              Subscribe
-            </button>
-          </form>
-        </div>
-      </section>
+      <Newsletter />
     </motion.main>
   )
 }

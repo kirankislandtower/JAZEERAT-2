@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async'
 
 const SITE_URL = 'https://jazeerat-2.vercel.app' // 🔁 Update to custom domain when ready
 const SITE_NAME = 'Jazeerat Al Hadeed'
-const DEFAULT_IMAGE = `${SITE_URL}/assets/slides/slide-1.webp`
+const DEFAULT_IMAGE = `${SITE_URL}/assets/assetsJazeerat/sobha-one-element-tower-dubai.webp`
 
 const JSONLD_ORGANIZATION = {
   '@context': 'https://schema.org',
@@ -13,8 +13,7 @@ const JSONLD_ORGANIZATION = {
   url: SITE_URL,
   logo: `${SITE_URL}/favicon.svg`,
   image: DEFAULT_IMAGE,
-  // 🔁 Fill in real details when ready:
-  telephone: '+971-XX-XXXXXXX',
+  telephone: '+971 54 305 8357',
   email: 'info@jahsteel.ae',
   address: {
     '@type': 'PostalAddress',

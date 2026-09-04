@@ -110,7 +110,10 @@ export default function WeldingCanvas() {
       ctx.stroke()
     }
 
+    let isVisible = true
+
     function loop() {
+      if (!isVisible) return
       ctx.clearRect(0, 0, width, height)
       drawGrid()
 
@@ -143,10 +146,25 @@ export default function WeldingCanvas() {
 
     const ro = new ResizeObserver(resize)
     ro.observe(canvas)
+
+    const io = new IntersectionObserver(([entry]) => {
+      const previouslyVisible = isVisible
+      isVisible = entry.isIntersecting
+      if (!previouslyVisible && isVisible) {
+        cancelAnimationFrame(raf)
+        raf = requestAnimationFrame(loop)
+      }
+    }, { threshold: 0.05 })
+    io.observe(canvas)
+
     resize()
     loop()
 
-    return () => { cancelAnimationFrame(raf); ro.disconnect() }
+    return () => {
+      cancelAnimationFrame(raf)
+      ro.disconnect()
+      io.disconnect()
+    }
   }, [])
 
   return (

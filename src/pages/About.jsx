@@ -8,13 +8,12 @@ import {
 } from 'lucide-react'
 import SectionLabel from '../components/SectionLabel'
 import Cutline from '../components/Cutline'
-import PageTransition from '../components/PageTransition'
 import { WordReveal, LetterReveal, LineReveal } from '../components/TypographyAnimations'
-import WeldingCanvas from '../components/WeldingCanvas'
 import SEO from '../components/SEO'
 import VideoHero from '../components/VideoHero'
 import Magnetic from '../components/Magnetic'
 import MaskReveal from '../components/MaskReveal'
+import CtaBanner from '../components/CtaBanner'
 
 /* ─── data ───────────────────────────────────────────────── */
 const timeline = [
@@ -72,7 +71,7 @@ const team = [
     name: 'Ahmed Al Mansoori',
     role: 'Founder & Managing Director',
     quote: 'Steel doesn\'t lie. Neither do we.',
-    img: '/assets/team-ahmed.jpg',
+    img: '/assets/team-ahmed.webp',
     initials: 'AA',
   },
   {
@@ -116,14 +115,6 @@ const fadeUp = {
 
 const fadeLeft = {
   hidden: { opacity: 0, x: -40 },
-  visible: (i = 0) => ({
-    opacity: 1, x: 0,
-    transition: { duration: 0.65, delay: i * 0.1, ease: 'easeOut' },
-  }),
-}
-
-const fadeRight = {
-  hidden: { opacity: 0, x: 40 },
   visible: (i = 0) => ({
     opacity: 1, x: 0,
     transition: { duration: 0.65, delay: i * 0.1, ease: 'easeOut' },
@@ -251,6 +242,7 @@ function MissionPillar({ pillar, index }) {
 /* ─── TeamCard ───────────────────────────────────────────── */
 function TeamCard({ member, index }) {
   const [flipped, setFlipped] = useState(false)
+  const [imgError, setImgError] = useState(false)
 
   return (
     <motion.div
@@ -275,11 +267,17 @@ function TeamCard({ member, index }) {
         >
           {/* avatar area */}
           <div className="relative h-52 bg-panel flex items-center justify-center overflow-hidden">
-            {member.img ? (
-              <img src={member.img} alt={member.name} className="w-full h-full object-cover" />
+            {member.img && !imgError ? (
+              <img
+                src={member.img}
+                alt={member.name}
+                loading="lazy"
+                onError={() => setImgError(true)}
+                className="w-full h-full object-cover"
+              />
             ) : (
               <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-panel to-graphite">
-                <span className="font-display font-extrabold text-6xl text-white/10">{member.initials}</span>
+                <span className="font-display font-extrabold text-6xl text-white/20">{member.initials}</span>
               </div>
             )}
             {/* subtle weld glow overlay */}
@@ -333,11 +331,11 @@ function TeamCard({ member, index }) {
 
 /* ─── stage images mapped to each timeline entry ────────── */
 const stageImages = [
-  '/assets/assetsJazeerat/IMG_8971.jpg',
-  '/assets/assetsJazeerat/IMG_8972.jpg',
-  '/assets/assetsJazeerat/IMG_8974.jpg',
-  '/assets/assetsJazeerat/IMG_8976.jpg',
-  '/assets/assetsJazeerat/PHOTO-2026-01-02-08-37-41.jpg',
+  '/assets/assetsJazeerat/IMG_8971.webp',
+  '/assets/assetsJazeerat/IMG_8972.webp',
+  '/assets/assetsJazeerat/IMG_8974.webp',
+  '/assets/assetsJazeerat/IMG_8976.webp',
+  '/assets/assetsJazeerat/PHOTO-2026-01-02-08-37-41.webp',
 ]
 
 const stageLabels = [
@@ -725,8 +723,9 @@ export default function About() {
                   whileHover={{ scale: 1.03, transition: { duration: 0.3 } }}
                 >
                   <img
-                    src="/assets/assetsJazeerat/IMG_8964.jpg"
+                    src="/assets/assetsJazeerat/IMG_8964.webp"
                     alt="Jazeerat Al Hadeed workshop"
+                    loading="lazy"
                     className="w-full h-72 md:h-96 object-cover"
                   />
                   <motion.div
@@ -856,6 +855,7 @@ export default function About() {
             src="/assets/timeline-growth.webp"
             alt=""
             aria-hidden
+            loading="lazy"
             className="w-full h-full object-cover object-center"
           />
         </motion.div>
@@ -1065,43 +1065,7 @@ export default function About() {
       <MilestoneScroller timeline={timeline} />
 
       {/* ── CTA BANNER ─────────────────────────────────── */}
-      <motion.section
-        className="py-16 border-t border-panel-line"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-      >
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="border border-panel-line bg-graphite-light p-10 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden group">
-            <motion.div
-              className="absolute inset-0 border-l-2 border-weld/0 group-hover:border-weld/20 transition-colors pointer-events-none"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-weld/0 group-hover:from-weld/[0.04] to-transparent transition-colors pointer-events-none" />
-
-            <div className="relative">
-              <p className="font-mono text-xs tracking-widest text-steel uppercase mb-2">Work with us</p>
-              <h3 className="font-display font-extrabold uppercase text-3xl sm:text-4xl text-steel-light leading-tight">
-                Have a spec?{' '}
-                <span className="text-weld">Let's cut it.</span>
-              </h3>
-              <p className="mt-3 text-steel text-sm max-w-md leading-relaxed">
-                Send us a drawing and we'll send back a quote — typically within 24 hours.
-              </p>
-            </div>
-
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
-              <NavLink
-                to="/contact"
-                className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-white text-graphite px-8 py-4 hover:bg-steel-light transition-colors"
-              >
-                Start a Project
-                <ArrowRight size={18} />
-              </NavLink>
-            </motion.div>
-          </div>
-        </div>
-      </motion.section>
+      <CtaBanner heading="Have a spec?" headingAccent="Let's cut it." />
 
     </motion.main>
   )

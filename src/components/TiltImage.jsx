@@ -1,9 +1,10 @@
 import React, { useRef, useState } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 
-export default function TiltImage({ src, alt, className = '' }) {
+export default function TiltImage({ src, alt, className = '', loading = 'lazy' }) {
   const ref = useRef(null)
-  
+  const [hovering, setHovering] = useState(false)
+
   // Motion values for tracking mouse position
   const x = useMotionValue(0)
   const y = useMotionValue(0)
@@ -18,6 +19,7 @@ export default function TiltImage({ src, alt, className = '' }) {
 
   const handleMouseMove = (e) => {
     if (!ref.current) return
+    setHovering(true)
     const rect = ref.current.getBoundingClientRect()
     
     const width = rect.width
@@ -38,6 +40,7 @@ export default function TiltImage({ src, alt, className = '' }) {
     // Reset to center when mouse leaves
     x.set(0)
     y.set(0)
+    setHovering(false)
   }
 
   return (
@@ -58,13 +61,15 @@ export default function TiltImage({ src, alt, className = '' }) {
         <img
           src={src}
           alt={alt}
+          loading={loading}
           className="w-full h-full object-cover shadow-2xl rounded-sm"
           style={{ transform: "translateZ(30px)" }} // Pops the image forward slightly
         />
         {/* Subtle glare effect that moves with mouse */}
         <motion.div
-          className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-30 transition-opacity duration-300"
+          className="absolute inset-0 pointer-events-none transition-opacity duration-300"
           style={{
+            opacity: hovering ? 0.3 : 0,
             background: "radial-gradient(circle at center, rgba(255,255,255,0.4) 0%, transparent 60%)",
             x: useTransform(mouseXSpring, [-0.5, 0.5], ["-50%", "50%"]),
             y: useTransform(mouseYSpring, [-0.5, 0.5], ["-50%", "50%"]),

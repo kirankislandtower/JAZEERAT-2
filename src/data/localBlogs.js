@@ -8,7 +8,7 @@ export const LOCAL_BLOGS = [
     category: 'Technical Insights',
     read_time: '5 min read',
     created_at: '2026-07-15T08:00:00Z',
-    image_url: '/assets/project-truss-install.jpg',
+    image_url: '/assets/project-truss-install.webp',
     content: `
       <h2>The Shift to Shop Floor Automation</h2>
       <p>Structural steel fabrication has historically been a labor-intensive craft, relying heavily on manual layout, marking, and oxy-fuel cutting. However, the rapid acceleration of infrastructure projects in the GCC region has necessitated a technological leap. Today, CNC plasma cutting stands at the center of this transformation, providing the speed and tolerances required for execution classes like EX3.</p>
@@ -36,7 +36,7 @@ export const LOCAL_BLOGS = [
     category: 'Technical Insights',
     read_time: '8 min read',
     created_at: '2026-07-20T10:00:00Z',
-    image_url: '/assets/project-sobha-rendering.jpg',
+    image_url: '/assets/project-sobha-rendering.webp',
     content: `
       <h2>Bridging Architecture and Structure</h2>
       <p>Architecturally Exposed Structural Steel (AESS) refers to steelwork that is both structural and highly visible to building occupants. In premium residential developments like Sobha One, balcony supports, canopy frames, and structural columns are featured design elements. Standard structural steel rules do not apply here; visual aesthetics are just as critical as load capacities.</p>
@@ -70,7 +70,7 @@ export const LOCAL_BLOGS = [
     category: 'Technical Insights',
     read_time: '6 min read',
     created_at: '2026-07-25T14:00:00Z',
-    image_url: '/assets/project-sobha-aerial.jpg',
+    image_url: '/assets/project-sobha-aerial.webp',
     content: `
       <h2>The Extreme Climate of the Gulf</h2>
       <p>In regions like Saudi Arabia and the UAE, steel structures face some of the most severe thermal cycles in the world. A warehouse roof can experience temperatures of 65°C under direct summer sunlight, dropping to 30°C overnight. This temperature differential of 35°C causes significant expansion and contraction, creating large stresses that must be accounted for during the detailing phase.</p>

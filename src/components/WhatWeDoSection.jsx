@@ -12,7 +12,7 @@ const servicesData = [
     short: 'Portal frames, trusses and columns pre-assembled for site-ready installation.',
     spec: 'Spans up to 30,000mm',
     spanClass: 'md:col-span-2 md:row-span-2',
-    image: '/assets/team-in-jah-uniform.jpg'
+    image: '/assets/team-in-jah-uniform.webp'
   },
   {
     icon: PenTool,
@@ -53,7 +53,7 @@ const servicesData = [
     short: 'Coordinated transport and on-site installation support across the MENA region.',
     spec: 'Site-coordinated logistics',
     spanClass: 'md:col-span-3 md:row-span-1',
-    image: '/assets/project-crane-hoist.jpg'
+    image: '/assets/project-crane-hoist.webp'
   },
 ]
 
@@ -86,23 +86,7 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.1 } },
 }
 
-// Custom Mask Reveal for headers
-function MaskReveal({ children, delay = 0 }) {
-  return (
-    <div className="overflow-hidden">
-      <motion.div
-        initial={{ y: '100%' }}
-        whileInView={{ y: 0 }}
-        viewport={{ once: false, margin: '-40px' }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay }}
-      >
-        {children}
-      </motion.div>
-    </div>
-  )
-}
-
-function ServiceCard({ svc, i }) {
+function ServiceCard({ svc }) {
   const [hovered, setHovered] = useState(false)
   const Icon = svc.icon
 
@@ -116,7 +100,7 @@ function ServiceCard({ svc, i }) {
       {/* Liquid Glass Background Reveal */}
       {svc.image && (
         <div className="absolute inset-0 z-0">
-          <img src={svc.image} alt={svc.title} className="w-full h-full object-cover opacity-20 group-hover:opacity-70 transition-transform duration-[1.5s] ease-out group-hover:scale-110 blur-[4px] group-hover:blur-none" />
+          <img src={svc.image} alt={svc.title} loading="lazy" className="w-full h-full object-cover opacity-20 group-hover:opacity-70 transition-transform duration-[1.5s] ease-out group-hover:scale-110 blur-[4px] group-hover:blur-none" />
           <div className="absolute inset-0 bg-graphite/80 backdrop-blur-md group-hover:backdrop-blur-none transition-all duration-[1s]" />
           <div className="absolute inset-0 bg-gradient-to-t from-graphite via-graphite/40 to-transparent" />
         </div>
@@ -132,10 +116,8 @@ function ServiceCard({ svc, i }) {
         />
       )}
 
-      <motion.div
+      <div
         className="relative z-10 p-8 lg:p-10 flex flex-col h-full min-h-[340px]"
-        animate={{ padding: hovered ? '2.5rem' : '2rem' }}
-        transition={{ duration: 0.5, ease: 'easeOut' }}
       >
         {/* Top Header Row */}
         <div className="flex items-start justify-between mb-12">
@@ -166,7 +148,7 @@ function ServiceCard({ svc, i }) {
             </motion.div>
           </div>
         </div>
-      </motion.div>
+      </div>
     </motion.div>
   )
 }

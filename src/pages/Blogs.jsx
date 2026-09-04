@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { NavLink } from 'react-router-dom'
-import { Clock, User, ArrowRight, Mail } from 'lucide-react'
+import { Clock, User, ArrowRight } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import SEO from '../components/SEO'
 import SectionLabel from '../components/SectionLabel'
+import Cutline from '../components/Cutline'
 import TiltImage from '../components/TiltImage'
+import Newsletter from '../components/Newsletter'
+import { getCategoryColor } from '../data/blogCategories'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 36 },
@@ -14,15 +17,6 @@ const fadeUp = {
     transition: { duration: 0.6, delay: i * 0.08, ease: 'easeOut' },
   }),
 }
-
-const categoryColors = {
-  'Technical Insights': 'bg-[#ed91fa] text-black',
-  'Industry News': 'bg-[#ffc828] text-black',
-  'Company Updates': 'bg-black text-white border border-white/20',
-  'default': 'bg-weld text-white'
-}
-
-const getCategoryColor = (category) => categoryColors[category] || categoryColors.default
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([])
@@ -93,30 +87,29 @@ export default function Blogs() {
       {/* Category Filters */}
       <section className="bg-graphite pt-4 pb-12 relative z-20 border-b border-panel-line mb-12">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 flex flex-wrap gap-4">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`font-mono text-xs uppercase tracking-widest px-6 py-3 rounded-full font-bold relative transition-all duration-300 border ${
-                activeCategory === cat
-                  ? 'border-transparent text-black font-extrabold'
-                  : 'bg-transparent border-panel-line text-steel hover:border-white/50 hover:text-white'
-              }`}
-            >
-              {activeCategory === cat && (
-                <motion.span
-                  layoutId="activeCategoryBg"
-                  className={`absolute inset-0 rounded-full z-0 ${
-                    cat === 'All' ? 'bg-white' : getCategoryColor(cat).split(' ')[0]
-                  }`}
-                  transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                />
-              )}
-              <span className="relative z-10">{cat}</span>
-            </button>
-          ))}
+          {categories.map((cat) => {
+            const activeClasses = cat === 'All' ? 'bg-white text-graphite' : getCategoryColor(cat)
+            return (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                aria-pressed={activeCategory === cat}
+                className={`font-mono text-xs uppercase tracking-widest px-6 py-3 font-bold relative transition-all duration-300 border ${
+                  activeCategory === cat
+                    ? `border-transparent ${activeClasses}`
+                    : 'bg-transparent border-panel-line text-steel hover:border-white/50 hover:text-white'
+                }`}
+              >
+                {cat}
+              </button>
+            )
+          })}
         </div>
       </section>
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <Cutline label="Articles" />
+      </div>
 
       <section className="pb-20 lg:pb-32 bg-graphite relative z-10">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
@@ -138,9 +131,9 @@ export default function Blogs() {
                     className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center"
                   >
                     <div className="relative h-[400px] lg:h-[600px] w-full rounded-sm z-0">
-                      <TiltImage src={featuredPost.image_url} alt={featuredPost.title} />
+                      <TiltImage src={featuredPost.image_url} alt={featuredPost.title} loading="eager" />
                       <div className="absolute top-6 left-6 z-20 pointer-events-none">
-                        <span className={`font-mono text-xs uppercase tracking-widest px-4 py-2 font-bold shadow-lg rounded-full ${getCategoryColor(featuredPost.category)}`}>
+                        <span className={`font-mono text-xs uppercase tracking-widest px-4 py-2 font-bold shadow-lg ${getCategoryColor(featuredPost.category)}`}>
                           {featuredPost.category}
                         </span>
                       </div>
@@ -185,7 +178,7 @@ export default function Blogs() {
                         <div className="relative aspect-[4/3] w-full mb-6 rounded-sm z-0">
                           <TiltImage src={blog.image_url} alt={blog.title} />
                           <div className="absolute top-4 left-4 z-20 pointer-events-none">
-                            <span className={`font-mono text-[10px] uppercase tracking-widest px-3 py-1.5 font-bold shadow-lg rounded-full ${getCategoryColor(blog.category)}`}>
+                            <span className={`font-mono text-[10px] uppercase tracking-widest px-3 py-1.5 font-bold shadow-lg ${getCategoryColor(blog.category)}`}>
                               {blog.category}
                             </span>
                           </div>
@@ -219,53 +212,7 @@ export default function Blogs() {
         </div>
       </section>
 
-      {/* Newsletter Section */}
-      <section className="py-24 lg:py-32 bg-graphite relative overflow-hidden border-t border-panel-line">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(214,47,34,0.05),transparent_70%)] pointer-events-none" />
-        
-        <div className="max-w-4xl mx-auto px-6 lg:px-10 text-center relative z-10">
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true }}
-            custom={0} variants={fadeUp}
-            className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-graphite border border-panel-line mb-8"
-          >
-            <Mail size={24} className="text-white" />
-          </motion.div>
-          
-          <motion.h2 
-            initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1} variants={fadeUp}
-            className="font-display font-extrabold uppercase text-4xl lg:text-5xl text-steel-light mb-6"
-          >
-            Get the latest <span className="text-white">insights.</span>
-          </motion.h2>
-          
-          <motion.p 
-            initial="hidden" whileInView="visible" viewport={{ once: true }} custom={2} variants={fadeUp}
-            className="text-steel max-w-xl mx-auto mb-10 leading-relaxed"
-          >
-            Subscribe to our newsletter for technical breakdowns, industry news, and inside looks at major MENA infrastructure projects.
-          </motion.p>
-          
-          <motion.form 
-            initial="hidden" whileInView="visible" viewport={{ once: true }} custom={3} variants={fadeUp}
-            className="flex flex-col sm:flex-row max-w-lg mx-auto gap-4"
-            onSubmit={(e) => { e.preventDefault(); alert('Subscribed!') }}
-          >
-            <input 
-              type="email" 
-              required
-              placeholder="Enter your email address" 
-              className="flex-1 bg-graphite-light border border-panel-line focus:border-weld outline-none px-6 py-4 text-steel-light placeholder:text-steel/50 font-mono text-sm"
-            />
-            <button 
-              type="submit"
-              className="font-display uppercase tracking-wide font-semibold bg-white text-graphite px-8 py-4 hover:bg-steel-light transition-colors whitespace-nowrap"
-            >
-              Subscribe
-            </button>
-          </motion.form>
-        </div>
-      </section>
+      <Newsletter />
     </motion.main>
   )
 }

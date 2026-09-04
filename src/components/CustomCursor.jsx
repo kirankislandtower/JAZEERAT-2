@@ -1,24 +1,30 @@
 import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useMotionValue, useSpring } from 'framer-motion'
 
 export default function CustomCursor() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const cursorX = useMotionValue(-100)
+  const cursorY = useMotionValue(-100)
   const [isHovering, setIsHovering] = useState(false)
 
+  const springConfig = { stiffness: 400, damping: 28, mass: 0.5 }
+  const springX = useSpring(cursorX, springConfig)
+  const springY = useSpring(cursorY, springConfig)
+
   useEffect(() => {
-    // Only run on desktop
     if (window.matchMedia('(max-width: 1024px)').matches) return
 
     const updateMousePosition = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
+      cursorX.set(e.clientX)
+      cursorY.set(e.clientY)
     }
 
     const handleMouseOver = (e) => {
-      // Check if hovering over clickable elements
       const target = e.target
+      if (!target) return
+      const tag = target.tagName ? target.tagName.toLowerCase() : ''
       if (
-        target.tagName.toLowerCase() === 'a' ||
-        target.tagName.toLowerCase() === 'button' ||
+        tag === 'a' ||
+        tag === 'button' ||
         target.closest('a') ||
         target.closest('button')
       ) {
@@ -28,42 +34,32 @@ export default function CustomCursor() {
       }
     }
 
-    window.addEventListener('mousemove', updateMousePosition)
-    window.addEventListener('mouseover', handleMouseOver)
+    window.addEventListener('mousemove', updateMousePosition, { passive: true })
+    window.addEventListener('mouseover', handleMouseOver, { passive: true })
 
     return () => {
       window.removeEventListener('mousemove', updateMousePosition)
       window.removeEventListener('mouseover', handleMouseOver)
     }
-  }, [])
-
-  const variants = {
-    default: {
-      x: mousePosition.x - 6,
-      y: mousePosition.y - 6,
-      height: 12,
-      width: 12,
-      backgroundColor: 'var(--color-weld)',
-      border: '0px solid transparent',
-      opacity: 1
-    },
-    hover: {
-      x: mousePosition.x - 24,
-      y: mousePosition.y - 24,
-      height: 48,
-      width: 48,
-      backgroundColor: 'rgba(214,47,34, 0.1)',
-      border: '1px solid var(--color-weld)',
-      opacity: 1
-    }
-  }
+  }, [cursorX, cursorY])
 
   return (
     <motion.div
       className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999] hidden lg:block shadow-[0_0_10px_rgba(214,47,34,0.5)]"
-      variants={variants}
-      animate={isHovering ? 'hover' : 'default'}
+      style={{
+        x: springX,
+        y: springY,
+        translateX: '-50%',
+        translateY: '-50%',
+      }}
+      animate={{
+        width: isHovering ? 48 : 12,
+        height: isHovering ? 48 : 12,
+        backgroundColor: isHovering ? 'rgba(214,47,34, 0.1)' : 'var(--color-weld)',
+        border: isHovering ? '1px solid var(--color-weld)' : '0px solid transparent',
+      }}
       transition={{ type: 'spring', stiffness: 400, damping: 28, mass: 0.5 }}
     />
   )
 }
+

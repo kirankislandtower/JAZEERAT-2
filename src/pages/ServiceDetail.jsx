@@ -2,16 +2,12 @@ import { useParams, NavLink, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import {
   PenTool, Wrench, Ruler, ShieldCheck, Flame, Boxes, Truck, Factory,
-  ArrowLeft, CheckCircle2, Cpu, Calendar, Activity, ShieldAlert
+  ArrowLeft, CheckCircle2, Cpu, Activity, AlertTriangle
 } from 'lucide-react'
 import SEO from '../components/SEO'
 import VideoHero from '../components/VideoHero'
 import Cutline from '../components/Cutline'
 import SectionLabel from '../components/SectionLabel'
-
-const iconMap = {
-  PenTool, Wrench, Ruler, ShieldCheck, Flame, Boxes, Truck, Factory
-}
 
 const serviceDetails = {
   'estimation-takeoff': {
@@ -21,7 +17,7 @@ const serviceDetails = {
     category: 'design',
     spec: 'Accurate MTO & estimation',
     video: '/assets/about-hero.mp4',
-    poster: '/assets/slides/slide-1.webp',
+    poster: '/assets/assetsJazeerat/IMG_9079.webp',
     overview: 'Our dedicated estimation team provides contractors with rapid, precise, and mill-certified quantity takeoffs. We analyze design drawings to optimize steel nesting and reduce scrap percentages, ensuring competitive bidding and transparent material costs.',
     capabilities: [
       'Detail-level Material Takeoffs (MTO)',
@@ -43,7 +39,7 @@ const serviceDetails = {
     category: 'design',
     spec: 'Innovative steel design',
     video: '/assets/about-hero.mp4',
-    poster: '/assets/slides/slide-2.webp',
+    poster: '/assets/assetsJazeerat/IMG_9084.webp',
     overview: 'We offer full-scale structural design services tailored to commercial, industrial, and architectural projects. Our engineering team leverages cutting-edge analysis software to optimize member sizes, reduce overall tonnage, and verify structural integrity against seismic and wind loads.',
     capabilities: [
       'Comprehensive Structural Analysis',
@@ -65,7 +61,7 @@ const serviceDetails = {
     category: 'design',
     spec: 'Tekla & AutoCAD detailing',
     video: '/assets/services-hero.mp4',
-    poster: '/assets/slides/slide-1.webp',
+    poster: '/assets/assetsJazeerat/IMG_9079.webp',
     overview: 'Before manufacturing begins, our engineering department constructs a complete "digital twin" of the structure. We utilize Tekla Structures to detail connections, cross-verify drawing dimensions, and perform automated clash detection between steelwork and MEP systems.',
     capabilities: [
       '3D BIM Modeling (Tekla Structures)',
@@ -87,7 +83,7 @@ const serviceDetails = {
     category: 'fabrication',
     spec: 'Modern integrated workshop',
     video: '/assets/services-hero.mp4',
-    poster: '/assets/slides/slide-3.webp',
+    poster: '/assets/assetsJazeerat/IMG_9087.webp',
     overview: 'Our integrated, state-of-the-art facility operates around the clock to meet aggressive project deadlines. With a heavily optimized floor layout, materials move seamlessly from raw stock to CNC processing, assembly, welding, and finally into our surface treatment bays.',
     capabilities: [
       'High-Volume Structural Steel Output',
@@ -109,7 +105,7 @@ const serviceDetails = {
     category: 'machining',
     spec: 'Precision CNC & welding tech',
     video: '/assets/services-hero.mp4',
-    poster: '/assets/slides/slide-2.webp',
+    poster: '/assets/assetsJazeerat/IMG_9084.webp',
     overview: 'We continuously invest in top-tier fabrication technology to ensure every cut, bend, and weld is exact. By integrating our 3D detailing software directly with our CNC machine floor, we eliminate human transcription errors and vastly accelerate production timelines.',
     capabilities: [
       'Direct NC-to-Machine Processing',
@@ -132,7 +128,7 @@ const serviceDetails = {
     category: 'cutting',
     spec: 'High-precision finishes',
     video: '/assets/services-hero.mp4',
-    poster: '/assets/slides/slide-1.webp',
+    poster: '/assets/assetsJazeerat/IMG_9079.webp',
     overview: 'Our fiber laser cutting machines provide unmatched precision for intricate steel components, gusset plates, and architectural metalwork. The laser leaves an exceptionally clean, dross-free edge that requires zero secondary grinding before welding or finishing.',
     capabilities: [
       'High-Speed Fiber Laser Cutting',
@@ -154,7 +150,7 @@ const serviceDetails = {
     category: 'fabrication',
     spec: 'Bespoke steel solutions',
     video: '/assets/about-hero.mp4',
-    poster: '/assets/slides/slide-3.webp',
+    poster: '/assets/assetsJazeerat/IMG_9087.webp',
     overview: 'Beyond standard structural frames, our team excels in highly customized, bespoke fabrication. From complex spiral staircases and architectural canopies to heavy-duty industrial hoppers, we adapt our expertise to meet unique geometric and load-bearing requirements.',
     capabilities: [
       'Architectural Canopies & Facades',
@@ -176,7 +172,7 @@ const serviceDetails = {
     category: 'fabrication',
     spec: 'Strict inspection protocols',
     video: '/assets/services-hero.mp4',
-    poster: '/assets/slides/slide-2.webp',
+    poster: '/assets/assetsJazeerat/IMG_9084.webp',
     overview: 'Quality isn\'t just inspected at the end—it is built into every phase. Our certified welding inspectors (CWI) monitor joint fit-up, pre-heat temperatures, and weld passes. All critical welds undergo rigorous Non-Destructive Testing (NDT) to guarantee absolute structural integrity.',
     capabilities: [
       'FCAW, SMAW, GMAW, & SAW Welding',
@@ -198,7 +194,7 @@ const serviceDetails = {
     category: 'finishing',
     spec: 'Protective coatings & HDG',
     video: '/assets/contact-hero.mp4',
-    poster: '/assets/slides/slide-1.webp',
+    poster: '/assets/assetsJazeerat/IMG_9079.webp',
     overview: 'Steel in the MENA region faces extreme UV, high humidity, and coastal salinity. We apply rigorous surface preparation (up to SA 2.5) followed by multi-coat epoxy/polyurethane systems or Hot-Dip Galvanizing to ensure the structure lasts for decades without degradation.',
     capabilities: [
       'Automatic Steel Shot Blasting (SA 2.5 / SA 3)',
@@ -220,7 +216,7 @@ const serviceDetails = {
     category: 'logistics',
     spec: 'Safe & efficient erection',
     video: '/assets/contact-hero.mp4',
-    poster: '/assets/slides/slide-3.webp',
+    poster: '/assets/assetsJazeerat/IMG_9087.webp',
     overview: 'Fabrication is only half the job. We ensure that fabricated steel is safely transported and erected on-site. By matching the fabrication schedule with the erection sequences, we load and deliver members phase-by-phase, avoiding site congestion and ensuring structural alignment.',
     capabilities: [
       'Phased Site Delivery & Logistics Planning',
@@ -244,17 +240,34 @@ export default function ServiceDetail() {
 
   if (!detail) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-graphite text-center p-6">
-        <ShieldAlert size={48} className="text-white mb-4 animate-bounce" />
-        <h1 className="font-display uppercase text-2xl text-steel-light mb-2">Service Not Found</h1>
-        <p className="text-steel text-sm mb-6">The service page you are looking for does not exist or has been relocated.</p>
-        <button
-          onClick={() => navigate('/services')}
-          className="inline-flex items-center gap-2 font-mono uppercase text-white text-sm border border-panel-line px-5 py-3 hover:bg-white/10 transition-colors"
-        >
-          <ArrowLeft size={16} /> Back to Services
-        </button>
-      </div>
+      <motion.main
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}
+        className="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-20"
+      >
+        <SEO title="Service Not Found | Jazeerat Al Hadeed" description="The service page you are looking for does not exist." noIndex />
+
+        <div className="absolute inset-0 bp-grid opacity-15 pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-white/5 blur-[100px] pointer-events-none" />
+
+        <div className="relative z-10 max-w-2xl mx-auto px-6 lg:px-10 text-center flex flex-col items-center">
+          <div className="flex items-center justify-center w-20 h-20 rounded-full border border-white/10 bg-white/5 text-white mb-8">
+            <AlertTriangle size={32} />
+          </div>
+          <p className="font-mono text-sm tracking-[0.3em] text-white uppercase mb-4">Error 404</p>
+          <h1 className="font-display font-extrabold uppercase text-4xl sm:text-5xl text-steel-light leading-[0.95] mb-6">
+            Service Not Found.
+          </h1>
+          <p className="text-steel text-lg font-light leading-relaxed max-w-md mx-auto mb-10">
+            The service page you are looking for does not exist or has been relocated.
+          </p>
+          <button
+            onClick={() => navigate('/services')}
+            className="inline-flex items-center justify-center gap-3 bg-white text-graphite font-display uppercase font-semibold tracking-wide px-8 py-4 text-sm hover:bg-steel-light transition-colors w-full sm:w-auto"
+          >
+            <ArrowLeft size={18} /> Back to Services
+          </button>
+        </div>
+      </motion.main>
     )
   }
 
@@ -288,9 +301,14 @@ export default function ServiceDetail() {
           </button>
           
           <SectionLabel index={detail.category.toUpperCase()}>Capabilities</SectionLabel>
-          <h1 className="font-display font-extrabold uppercase text-3xl sm:text-5xl lg:text-6xl leading-[0.95] text-steel-light">
-            {detail.title}
-          </h1>
+          <div className="flex items-center gap-4 mb-4">
+            <span className="flex h-14 w-14 items-center justify-center border border-white/10 bg-white/5 text-white shrink-0">
+              <Icon size={26} strokeWidth={1.5} />
+            </span>
+            <h1 className="font-display font-extrabold uppercase text-3xl sm:text-5xl lg:text-6xl leading-[0.95] text-steel-light">
+              {detail.title}
+            </h1>
+          </div>
           <p className="mt-6 text-base sm:text-lg text-steel max-w-2xl font-light leading-relaxed">
             {detail.desc}
           </p>
@@ -308,7 +326,7 @@ export default function ServiceDetail() {
           <div className="w-full lg:w-[40%] flex flex-col gap-8">
             
             {/* Tech Specs Card */}
-            <div className="rounded-3xl border border-panel-line bg-graphite p-8 shadow-lg shadow-black/20 relative overflow-hidden">
+            <div className="border border-panel-line bg-graphite p-8 shadow-lg shadow-black/20 relative overflow-hidden">
               <div className="absolute top-0 left-0 w-[3px] h-full bg-steel-light" />
               <div className="flex items-center gap-2 mb-6">
                 <Activity size={16} className="text-steel-light" />
@@ -334,7 +352,7 @@ export default function ServiceDetail() {
             </div>
 
             {/* Machinery / Capacity list */}
-            <div className="rounded-3xl border border-panel-line bg-graphite p-8 shadow-lg shadow-black/20">
+            <div className="border border-panel-line bg-graphite p-8 shadow-lg shadow-black/20">
               <div className="flex items-center gap-2 mb-6">
                 <Cpu size={16} className="text-steel-light" />
                 <h4 className="font-mono text-xs uppercase tracking-widest text-steel-light">Machinery & Capacity</h4>
@@ -367,7 +385,7 @@ export default function ServiceDetail() {
               <span className="text-xs font-mono uppercase tracking-[0.25em] text-steel-light">Core Capabilities</span>
               <ul className="mt-6 grid gap-4 sm:grid-cols-2">
                 {detail.capabilities.map((cap) => (
-                  <li key={cap} className="flex items-start gap-3 rounded-2xl border border-panel-line bg-graphite/40 p-4">
+                  <li key={cap} className="flex items-start gap-3 border border-panel-line bg-graphite/40 p-4">
                     <CheckCircle2 size={16} className="text-steel-light shrink-0 mt-0.5" />
                     <span className="text-sm text-steel-light leading-relaxed">{cap}</span>
                   </li>
@@ -375,7 +393,7 @@ export default function ServiceDetail() {
               </ul>
             </div>
 
-            <div className="rounded-3xl border border-panel-line bg-graphite-light p-8 flex flex-col sm:flex-row items-center justify-between gap-6 mt-6">
+            <div className="border border-panel-line bg-graphite-light p-8 flex flex-col sm:flex-row items-center justify-between gap-6 mt-6">
               <div>
                 <h4 className="font-display uppercase text-lg text-steel-light">Have a project drawing?</h4>
                 <p className="text-xs text-steel mt-1">Get an accurate cost estimation in 24 hours.</p>

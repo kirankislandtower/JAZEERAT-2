@@ -10,7 +10,7 @@
   --color-weld: #cc0000;
   --color-weld-dim: #7F1D1D;
   --color-signal: #94A3B8;
-  --font-display: Poppins, sans-serif;
+  --font-display: "Outfit", "Plus Jakarta Sans", sans-serif;
   --font-body: Inter, sans-serif;
   --font-sans: Inter, sans-serif;
   --font-mono: "Space Mono", monospace;
@@ -53,6 +53,11 @@ body {
 ::selection {
   background: var(--color-weld);
   color: #0c0d0f;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-weld);
+  outline-offset: 3px;
 }
 
 ::-webkit-scrollbar {

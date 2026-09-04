@@ -2,8 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { NavLink } from 'react-router-dom'
 import {
-  ArrowUpRight, ArrowRight, Factory, Wrench,
-  ShieldCheck, Flame, PenTool, Truck, MapPin, ExternalLink,
+  ArrowUpRight, ArrowRight, MapPin, ExternalLink,
 } from 'lucide-react'
 import SEO from '../components/SEO'
 import SlidingHero from '../components/SlidingHero'
@@ -13,12 +12,29 @@ import WhatWeDoSection from '../components/WhatWeDoSection'
 import CinematicIntro from '../components/CinematicIntro'
 import Reveal from '../components/Reveal'
 import Magnetic from '../components/Magnetic'
-import MaskReveal from '../components/MaskReveal'
-import { WordReveal, LineReveal } from '../components/TypographyAnimations'
+import { WordReveal } from '../components/TypographyAnimations'
 
 /* ─── data ───────────────────────────────────────────────── */
 
 import { supabase } from '../lib/supabase'
+
+const DEFAULT_HERO_SLIDES = [
+  {
+    src: 'https://ksbbcfaxctcfjokormtk.supabase.co/storage/v1/object/public/videos/home-hero/banner2.mp4',
+    poster: '/assets/assetsJazeerat/sobha-one-element-tower-dubai.webp',
+    type: 'video',
+    caption: 'Leading Manufacturers of Versatile Steel Products',
+    sub: 'Structural steel, CNC fabrication and precision machining for the MENA region.',
+    tag: 'GCC FABRICATION'
+  },
+  {
+    src: '/assets/assetsJazeerat/sobha-one-element-tower-dubai.webp',
+    type: 'image',
+    caption: 'Architectural & Heavy Erection',
+    sub: 'Sub-millimeter tolerance standard with seamless site deployment and structural erection.',
+    tag: 'EXCELLENCE'
+  }
+]
 
 const process = [
   { n: '01', title: 'Engineering & Draft', desc: 'Every millimeter calculated. We translate architectural vision into executable shop drawings with zero ambiguity.' },
@@ -65,14 +81,6 @@ const fadeDown = {
   visible: (i = 0) => ({
     opacity: 1, y: 0,
     transition: { duration: 0.6, delay: i * 0.08, ease: 'easeOut' },
-  }),
-}
-
-const cardPop = {
-  hidden: { opacity: 0, scale: 0.95, y: 20 },
-  visible: (i = 0) => ({
-    opacity: 1, scale: 1, y: 0,
-    transition: { type: 'spring', stiffness: 100, damping: 15, delay: i * 0.1 }
   }),
 }
 
@@ -155,30 +163,30 @@ const LOCAL_PROJECTS = [
     location: 'Sharjah, UAE',
     scope: 'Portal frames, columns and steel decks',
     tag: 'Fabrication',
-    image: '/assets/assetsJazeerat/mild-steel-fabrication-works.jpeg'
+    image: '/assets/assetsJazeerat/mild-steel-fabrication-works.webp'
   },
   {
     title: 'Heavy Erection & Lift',
     location: 'Kuwait',
     scope: 'Column splicing and crane rigging',
     tag: 'Erection',
-    image: '/assets/project-crane-hoist.jpg'
+    image: '/assets/project-crane-hoist.webp'
   },
   {
     title: 'Sobha One Facades',
     location: 'Dubai, UAE',
     scope: 'Architectural facade steel and balcony structures',
     tag: 'Architectural',
-    image: '/assets/assetsJazeerat/sobha-one-element-tower-dubai.jpg'
+    image: '/assets/assetsJazeerat/sobha-one-element-tower-dubai.webp'
   }
 ]
 
 /* ─── Main Page ──────────────────────────────────────────── */
 export default function Home() {
-  const [projects, setProjects] = useState([])
+  const [projects, setProjects] = useState(LOCAL_PROJECTS)
   const [loadingProjects, setLoadingProjects] = useState(true)
   const [activeProject, setActiveProject] = useState(0)
-  const [slides, setSlides] = useState(null) // null means it will use the fallback in SlidingHero initially
+  const [slides, setSlides] = useState(DEFAULT_HERO_SLIDES)
 
   useEffect(() => {
     async function loadData() {
@@ -193,14 +201,11 @@ export default function Home() {
               tag: idx === 0 ? 'Fabrication' : idx === 1 ? 'Erection' : 'Architectural'
             }
           }))
-        } else {
-          setProjects([])
         }
 
         // Fetch dynamic hero slides
         const { data: heroData, error: heroError } = await supabase.from('hero_assets').select('*')
         if (!heroError && heroData) {
-          // Find rows meant for the slider by excluding known page heroes
           const excludedKeys = ['about', 'services', 'facilities', 'projects', 'contact']
           const sliderRows = heroData.filter(h => {
             if (h.page_key && excludedKeys.includes(h.page_key.toLowerCase())) return false
@@ -223,28 +228,19 @@ export default function Home() {
             })))
           }
         }
-      } catch (err) {
+      } catch {
         setProjects(LOCAL_PROJECTS)
       }
       setLoadingProjects(false)
-
-
     }
     loadData()
   }, [])
 
-  const containerRef = useRef(null)
   const processRef = useRef(null)
   const servicesRef = useRef(null)
   const projectsRef = useRef(null)
   const projectsWrapperRef = useRef(null)
   const processWrapperRef = useRef(null)
-
-  const { scrollYProgress: processProgress } = useScroll({ target: processRef, offset: ['start end', 'end start'] })
-  const lineH = useTransform(processProgress, [0.1, 0.9], ['0%', '100%'])
-
-  const { scrollYProgress: servicesProgress } = useScroll({ target: servicesRef, offset: ['start end', 'end start'] })
-  const glowY1 = useTransform(servicesProgress, [0, 1], [-120, 120])
 
   const { scrollYProgress: projectsProgress } = useScroll({ target: projectsRef, offset: ['start end', 'end start'] })
   const glowY2 = useTransform(projectsProgress, [0, 1], [150, -150])

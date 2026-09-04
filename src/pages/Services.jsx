@@ -2,12 +2,13 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import {
-  Factory, Wrench, Ruler, ShieldCheck, Flame, Boxes, Truck, PenTool, ArrowUpRight,
+  Factory, Wrench, Ruler, ShieldCheck, Flame, Boxes, Truck, PenTool,
 } from 'lucide-react'
 import SectionLabel from '../components/SectionLabel'
 import Cutline from '../components/Cutline'
 import SEO from '../components/SEO'
 import VideoHero from '../components/VideoHero'
+import CtaBanner from '../components/CtaBanner'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -114,7 +115,7 @@ export default function Services() {
       <VideoHero
         pageKey="services"
         videoSrc="/assets/services-hero.mp4"
-        poster="/assets/assetsJazeerat/mild-steel-fabrication-works.jpeg"
+        poster="/assets/assetsJazeerat/mild-steel-fabrication-works.webp"
         showSparks={false}
         className="pt-40 pb-20 lg:pt-48 lg:pb-28"
       >
@@ -151,7 +152,8 @@ export default function Services() {
               <button
                 key={c}
                 onClick={() => setFilter(c)}
-                className={`text-sm px-3 py-2 rounded-full border ${filter === c ? 'bg-white text-graphite border-white' : 'border-panel-line text-steel'}`}
+                aria-pressed={filter === c}
+                className={`font-mono text-xs uppercase tracking-widest px-4 py-2.5 border transition-colors ${filter === c ? 'bg-white text-graphite border-white' : 'border-panel-line text-steel hover:border-white/50 hover:text-white'}`}
               >
                 {c === 'all' ? 'All' : c.charAt(0).toUpperCase() + c.slice(1)}
               </button>
@@ -193,25 +195,11 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="py-24 lg:py-32 bg-graphite-light">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <motion.h2
-            initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0} variants={fadeUp}
-            className="font-display font-extrabold uppercase text-4xl sm:text-5xl text-steel-light"
-          >
-            Send us a drawing. <span className="text-white">We'll send back a quote.</span>
-          </motion.h2>
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1} variants={fadeUp} className="mt-10">
-            <NavLink
-              to="/contact"
-              className="inline-flex items-center gap-2 font-display uppercase tracking-wide font-semibold bg-white text-graphite px-8 py-4 hover:bg-steel-light transition-colors"
-            >
-              Get in Touch
-              <ArrowUpRight size={18} />
-            </NavLink>
-          </motion.div>
-        </div>
-      </section>
+      <CtaBanner
+        heading="Send us a drawing."
+        headingAccent="We'll send back a quote."
+        ctaLabel="Get in Touch"
+      />
     </motion.main>
   )
 }

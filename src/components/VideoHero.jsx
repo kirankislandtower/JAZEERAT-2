@@ -15,7 +15,7 @@ import WeldingCanvas from './WeldingCanvas'
  */
 const VideoHero = forwardRef(({
   videoSrc = '/assets/about-hero.mp4',
-  poster = '/assets/assetsJazeerat/mild-steel-fabrication-works.jpeg',
+  poster = '/assets/assetsJazeerat/mild-steel-fabrication-works.webp',
   showSparks = false,
   className = '',
   pageKey,
