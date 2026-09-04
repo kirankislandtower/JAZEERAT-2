@@ -13,6 +13,7 @@ import CinematicIntro from '../components/CinematicIntro'
 import Reveal from '../components/Reveal'
 import Magnetic from '../components/Magnetic'
 import { WordReveal } from '../components/TypographyAnimations'
+import SiteVisitSection from '../components/SiteVisitSection'
 
 /* ─── data ───────────────────────────────────────────────── */
 
@@ -258,6 +259,9 @@ export default function Home() {
 
       {/* ── CINEMATIC APPLE-STYLE INTRO */}
       <CinematicIntro />
+
+      {/* ── SITE VISIT STORY SECTION */}
+      <SiteVisitSection />
 
       {/* ── STICKY SECTION STACK WRAPPER */}
       <div className="relative">
