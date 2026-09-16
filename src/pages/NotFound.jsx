@@ -12,7 +12,7 @@ export default function NotFound() {
       transition={{ duration: 0.4 }}
       className="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-20"
     >
-      <SEO title="Page Not Found | Jazeerat Al Hadeed" description="The page you are looking for does not exist." />
+      <SEO title="Page Not Found | Jazeerat Al Hadeed" description="The page you are looking for does not exist." noIndex />
 
       {/* Blueprint Grid Overlay */}
       <div className="absolute inset-0 bp-grid opacity-15 pointer-events-none" />

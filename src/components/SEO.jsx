@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async'
 
-const SITE_URL = 'https://jazeerat-2.vercel.app' // 🔁 Update to custom domain when ready
+const SITE_URL = 'https://jahsteel.ae'
 const SITE_NAME = 'Jazeerat Al Hadeed'
 const DEFAULT_IMAGE = `${SITE_URL}/assets/assetsJazeerat/sobha-one-element-tower-dubai.webp`
 

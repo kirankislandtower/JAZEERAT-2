@@ -195,7 +195,7 @@ export default function Projects() {
         title="Steel Fabrication Projects | GCC Region"
         description="Browse Jazeerat Al Hadeed's steel fabrication project gallery: industrial structures, oil & gas platforms, logistics hubs and architectural steelwork delivered across UAE, Oman, Qatar and Saudi Arabia."
         path="/projects"
-        image="https://jazeerat-2.vercel.app/assets/project-sobha-rendering.webp"
+        image="https://jahsteel.ae/assets/project-sobha-rendering.webp"
       />
       <section className="relative pt-56 pb-32 lg:pt-64 lg:pb-40 overflow-hidden">
         {/* Clean Static Background Image */}
