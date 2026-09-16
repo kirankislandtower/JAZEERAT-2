@@ -2,6 +2,14 @@ import { NavLink } from 'react-router-dom'
 import { Phone, Mail, MapPin } from 'lucide-react'
 import Logo from './Logo'
 
+function LinkedinIcon(props) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zM3.558 20.452h3.559V9H3.558v11.452z" />
+    </svg>
+  )
+}
+
 export default function Footer() {
   return (
     <footer className="bg-graphite-light border-t border-panel-line">
@@ -59,6 +67,15 @@ export default function Footer() {
           <p className="text-steel text-xs">
             © {new Date().getFullYear()} Jazeerat Al Hadeed. All rights reserved.
           </p>
+          <a
+            href="https://www.linkedin.com/company/jahsteel/posts/?feedView=all"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Jazeerat Al Hadeed on LinkedIn"
+            className="flex items-center justify-center w-9 h-9 border border-panel-line text-steel hover:text-white hover:border-white/40 transition-colors"
+          >
+            <LinkedinIcon width={16} height={16} />
+          </a>
         </div>
       </div>
     </footer>

@@ -42,9 +42,7 @@ const JSONLD_ORGANIZATION = {
     ],
   },
   sameAs: [
-    // 🔁 Add your social media links when ready
-    // 'https://www.linkedin.com/company/jazeerat-al-hadeed',
-    // 'https://www.instagram.com/jazeeratalhadeed',
+    'https://www.linkedin.com/company/jahsteel/',
   ],
 }
 
