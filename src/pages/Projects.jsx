@@ -227,7 +227,7 @@ export default function Projects() {
             </motion.div>
             <motion.h1
               variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } } }}
-              className="font-display font-black uppercase text-[clamp(4rem,9vw,9rem)] tracking-tighter leading-[0.85] text-steel-light max-w-5xl"
+              className="font-display font-black uppercase text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[9rem] tracking-tighter leading-[0.95] sm:leading-[0.85] text-steel-light max-w-5xl"
             >
               Delivered steel work with clarity and control.
             </motion.h1>

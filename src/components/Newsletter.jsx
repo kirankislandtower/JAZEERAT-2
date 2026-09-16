@@ -51,7 +51,7 @@ export default function Newsletter() {
             type="email"
             required
             placeholder="Enter your email address"
-            className="flex-1 bg-graphite-light border border-panel-line focus:border-weld outline-none px-6 py-4 text-steel-light placeholder:text-steel/50 font-mono text-sm"
+            className="flex-1 bg-graphite-light border border-panel-line focus:border-weld outline-none px-6 py-4 text-steel-light placeholder:text-steel/50 font-mono text-base"
           />
           <button
             type="submit"
