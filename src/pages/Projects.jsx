@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion'
+import { createPortal } from 'react-dom'
 import { useState, useEffect, useCallback } from 'react'
 import { Layers, Home, Truck, ShieldCheck, Factory, X, ArrowLeft, ArrowRight } from 'lucide-react'
 import SectionLabel from '../components/SectionLabel'
@@ -28,7 +29,10 @@ function ProjectModal({ project, index, total, onClose, onPrev, onNext }) {
   const Icon = project.icon
   const currentImg = project.gallery && project.gallery[imgIndex] ? project.gallery[imgIndex] : project.image
 
-  return (
+  // Portaled to <body> — this page is wrapped by PageTransition, whose
+  // transform/filter animation would otherwise become the containing
+  // block for this `fixed` modal instead of the real viewport.
+  return createPortal(
     <motion.div
       className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6"
       initial={{ opacity: 0 }}
@@ -67,29 +71,29 @@ function ProjectModal({ project, index, total, onClose, onPrev, onNext }) {
           </div>
 
           {/* Bottom Bar: Prev/Next, Thumbnails, Index */}
-          <div className="absolute bottom-0 left-0 right-0 bg-graphite/90 backdrop-blur-md border-t border-panel-line p-3 flex items-center justify-between z-20">
-            <div className="flex gap-2">
+          <div className="absolute bottom-0 left-0 right-0 bg-graphite/90 backdrop-blur-md border-t border-panel-line p-3 flex items-center gap-2 z-20">
+            <div className="flex gap-2 shrink-0">
               <button
                 onClick={onPrev}
-                className="w-8 h-8 border border-panel-line bg-graphite/90 flex items-center justify-center text-steel hover:text-white hover:border-white/40 transition-colors"
+                className="w-11 h-11 border border-panel-line bg-graphite/90 flex items-center justify-center text-steel hover:text-white hover:border-white/40 transition-colors"
               >
                 <ArrowLeft size={14} />
               </button>
               <button
                 onClick={onNext}
-                className="w-8 h-8 border border-panel-line bg-graphite/90 flex items-center justify-center text-steel hover:text-white hover:border-white/40 transition-colors"
+                className="w-11 h-11 border border-panel-line bg-graphite/90 flex items-center justify-center text-steel hover:text-white hover:border-white/40 transition-colors"
               >
                 <ArrowRight size={14} />
               </button>
             </div>
 
             {project.gallery && project.gallery.length > 0 && (
-              <div className="flex gap-1.5">
+              <div className="flex gap-2 overflow-x-auto flex-1 min-w-0">
                 {project.gallery.map((img, idx) => (
                   <button
                     key={img + idx}
                     onClick={() => setImgIndex(idx)}
-                    className={`w-12 h-8 border transition-all overflow-hidden ${idx === imgIndex ? 'border-weld scale-105 opacity-100' : 'border-panel-line opacity-50 hover:opacity-100'}`}
+                    className={`w-12 h-8 shrink-0 border transition-all overflow-hidden ${idx === imgIndex ? 'border-weld scale-105 opacity-100' : 'border-panel-line opacity-50 hover:opacity-100'}`}
                   >
                     <img src={img} alt="thumb" loading="lazy" className="w-full h-full object-cover" />
                   </button>
@@ -97,7 +101,7 @@ function ProjectModal({ project, index, total, onClose, onPrev, onNext }) {
               </div>
             )}
 
-            <span className="font-mono text-[9px] text-steel-light tracking-widest bg-graphite px-2.5 py-1 border border-panel-line rounded">
+            <span className="font-mono text-[9px] text-steel-light tracking-widest bg-graphite px-2.5 py-1 border border-panel-line rounded shrink-0">
               {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
             </span>
           </div>
@@ -107,7 +111,7 @@ function ProjectModal({ project, index, total, onClose, onPrev, onNext }) {
         <div className="relative w-full md:w-1/2 p-6 md:p-10 flex flex-col h-1/2 md:h-full overflow-y-auto">
           <button
             onClick={onClose}
-            className="absolute top-6 right-6 w-9 h-9 border border-panel-line flex items-center justify-center text-steel hover:text-white hover:border-white/40 transition-colors bg-graphite z-20"
+            className="absolute top-6 right-6 w-11 h-11 border border-panel-line flex items-center justify-center text-steel hover:text-white hover:border-white/40 transition-colors bg-graphite z-20"
           >
             <X size={16} />
           </button>
@@ -146,7 +150,8 @@ function ProjectModal({ project, index, total, onClose, onPrev, onNext }) {
           </motion.div>
         </div>
       </motion.div>
-    </motion.div>
+    </motion.div>,
+    document.body
   )
 }
 

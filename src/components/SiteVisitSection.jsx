@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
-import { Play, X, Volume2, VolumeX, Maximize2 } from 'lucide-react'
+import { Play, Pause, X, Volume2, VolumeX, Maximize2 } from 'lucide-react'
 
 /**
  * SiteVisitSection — Cinematic "Watch Our Story" section with lightbox modal.
@@ -10,7 +11,7 @@ import { Play, X, Volume2, VolumeX, Maximize2 } from 'lucide-react'
  *  - poster   : Thumbnail image shown before play
  */
 export default function SiteVisitSection({
-  videoSrc = '/assets/site-visit.mp4', // ← replace with your actual video URL
+  videoSrc = '/assets/projects-hero.mp4', // ← TEMP test placeholder, swap for the real site-visit video
   poster = '/assets/assetsJazeerat/mild-steel-fabrication-works.webp',
 }) {
   const [modalOpen, setModalOpen] = useState(false)
@@ -48,6 +49,17 @@ export default function SiteVisitSection({
     document.body.style.overflow = modalOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [modalOpen])
+
+  // Preload just enough metadata to show the real duration on the thumbnail
+  // badge, without waiting for the user to open the modal first.
+  useEffect(() => {
+    const probe = document.createElement('video')
+    probe.preload = 'metadata'
+    probe.src = videoSrc
+    const onMeta = () => setDuration(probe.duration)
+    probe.addEventListener('loadedmetadata', onMeta)
+    return () => probe.removeEventListener('loadedmetadata', onMeta)
+  }, [videoSrc])
 
   // Track progress
   useEffect(() => {
@@ -180,9 +192,11 @@ export default function SiteVisitSection({
               />
 
               {/* Duration badge */}
-              <div className="absolute top-4 right-4 font-mono text-[10px] text-white/80 bg-black/50 backdrop-blur-sm px-2 py-1 rounded border border-white/10">
-                1:06
-              </div>
+              {duration > 0 && (
+                <div className="absolute top-4 right-4 font-mono text-[10px] text-white/80 bg-black/50 backdrop-blur-sm px-2 py-1 rounded border border-white/10">
+                  {fmt(duration)}
+                </div>
+              )}
 
               {/* Center play button */}
               <div className="absolute inset-0 flex items-center justify-center">
@@ -227,8 +241,12 @@ export default function SiteVisitSection({
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          LIGHTBOX MODAL
+          LIGHTBOX MODAL — portaled to <body> so `fixed` positions
+          against the real viewport, not the page-transition wrapper
+          (which applies a transform/filter and would otherwise turn
+          it into the containing block for this element).
       ══════════════════════════════════════════════════════ */}
+      {createPortal(
       <AnimatePresence>
         {modalOpen && (
           <motion.div
@@ -304,19 +322,19 @@ export default function SiteVisitSection({
 
                   {/* Button row */}
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <button onClick={togglePlay} className="text-white hover:text-white/70 transition-colors" aria-label={playing ? 'Pause' : 'Play'}>
+                    <div className="flex items-center gap-1">
+                      <button onClick={togglePlay} className="w-9 h-9 flex items-center justify-center text-white hover:text-white/70 transition-colors" aria-label={playing ? 'Pause' : 'Play'}>
                         {playing ? <Pause size={20} /> : <Play size={20} className="fill-white" />}
                       </button>
-                      <button onClick={toggleMute} className="text-white hover:text-white/70 transition-colors" aria-label={muted ? 'Unmute' : 'Mute'}>
+                      <button onClick={toggleMute} className="w-9 h-9 flex items-center justify-center text-white hover:text-white/70 transition-colors" aria-label={muted ? 'Unmute' : 'Mute'}>
                         {muted ? <VolumeX size={18} /> : <Volume2 size={18} />}
                       </button>
-                      <span className="font-mono text-[11px] text-white/50 tabular-nums">
+                      <span className="font-mono text-[11px] text-white/50 tabular-nums ml-1">
                         {fmt(currentTime)} / {fmt(duration)}
                       </span>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <button onClick={requestFullscreen} className="text-white hover:text-white/70 transition-colors" aria-label="Fullscreen">
+                    <div className="flex items-center gap-1">
+                      <button onClick={requestFullscreen} className="w-9 h-9 flex items-center justify-center text-white hover:text-white/70 transition-colors" aria-label="Fullscreen">
                         <Maximize2 size={17} />
                       </button>
                     </div>
@@ -331,7 +349,7 @@ export default function SiteVisitSection({
                 </span>
                 <button
                   onClick={() => setModalOpen(false)}
-                  className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider text-white/50 hover:text-white transition-colors"
+                  className="flex items-center gap-1.5 py-2 px-3 -my-2 -mr-3 font-mono text-[10px] uppercase tracking-wider text-white/50 hover:text-white transition-colors"
                   aria-label="Close video"
                 >
                   <X size={14} /> Close
@@ -340,7 +358,9 @@ export default function SiteVisitSection({
             </motion.div>
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence>,
+      document.body
+      )}
     </>
   )
 }

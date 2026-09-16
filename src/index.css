@@ -55,11 +55,6 @@ body {
   color: #0c0d0f;
 }
 
-:focus-visible {
-  outline: 2px solid var(--color-weld);
-  outline-offset: 3px;
-}
-
 ::-webkit-scrollbar {
   width: 8px;
 }

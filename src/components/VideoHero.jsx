@@ -23,6 +23,7 @@ const VideoHero = forwardRef(({
 }, ref) => {
   const [mediaUrl, setMediaUrl] = useState(videoSrc)
   const [isImage, setIsImage] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
     async function loadHeroAsset() {
@@ -38,16 +39,22 @@ const VideoHero = forwardRef(({
     loadHeroAsset()
   }, [pageKey])
 
+  // Skip downloading/autoplaying the background video on mobile to save data —
+  // matches the same behavior already used by the Home page's SlidingHero.
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 768px)')
+    setIsMobile(mq.matches)
+    const onChange = (e) => setIsMobile(e.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+
+  const showVideo = !isImage && !isMobile
+
   return (
     <section ref={ref} className={`relative w-full overflow-hidden ${className}`}>
       {/* ── LAYER 1: background video or image ── */}
-      {isImage ? (
-        <img
-          className="absolute inset-0 w-full h-full object-cover"
-          src={mediaUrl}
-          alt="Hero Background"
-        />
-      ) : (
+      {showVideo ? (
         <video
           className="absolute inset-0 w-full h-full object-cover"
           src={mediaUrl}
@@ -58,6 +65,12 @@ const VideoHero = forwardRef(({
           playsInline
           preload="metadata"
           onError={(e) => { e.target.style.display = 'none' }}
+        />
+      ) : (
+        <img
+          className="absolute inset-0 w-full h-full object-cover"
+          src={isImage ? mediaUrl : poster}
+          alt="Hero Background"
         />
       )}
 

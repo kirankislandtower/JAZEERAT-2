@@ -29,13 +29,13 @@ const facilities = [
     icon: ShieldCheck,
     title: 'Welding Bays',
     desc: 'Dedicated welding stations with certified welders and multi-process capability.',
-    image: '/assets/assetsJazeerat/2. site photos /IMG_5998.JPG',
+    image: '/assets/assetsJazeerat/2. site photos /IMG_5998.webp',
   },
   {
     icon: Boxes,
     title: 'Surface Finishing',
     desc: 'Shot blasting, priming, painting and protective coating optimised for MENA climates.',
-    image: '/assets/assetsJazeerat/2. site photos /IMG_4981.JPG',
+    image: '/assets/assetsJazeerat/2. site photos /IMG_4981.webp',
   },
   {
     icon: Truck,

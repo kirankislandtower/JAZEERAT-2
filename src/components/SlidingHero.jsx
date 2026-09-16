@@ -134,7 +134,7 @@ export default function SlidingHero({ slides }) {
       aria-roledescription="carousel"
       aria-label="Hero carousel"
       tabIndex={0}
-      className="relative w-full min-h-[99vh] max-h-screen overflow-hidden bg-graphite select-none"
+      className="relative w-full min-h-[99dvh] max-h-screen overflow-hidden bg-graphite select-none"
       onKeyDown={handleKeyDown}
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
@@ -297,9 +297,11 @@ export default function SlidingHero({ slides }) {
             <button
               key={i}
               onClick={() => go(i)}
-              className={`h-2 rounded-full transition-all duration-500 ${i === index ? 'w-10 bg-weld' : 'w-2 bg-white/40 hover:bg-white/80'}`}
+              className="group flex items-center justify-center p-2 -m-2"
               aria-label={`Go to slide ${i + 1}`}
-            />
+            >
+              <span className={`block h-2 rounded-full transition-all duration-500 ${i === index ? 'w-10 bg-weld' : 'w-2 bg-white/40 group-hover:bg-white/80'}`} />
+            </button>
           ))}
         </div>
       )}

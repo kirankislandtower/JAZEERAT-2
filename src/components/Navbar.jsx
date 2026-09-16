@@ -70,7 +70,7 @@ export default function Navbar() {
 
         <button
           onClick={() => setOpen(true)}
-          className="md:hidden text-steel-light"
+          className="md:hidden text-steel-light p-2 -mr-2"
           aria-label="Open menu"
         >
           <Menu size={26} />

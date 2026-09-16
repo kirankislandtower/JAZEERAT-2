@@ -1,9 +1,13 @@
 import { motion } from 'framer-motion'
+import { useLocation } from 'react-router-dom'
 
 export default function WhatsAppWidget() {
+  const { pathname } = useLocation()
   const phoneNumber = '971543058357'
   const message = "Hello, I'm interested in your steel fabrication services. I'd like to discuss my project requirements and request a quotation. Please contact me at your earliest convenience. Thank you!"
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
+
+  if (pathname !== '/contact') return null
 
   return (
     <motion.a
@@ -15,7 +19,7 @@ export default function WhatsAppWidget() {
       transition={{ type: 'spring', stiffness: 260, damping: 20, delay: 1 }}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
-      className="fixed bottom-6 right-6 lg:bottom-10 lg:right-10 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] text-white shadow-[0_4px_14px_rgba(37,211,102,0.4)] hover:shadow-[0_6px_20px_rgba(37,211,102,0.6)] transition-shadow"
+      className="fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] right-6 lg:bottom-10 lg:right-10 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] text-white shadow-[0_4px_14px_rgba(37,211,102,0.4)] hover:shadow-[0_6px_20px_rgba(37,211,102,0.6)] transition-shadow"
       aria-label="Chat with us on WhatsApp"
     >
       <svg

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { useParams, NavLink, useNavigate } from 'react-router-dom'
 import { motion, useScroll, useSpring } from 'framer-motion'
 import { ArrowLeft, Clock, User, Share2, ArrowRight } from 'lucide-react'
@@ -96,27 +97,37 @@ export default function BlogPost() {
 
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }} className="bg-graphite min-h-screen">
-      {/* Top reading progress bar */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-[3px] bg-weld z-[200] origin-[0%]"
-        style={{ scaleX }}
-      />
+      {/* Fixed elements portaled to <body> — this page is wrapped by
+          PageTransition, whose transform/filter animation would otherwise
+          become the containing block for these `fixed` elements instead
+          of the real viewport. */}
+      {createPortal(
+        <>
+          {/* Top reading progress bar */}
+          <motion.div
+            className="fixed top-0 left-0 right-0 h-[3px] bg-weld z-[200] origin-[0%]"
+            style={{ scaleX }}
+          />
+
+          {/* Floating Back Button */}
+          <div className="fixed top-24 left-6 lg:left-10 z-50">
+            <NavLink
+              to="/blogs"
+              className="flex items-center justify-center w-12 h-12 rounded-full bg-graphite/80 backdrop-blur-md border border-panel-line text-steel hover:text-white hover:border-weld/50 transition-all shadow-2xl group"
+            >
+              <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
+            </NavLink>
+          </div>
+        </>,
+        document.body
+      )}
+
       <SEO
         title={`${post.title} | Jazeerat Al Hadeed Insights`}
         description={post.excerpt}
         path={`/blogs/${post.slug}`}
         image={post.image_url}
       />
-
-      {/* Floating Back Button */}
-      <div className="fixed top-24 left-6 lg:left-10 z-50">
-        <NavLink
-          to="/blogs"
-          className="flex items-center justify-center w-12 h-12 rounded-full bg-graphite/80 backdrop-blur-md border border-panel-line text-steel hover:text-white hover:border-weld/50 transition-all shadow-2xl group"
-        >
-          <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
-        </NavLink>
-      </div>
 
       {/* Immersive Editorial Hero */}
       <section className="relative w-full min-h-[85vh] flex items-end pb-20 pt-40 lg:pb-32 overflow-hidden">
