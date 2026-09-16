@@ -216,7 +216,7 @@ function V4_Typewriter({ onDone }) {
         transition={{ duration: 0.4 }}
         className="text-center"
       >
-        <p className="font-mono text-[10px] uppercase tracking-[0.6em] text-white/30 mb-6">Established 2020 · Sharjah, UAE</p>
+        <p className="font-mono text-[10px] uppercase tracking-[0.6em] text-white/30 mb-6">Established 2019 · Dubai, UAE</p>
         <h1 className="font-display font-extrabold text-3xl sm:text-5xl md:text-6xl text-white tracking-[0.12em] uppercase min-w-[20ch] text-center">
           {displayed}
           <span className="inline-block w-[3px] h-[1em] bg-[#d62f22] ml-1 align-middle animate-pulse" />

@@ -17,7 +17,7 @@ import CtaBanner from '../components/CtaBanner'
 
 /* ─── data ───────────────────────────────────────────────── */
 const timeline = [
-  { year: '2019', title: 'Workshop Founded', desc: 'Jazeerat Al Hadeed Metallic Construction and Industrial Engineering opens its doors in Sharjah, UAE.' },
+  { year: '2019', title: 'Workshop Founded', desc: 'Jazeerat Al Hadeed Metallic Construction and Industrial Engineering opens its doors in Dubai, UAE.' },
   { year: '2020', title: 'CNC Line Installed', desc: 'In-house CNC plasma and machining capability brought online.' },
   { year: '2022', title: 'Regional Expansion', desc: 'Fabrication and delivery extended across GCC construction sites.' },
   { year: '2024', title: 'ISO-Aligned Qc', desc: 'Quality control processes aligned to international fabrication standards.' },
@@ -575,7 +575,7 @@ export default function About() {
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
       <SEO
         title="About Us | Steel Fabrication Company UAE"
-        description="Since 2019, Jazeerat Al Hadeed Metallic Construction and Industrial Engineering has become an essential part of the Sharjah community by promoting innovative ideas that enhance the future."
+        description="Since 2019, Jazeerat Al Hadeed Metallic Construction and Industrial Engineering has become an essential part of the Dubai community by promoting innovative ideas that enhance the future."
         path="/about"
       />
 

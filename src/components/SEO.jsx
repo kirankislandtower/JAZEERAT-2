@@ -17,8 +17,9 @@ const JSONLD_ORGANIZATION = {
   email: 'info@jahsteel.ae',
   address: {
     '@type': 'PostalAddress',
+    streetAddress: 'Industrial Area, Dubai',
+    addressLocality: 'Dubai',
     addressCountry: 'AE',
-    addressRegion: 'UAE',
   },
   areaServed: [
     { '@type': 'Country', name: 'United Arab Emirates' },
