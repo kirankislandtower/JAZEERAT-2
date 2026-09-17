@@ -227,8 +227,8 @@ export default function SlidingHero({ slides }) {
 
           {/* Centered Headline with Thinner Font & Vertical Fading White Gradient */}
           <AnimatePresence mode="wait">
-            <motion.h1
-              key={`h1-${index}`}
+            <motion.h2
+              key={`h2-${index}`}
               initial={{ opacity: 0, y: 24, filter: 'blur(12px)', scale: 0.98 }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)', scale: 1 }}
               exit={{ opacity: 0, y: -20, filter: 'blur(12px)', scale: 1.02 }}
@@ -236,7 +236,7 @@ export default function SlidingHero({ slides }) {
               className="font-display font-medium uppercase text-3xl sm:text-5xl md:text-6xl lg:text-[4.2rem] leading-[1.1] sm:leading-[1.08] tracking-[0.03em] sm:tracking-[0.04em] text-transparent bg-clip-text bg-gradient-to-b from-white via-white/95 to-white/35 drop-shadow-[0_4px_30px_rgba(0,0,0,0.6)] max-w-4xl px-2"
             >
               {allSlides[index].caption}
-            </motion.h1>
+            </motion.h2>
           </AnimatePresence>
 
           {/* Subtitle */}

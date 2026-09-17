@@ -107,8 +107,8 @@ export default function Services() {
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
       <SEO
-        title="Steel Fabrication Services | UAE & GCC"
-        description="Comprehensive steel fabrication services: CNC plasma cutting, structural fabrication, machine workshop, welding & QC, surface finishing and delivery. One integrated workshop across the UAE."
+        title="Steel Fabrication & Engineering Services in Dubai"
+        description="Explore Jazeerat Al Hadeed's steel fabrication, structural steel, design and detailing, CNC cutting, welding, machine workshop and installation services in Dubai and the UAE."
         path="/services"
       />
 

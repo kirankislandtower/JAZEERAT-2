@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Primary Meta -->
-    <title>Jazeerat Al Hadeed | Steel Fabrication & Machine Workshop UAE</title>
-    <meta name="description" content="Jazeerat Al Hadeed — precision steel fabrication, CNC plasma cutting and integrated machine workshop delivering structural steel projects across the UAE and MENA region." />
-    <meta name="keywords" content="steel fabrication UAE, CNC plasma cutting, structural steel, machine workshop, steel fabrication MENA, welding UAE, steel fabrication company" />
+    <title>Steel Fabrication Company in Dubai, UAE | Jazeerat Al Hadeed</title>
+    <meta name="description" content="Jazeerat Al Hadeed is a steel fabrication company in Dubai, UAE, providing structural steel fabrication, steel design and detailing, CNC cutting, welding, machine workshop and installation services." />
     <meta name="author" content="Jazeerat Al Hadeed" />
     <meta name="robots" content="index, follow" />
 
     <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="v0oE5QPx6QRUXWnzxFNK3-RchOl5LFJUoUe8vR03qBk" />
+
+    <!-- Canonical (per-page canonical is set via react-helmet-async in SEO.jsx; this is the default for the root) -->
+    <link rel="canonical" href="https://jahsteel.ae/" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png" />
@@ -20,24 +22,12 @@
     <!-- Theme -->
     <meta name="theme-color" content="#1a1d20" />
 
-    <!-- Open Graph fallback (per-page values override via react-helmet-async) -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Jazeerat Al Hadeed" />
-    <meta property="og:title" content="Jazeerat Al Hadeed | Steel Fabrication UAE" />
-    <meta property="og:description" content="Precision steel fabrication, CNC cutting and machine workshop serving the MENA region." />
-    <meta property="og:image" content="https://jahsteel.ae/assets/assetsJazeerat/sobha-one-element-tower-dubai.webp" />
-    <meta property="og:url" content="https://jahsteel.ae" />
-    <meta property="og:locale" content="en_AE" />
-
-    <!-- Twitter Card fallback -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Jazeerat Al Hadeed | Steel Fabrication UAE" />
-    <meta name="twitter:description" content="Precision steel fabrication, CNC cutting and machine workshop serving the MENA region." />
-    <meta name="twitter:image" content="https://jahsteel.ae/assets/assetsJazeerat/sobha-one-element-tower-dubai.webp" />
-
-    <!-- Geo -->
-    <meta name="geo.region" content="AE" />
-    <meta name="geo.country" content="UAE" />
+    <!-- Open Graph, Twitter Card and geo tags are intentionally NOT duplicated here.
+         Every route renders <SEO> (src/components/SEO.jsx), which injects all of
+         those via react-helmet-async on every single page. Keeping a second static
+         copy here would produce duplicate og:*/twitter:* meta tags in the rendered
+         DOM, since Helmet only manages tags it created — not ones already present
+         in this file. -->
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

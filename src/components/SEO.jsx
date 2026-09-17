@@ -63,9 +63,12 @@ export default function SEO({
   image = DEFAULT_IMAGE,
   noIndex = false,
 }) {
+  // If the title already spells out the brand name (e.g. "About Jazeerat Al
+  // Hadeed | ..."), use it exactly as given instead of appending the brand
+  // suffix a second time.
   const fullTitle = title
-    ? `${title} | ${SITE_NAME}`
-    : `${SITE_NAME} | Steel Fabrication & Machine Workshop UAE`
+    ? (title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`)
+    : 'Steel Fabrication Company in Dubai, UAE | Jazeerat Al Hadeed'
   const canonicalUrl = `${SITE_URL}${path}`
 
   return (

@@ -15,6 +15,7 @@ const About = lazy(() => import('./pages/About'))
 const Services = lazy(() => import('./pages/Services'))
 const Facilities = lazy(() => import('./pages/Facilities'))
 const Projects = lazy(() => import('./pages/Projects'))
+const ProjectDetail = lazy(() => import('./pages/ProjectDetail'))
 const Contact = lazy(() => import('./pages/Contact'))
 // const Team = lazy(() => import('./pages/Team'))
 const ServiceDetail = lazy(() => import('./pages/ServiceDetail'))
@@ -51,6 +52,7 @@ function App() {
               <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
               <Route path="/facilities" element={<PageTransition><Facilities /></PageTransition>} />
               <Route path="/projects" element={<PageTransition><Projects /></PageTransition>} />
+              <Route path="/projects/:slug" element={<PageTransition><ProjectDetail /></PageTransition>} />
               {/* <Route path="/team" element={<PageTransition><Team /></PageTransition>} /> */}
               <Route path="/blogs" element={<PageTransition><Blogs /></PageTransition>} />
               <Route path="/blogs/:slug" element={<PageTransition><BlogPost /></PageTransition>} />

@@ -56,8 +56,8 @@ export default function Contact() {
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
       <SEO
-        title="Contact Us | Get a Steel Fabrication Quote"
-        description="Get in touch with Jazeerat Al Hadeed for a steel fabrication quote. Send your drawings, spec or scope and our team will respond with a price and timeline — fast."
+        title="Contact Jazeerat Al Hadeed | Steel Fabrication Dubai, UAE"
+        description="Contact Jazeerat Al Hadeed for steel fabrication, structural steel, CNC cutting, engineering and machine workshop requirements in Dubai and the UAE."
         path="/contact"
       />
 

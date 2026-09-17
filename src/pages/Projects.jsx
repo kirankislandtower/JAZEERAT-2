@@ -1,13 +1,15 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { createPortal } from 'react-dom'
+import { NavLink } from 'react-router-dom'
 import { useState, useEffect, useCallback } from 'react'
-import { Layers, Home, Truck, ShieldCheck, Factory, X, ArrowLeft, ArrowRight } from 'lucide-react'
+import { Layers, Home, Truck, ShieldCheck, Factory, X, ArrowLeft, ArrowRight, ExternalLink } from 'lucide-react'
 import SectionLabel from '../components/SectionLabel'
 import Cutline from '../components/Cutline'
 import SEO from '../components/SEO'
 import CtaBanner from '../components/CtaBanner'
 
 import { supabase } from '../lib/supabase'
+import { slugify } from '../lib/slugify'
 
 const iconMap = {
   Factory, Home, Truck, ShieldCheck, Layers
@@ -144,9 +146,16 @@ function ProjectModal({ project, index, total, onClose, onPrev, onNext }) {
             </p>
 
             <h3 className="font-mono text-xs uppercase tracking-widest text-steel-light mb-2">Project Overview</h3>
-            <p className="text-steel text-sm leading-relaxed">
+            <p className="text-steel text-sm leading-relaxed mb-6">
               {project.desc}
             </p>
+
+            <NavLink
+              to={`/projects/${slugify(project.title)}`}
+              className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-steel-light hover:text-white transition-colors"
+            >
+              View full project page <ExternalLink size={13} />
+            </NavLink>
           </motion.div>
         </div>
       </motion.div>

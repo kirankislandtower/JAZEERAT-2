@@ -103,6 +103,38 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Individual Projects -->
+  <url>
+    <loc>https://jahsteel.ae/projects/heavy-erection-lift</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://jahsteel.ae/projects/logistics-hub-canopy</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://jahsteel.ae/projects/sobha-one-facades</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://jahsteel.ae/projects/industrial-fabrication-works</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://jahsteel.ae/projects/compliance-structural-splicing</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
   <!-- Contact -->
   <url>
     <loc>https://jahsteel.ae/contact</loc>

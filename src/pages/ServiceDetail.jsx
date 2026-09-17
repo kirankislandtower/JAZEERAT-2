@@ -330,7 +330,7 @@ export default function ServiceDetail() {
               <div className="absolute top-0 left-0 w-[3px] h-full bg-steel-light" />
               <div className="flex items-center gap-2 mb-6">
                 <Activity size={16} className="text-steel-light" />
-                <h4 className="font-mono text-xs uppercase tracking-widest text-steel-light">Technical Specifications</h4>
+                <h2 className="font-mono text-xs uppercase tracking-widest text-steel-light">Technical Specifications</h2>
               </div>
               
               <div className="space-y-4">
@@ -355,7 +355,7 @@ export default function ServiceDetail() {
             <div className="border border-panel-line bg-graphite p-8 shadow-lg shadow-black/20">
               <div className="flex items-center gap-2 mb-6">
                 <Cpu size={16} className="text-steel-light" />
-                <h4 className="font-mono text-xs uppercase tracking-widest text-steel-light">Machinery & Capacity</h4>
+                <h2 className="font-mono text-xs uppercase tracking-widest text-steel-light">Machinery & Capacity</h2>
               </div>
               
               <ul className="space-y-5">
@@ -395,7 +395,7 @@ export default function ServiceDetail() {
 
             <div className="border border-panel-line bg-graphite-light p-8 flex flex-col sm:flex-row items-center justify-between gap-6 mt-6">
               <div>
-                <h4 className="font-display uppercase text-lg text-steel-light">Have a project drawing?</h4>
+                <h2 className="font-display uppercase text-lg text-steel-light">Have a project drawing?</h2>
                 <p className="text-xs text-steel mt-1">Get an accurate cost estimation in 24 hours.</p>
               </div>
               <NavLink

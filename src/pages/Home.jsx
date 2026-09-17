@@ -14,6 +14,7 @@ import Reveal from '../components/Reveal'
 import Magnetic from '../components/Magnetic'
 import { WordReveal } from '../components/TypographyAnimations'
 import SiteVisitSection from '../components/SiteVisitSection'
+import FaqSection from '../components/FaqSection'
 
 /* ─── data ───────────────────────────────────────────────── */
 
@@ -249,16 +250,33 @@ export default function Home() {
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
       <SEO
-        title="Steel Fabrication & Machine Workshop UAE"
-        description="Jazeerat Al Hadeed — precision structural steel fabrication, CNC plasma & laser cutting and machine workshop delivering projects across UAE, Oman, Qatar and the wider GCC region."
+        title="Steel Fabrication Company in Dubai, UAE"
+        description="Jazeerat Al Hadeed is a steel fabrication company in Dubai, UAE, providing structural steel fabrication, steel design and detailing, CNC cutting, welding, machine workshop and installation services."
         path="/"
       />
+
+      {/* Real, crawlable H1 for SEO — kept visually hidden since the hero's
+          rotating headline (rendered as an h2 in SlidingHero) already carries
+          the primary visual message. This does not change anything visible. */}
+      <h1 className="sr-only">Steel Fabrication & Engineering Solutions in Dubai, UAE</h1>
 
       {/* ── HERO — full-width sliding carousel */}
       <SlidingHero slides={slides} />
 
       {/* ── CINEMATIC APPLE-STYLE INTRO */}
       <CinematicIntro />
+
+      {/* ── CRAWLABLE INTRO PARAGRAPH — real content for search engines, near the hero */}
+      <section className="py-16 lg:py-20 bg-graphite border-t border-panel-line">
+        <div className="max-w-4xl mx-auto px-6 lg:px-10 text-center">
+          <p className="text-steel-light text-base lg:text-lg leading-relaxed">
+            Jazeerat Al Hadeed is a UAE-based steel fabrication and engineering company specializing in
+            structural steel fabrication, steel design and detailing, CNC cutting, machine workshop
+            services, welding, supply and installation. We support industrial, commercial and
+            infrastructure projects across Dubai, the UAE and the wider MENA region.
+          </p>
+        </div>
+      </section>
 
       {/* ── SITE VISIT STORY SECTION */}
       <SiteVisitSection />
@@ -486,6 +504,8 @@ export default function Home() {
           </div>
         </section>
       </Reveal>
+
+      <FaqSection />
 
       {/* ═══════════════════════════════════════════════════
           FINAL CTA BANNER

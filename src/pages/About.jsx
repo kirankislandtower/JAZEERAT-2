@@ -574,8 +574,8 @@ export default function About() {
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
       <SEO
-        title="About Us | Steel Fabrication Company UAE"
-        description="Since 2019, Jazeerat Al Hadeed Metallic Construction and Industrial Engineering has become an essential part of the Dubai community by promoting innovative ideas that enhance the future."
+        title="About Jazeerat Al Hadeed | Steel Fabrication Company UAE"
+        description="Learn about Jazeerat Al Hadeed, a UAE steel fabrication and engineering company providing structural steel fabrication, machine workshop and related industrial solutions."
         path="/about"
       />
 
