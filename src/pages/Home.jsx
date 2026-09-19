@@ -267,15 +267,29 @@ export default function Home() {
       <CinematicIntro />
 
       {/* ── CRAWLABLE INTRO PARAGRAPH — real content for search engines, near the hero */}
-      <section className="py-16 lg:py-20 bg-graphite border-t border-panel-line">
-        <div className="max-w-4xl mx-auto px-6 lg:px-10 text-center">
-          <p className="text-steel-light text-base lg:text-lg leading-relaxed">
+      <section className="py-20 lg:py-28 bg-graphite border-t border-panel-line relative overflow-hidden">
+        {/* subtle ambient texture to match the rest of the site, kept quiet on purpose */}
+        <div className="absolute inset-0 bp-grid-fine opacity-[0.07] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-white/[0.03] blur-3xl rounded-full pointer-events-none" />
+
+        <motion.div
+          initial="hidden" whileInView="visible" viewport={{ once: false, margin: '-60px' }}
+          variants={stagger}
+          className="relative max-w-4xl mx-auto px-6 lg:px-10 text-center flex flex-col items-center"
+        >
+          <motion.div variants={fadeUp} custom={0}>
+            <SectionLabel>Who We Are</SectionLabel>
+          </motion.div>
+          <motion.p
+            variants={fadeUp} custom={1}
+            className="mt-4 text-steel-light text-base lg:text-lg leading-relaxed max-w-3xl"
+          >
             Jazeerat Al Hadeed is a UAE-based steel fabrication and engineering company specializing in
             structural steel fabrication, steel design and detailing, CNC cutting, machine workshop
             services, welding, supply and installation. We support industrial, commercial and
             infrastructure projects across Dubai, the UAE and the wider MENA region.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
       </section>
 
       {/* ── SITE VISIT STORY SECTION */}

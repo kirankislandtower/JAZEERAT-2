@@ -11,8 +11,8 @@ import { Play, Pause, X, Volume2, VolumeX, Maximize2 } from 'lucide-react'
  *  - poster   : Thumbnail image shown before play
  */
 export default function SiteVisitSection({
-  videoSrc = '/assets/projects-hero.mp4', // ← TEMP test placeholder, swap for the real site-visit video
-  poster = '/assets/assetsJazeerat/mild-steel-fabrication-works.webp',
+  videoSrc = '/assets/site-visit.mp4',
+  poster = '/assets/site-visit-poster.webp',
 }) {
   const [modalOpen, setModalOpen] = useState(false)
   const [playing, setPlaying] = useState(false)
