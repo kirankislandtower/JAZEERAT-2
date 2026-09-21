@@ -17,7 +17,7 @@ import CtaBanner from '../components/CtaBanner'
 
 /* ─── data ───────────────────────────────────────────────── */
 const timeline = [
-  { year: '2019', title: 'Workshop Founded', desc: 'Jazeerat Al Hadeed Metallic Construction and Industrial Engineering opens its doors in Dubai, UAE.' },
+  { year: '2019', title: 'Established', desc: 'Jazeerat Al Hadeed is established after acquiring Carlton Steel Works LLC, a Sharjah workshop operating since 1983.' },
   { year: '2020', title: 'CNC Line Installed', desc: 'In-house CNC plasma and machining capability brought online.' },
   { year: '2022', title: 'Regional Expansion', desc: 'Fabrication and delivery extended across GCC construction sites.' },
   { year: '2024', title: 'ISO-Aligned Qc', desc: 'Quality control processes aligned to international fabrication standards.' },
@@ -40,7 +40,7 @@ const capabilities = [
 ]
 
 const stats = [
-  { icon: Award, value: 5, suffix: '+', label: 'Years Fabricating' },
+  { icon: Award, value: 30, suffix: '+', label: 'Years Of Experience' },
   { icon: Users, value: 450, suffix: '+', label: 'Projects Delivered' },
   { icon: Calendar, value: 6, suffix: '', label: 'Countries Served' },
   { icon: TrendingUp, value: 98, suffix: '%', label: 'On-Time Delivery' },
@@ -339,7 +339,7 @@ const stageImages = [
 ]
 
 const stageLabels = [
-  'Workshop Founded',
+  'Established',
   'CNC Line Installed',
   'Regional Expansion',
   'ISO-Aligned QC',

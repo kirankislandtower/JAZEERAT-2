@@ -47,7 +47,7 @@ const process = [
 ]
 
 const stats = [
-  { value: '5+', label: 'Years Of Precision' },
+  { value: '30+', label: 'Years Of Experience' },
   { value: '450+', label: 'Structures Delivered' },
   { value: '±0.5mm', label: 'Tolerance Standard' },
   { value: 'MENA', label: 'Deployment Range' },

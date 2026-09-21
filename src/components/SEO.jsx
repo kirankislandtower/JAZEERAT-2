@@ -8,6 +8,8 @@ const JSONLD_ORGANIZATION = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
   name: SITE_NAME,
+  alternateName: 'JAHSTEEL',
+  foundingDate: '2019',
   description:
     'Precision steel fabrication and integrated machine workshop delivering structural steel projects across the MENA region.',
   url: SITE_URL,
@@ -17,8 +19,8 @@ const JSONLD_ORGANIZATION = {
   email: 'info@jahsteel.ae',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Industrial Area, Dubai',
-    addressLocality: 'Dubai',
+    streetAddress: 'Industrial Area, Sharjah',
+    addressLocality: 'Sharjah',
     addressCountry: 'AE',
   },
   areaServed: [

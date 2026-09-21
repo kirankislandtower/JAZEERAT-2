@@ -9,11 +9,11 @@ import SectionLabel from './SectionLabel'
 const faqs = [
   {
     q: 'What steel fabrication services does Jazeerat Al Hadeed provide?',
-    a: 'Jazeerat Al Hadeed provides structural steel fabrication, steel design and detailing, CNC plasma and laser cutting, machine workshop services, welding and quality control, surface finishing, and steel delivery and installation from an integrated workshop in Dubai, UAE.',
+    a: 'Jazeerat Al Hadeed provides structural steel fabrication, steel design and detailing, CNC plasma and laser cutting, machine workshop services, welding and quality control, surface finishing, and steel delivery and installation from an integrated workshop in Sharjah, UAE.',
   },
   {
     q: 'Does Jazeerat Al Hadeed provide structural steel fabrication in Dubai?',
-    a: 'Yes. Jazeerat Al Hadeed is a structural steel fabrication company based in Dubai, UAE, delivering fabricated steelwork for industrial, commercial and architectural projects.',
+    a: 'Yes. Jazeerat Al Hadeed is a structural steel fabrication company based in Sharjah, UAE, delivering fabricated steelwork for industrial, commercial and architectural projects, including projects in Dubai.',
   },
   {
     q: 'Do you provide steel design and detailing?',
