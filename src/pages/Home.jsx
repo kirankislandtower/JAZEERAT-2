@@ -432,9 +432,10 @@ export default function Home() {
               >
                 <SectionLabel>From Drawing to Delivery</SectionLabel>
                   <h2 className="font-display font-bold uppercase text-4xl lg:text-5xl text-steel-light max-w-xl mt-2 flex flex-wrap gap-[0.25em]">
-                    <WordReveal delay={0.1}>A fabrication line,</WordReveal>
-                    <WordReveal delay={0.4} className="text-white">not a black box.</WordReveal>
+                    <WordReveal delay={0.1}>Our Steel Fabrication</WordReveal>
+                    <WordReveal delay={0.4} className="text-white">Process.</WordReveal>
                   </h2>
+                  <p className="mt-4 font-display uppercase tracking-widest text-sm text-steel-light">A fabrication line, not a black box.</p>
               </motion.div>
 
               <div className="relative mt-20">
