@@ -48,10 +48,10 @@ export default function CinematicIntro() {
             <span className="w-12 h-px bg-steel-light/50" />
           </div>
           
-          <h2 className="font-display font-extrabold uppercase text-6xl md:text-[80px] lg:text-[120px] leading-[0.85] text-white tracking-tighter mix-blend-screen">
+          <p className="font-display font-extrabold uppercase text-6xl md:text-[80px] lg:text-[120px] leading-[0.85] text-white tracking-tighter mix-blend-screen">
             <span className="block">WE FORGE</span>
-            <span className="block text-steel-light">THE FUTURE</span>
-          </h2>
+            <span className="block text-steel-light">THE FUTURE IN STEEL</span>
+          </p>
         </motion.div>
 
         {/* ── STAGE 2: CINEMATIC IMAGE ── */}
@@ -81,11 +81,11 @@ export default function CinematicIntro() {
           style={{ opacity: textOpacity, y: textY }}
           className="absolute z-40 left-6 lg:left-24 bottom-24 lg:bottom-40 max-w-lg pointer-events-auto"
         >
-          <h3 className="font-display font-bold uppercase text-3xl md:text-5xl text-white mb-6">
-            Industrial Reality
-          </h3>
+          <h2 className="font-display font-bold uppercase text-3xl md:text-5xl text-white mb-6">
+            From Design to Industrial Reality
+          </h2>
           <p className="text-steel-light text-sm md:text-lg leading-relaxed mb-10 font-serif italic border-l-2 border-weld pl-6">
-            "A seamless transition from digital architecture to heavy industrial reality. Our workshop bridges the gap between ambitious design and structural execution."
+            "A seamless transition from digital design to heavy industrial reality. Our Sharjah workshop bridges the gap between ambitious architecture and structural steel execution."
           </p>
           <NavLink
             to="/about"

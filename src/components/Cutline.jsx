@@ -31,7 +31,7 @@ export default function Cutline({ label }) {
         style={{ left: dotX }}
       />
       {label && (
-        <span className="absolute -top-5 left-0 font-mono text-[10px] tracking-[0.25em] text-steel uppercase">
+        <span aria-hidden="true" className="absolute -top-5 left-0 font-mono text-[10px] tracking-[0.25em] text-steel uppercase">
           {label}
         </span>
       )}

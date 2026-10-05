@@ -6,6 +6,7 @@ import { Layers, Home, Truck, ShieldCheck, Factory, X, ArrowLeft, ArrowRight, Ex
 import SectionLabel from '../components/SectionLabel'
 import Cutline from '../components/Cutline'
 import SEO from '../components/SEO'
+import { PAGE_SEO } from '../data/seo'
 import CtaBanner from '../components/CtaBanner'
 
 import { supabase } from '../lib/supabase'
@@ -206,8 +207,8 @@ export default function Projects() {
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
       <SEO
-        title="Steel Fabrication Projects | GCC Region"
-        description="Browse Jazeerat Al Hadeed's steel fabrication project gallery: industrial structures, oil & gas platforms, logistics hubs and architectural steelwork delivered across UAE, Oman, Qatar and Saudi Arabia."
+        title={PAGE_SEO['/projects'].title}
+        description={PAGE_SEO['/projects'].description}
         path="/projects"
         image="https://jahsteel.ae/assets/project-sobha-rendering.webp"
       />
@@ -232,19 +233,19 @@ export default function Projects() {
             }}
           >
             <motion.div variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } } }}>
-              <SectionLabel index="PROJECTS">Project Gallery</SectionLabel>
+              <SectionLabel index="PROJECTS" as="h1">{PAGE_SEO['/projects'].h1}</SectionLabel>
             </motion.div>
-            <motion.h1
+            <motion.p
               variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } } }}
               className="font-display font-black uppercase text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl tracking-tighter leading-[0.95] sm:leading-[0.9] text-steel-light max-w-5xl"
             >
               Delivered steel work with clarity and control.
-            </motion.h1>
+            </motion.p>
             <motion.p
               variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } } }}
               className="mt-12 max-w-2xl text-steel text-lg sm:text-xl font-light leading-relaxed"
             >
-              Browse a curated selection of our recent fabrication and erection projects across the Gulf, with emphasis on structural quality and execution speed.
+              Browse recent fabrication and erection work across the UAE and the GCC, from architectural facade steel in Dubai to industrial frames in Sharjah.
             </motion.p>
           </motion.div>
         </div>

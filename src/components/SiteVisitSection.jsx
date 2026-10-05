@@ -148,11 +148,11 @@ export default function SiteVisitSection({
               Behind the Workshop
             </span>
             <h2 className="font-display font-bold uppercase text-3xl sm:text-4xl lg:text-5xl text-white mt-4 tracking-tight">
-              See Our Facility{' '}
+              See Our Steel Fabrication Workshop{' '}
               <span className="text-steel-light">in Action</span>
             </h2>
             <p className="mt-4 text-steel text-base lg:text-lg max-w-xl mx-auto leading-relaxed">
-              A real look inside our workshop — the machines, the team, and the precision behind every project.
+              A real look inside our Sharjah fabrication facility: the CNC machines, the welders and the precision behind every steel structure we deliver.
             </p>
           </motion.div>
 

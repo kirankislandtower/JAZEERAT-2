@@ -9,6 +9,8 @@ import Cutline from '../components/Cutline'
 import SEO from '../components/SEO'
 import VideoHero from '../components/VideoHero'
 import CtaBanner from '../components/CtaBanner'
+import { SERVICES, SERVICE_GROUPS } from '../data/services'
+import { PAGE_SEO } from '../data/seo'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -18,98 +20,45 @@ const fadeUp = {
   }),
 }
 
-const services = [
+// Answers use only facts already published on the homepage and service pages.
+const faqs = [
   {
-    icon: Ruler,
-    title: 'Estimation & Material Takeoff',
-    desc: 'We provide accurate estimation and material takeoff services through detailed drawing and specification analysis. Our precise quantity calculations support cost control, efficient procurement, reduced waste, and effective project planning.',
-    category: 'design',
-    spec: 'Accurate MTO & estimation',
-    slug: 'estimation-takeoff'
+    q: 'What steel fabrication services do you offer?',
+    a: `We offer ${SERVICES.length} in-house services: ${SERVICES.map((s) => s.title).join(', ')}.`,
   },
   {
-    icon: PenTool,
-    title: 'Structural Design & Engineering',
-    desc: 'Our experienced structural engineers deliver innovative steel design solutions, including structural analysis, complex and iconic structures, and value engineering. We optimize performance, safety, material efficiency, and constructability for successful project execution.',
-    category: 'design',
-    spec: 'Innovative steel design',
-    slug: 'structural-design-engineering'
+    q: 'Where do you deliver and install steel?',
+    a: 'We fabricate in our Sharjah workshop and deliver and erect structural steel across Dubai and the UAE, and support projects across the MENA region.',
   },
   {
-    icon: PenTool,
-    title: 'Design & Detailing',
-    desc: 'Using Tekla Structures and AutoCAD, we develop accurate 3D models, fabrication drawings, erection drawings, and connection details. With PowerFab for project tracking and production management, we ensure seamless coordination from design through fabrication and installation.',
-    category: 'design',
-    spec: 'Tekla & AutoCAD detailing',
-    slug: 'design-detailing'
+    q: 'What do you need from me to prepare a quote?',
+    a: 'Send us your drawings or specifications and tell us which services you need. We typically return a quote within 24 hours.',
   },
-  {
-    icon: Factory,
-    title: 'State-of-the-Art Fabrication Facility',
-    desc: 'Our modern fabrication facility combines advanced technology with a skilled workforce of engineers, supervisors, fabricators, welders, and quality inspectors. We deliver high-quality structural steel components through efficient production processes and strict quality control.',
-    category: 'fabrication',
-    spec: 'Modern integrated workshop',
-    slug: 'fabrication-facility'
-  },
-  {
-    icon: Wrench,
-    title: 'Advanced Machinery & Technology',
-    desc: 'Equipped with CNC laser cutting, press brake, plate rolling, band saw cutting, MIG welding, ARC welding, and supporting fabrication equipment, we ensure precision, efficiency, and consistent quality in every project.',
-    category: 'machining',
-    spec: 'Precision CNC & welding tech',
-    slug: 'advanced-machinery'
-  },
-  {
-    icon: Flame,
-    title: 'CNC Laser Cutting',
-    desc: 'Our CNC laser cutting technology delivers high-precision cutting with excellent accuracy, clean finishes, and minimal material waste, enabling the production of complex steel components with superior quality.',
-    category: 'cutting',
-    spec: 'High-precision finishes',
-    slug: 'cnc-laser-cutting'
-  },
-  {
-    icon: Boxes,
-    title: 'Custom Steel Fabrication',
-    desc: 'We provide customized steel fabrication solutions including tanks, platforms, architectural structures, and specialized metal works, delivering durable and precise solutions tailored to client requirements.',
-    category: 'fabrication',
-    spec: 'Bespoke steel solutions',
-    slug: 'custom-fabrication'
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Welding & Quality Control',
-    desc: 'Our qualified welding team applies advanced welding techniques and strict inspection procedures to ensure strong, reliable, and high-quality fabricated structures that meet project specifications and industry standards.',
-    category: 'fabrication',
-    spec: 'Strict inspection protocols',
-    slug: 'welding-qc'
-  },
-  {
-    icon: Ruler,
-    title: 'Surface Finishing',
-    desc: 'We provide professional surface protection solutions including industrial painting, protective coatings, and hot-dip galvanizing (HDG) to enhance durability, corrosion resistance, and long-term performance.',
-    category: 'finishing',
-    spec: 'Protective coatings & HDG',
-    slug: 'surface-finishing'
-  },
-  {
-    icon: Truck,
-    title: 'Delivery & Installation',
-    desc: 'Our experienced installation teams provide safe and efficient steel erection services, ensuring accurate assembly, quality workmanship, and timely project completion from fabrication to final installation.',
-    category: 'logistics',
-    spec: 'Safe & efficient erection',
-    slug: 'delivery-installation'
-  }
 ]
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+}
+
+const ICONS = { ruler: Ruler, pen: PenTool, factory: Factory, wrench: Wrench, flame: Flame, boxes: Boxes, shield: ShieldCheck, truck: Truck }
 
 export default function Services() {
   const [filter, setFilter] = useState('all')
-  const categories = ['all', 'design', 'cutting', 'machining', 'fabrication', 'finishing', 'logistics']
+  const seo = PAGE_SEO['/services']
+  const groups = SERVICE_GROUPS.filter((g) => filter === 'all' || g.key === filter)
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
       <SEO
-        title="Steel Fabrication & Engineering Services in Dubai"
-        description="Explore Jazeerat Al Hadeed's steel fabrication, structural steel, design and detailing, CNC cutting, welding, machine workshop and installation services in Dubai and the UAE."
+        title={seo.title}
+        description={seo.description}
         path="/services"
+        schema={faqJsonLd}
       />
 
       <VideoHero
@@ -121,22 +70,22 @@ export default function Services() {
       >
         <div className="max-w-5xl mx-auto px-6 lg:px-10">
           <motion.div initial="hidden" animate="visible" custom={0} variants={fadeUp}>
-            <SectionLabel index="SERVICES">Capabilities</SectionLabel>
+            <SectionLabel index="SERVICES" as="h1">{seo.h1}</SectionLabel>
           </motion.div>
-          <motion.h1
+          <motion.p
             initial="hidden" animate="visible" custom={1} variants={fadeUp}
             className="font-display font-extrabold uppercase text-5xl sm:text-6xl lg:text-7xl leading-[0.95] text-steel-light"
           >
             Every stage,
             <br /><span className="text-white">one workshop.</span>
-          </motion.h1>
+          </motion.p>
           <motion.p
             initial="hidden" animate="visible" custom={2} variants={fadeUp}
             className="mt-6 text-lg text-steel max-w-2xl font-light leading-relaxed"
           >
-            From raw structural steel to precision-machined components.
-            Jazeerat Al Hadeed provides a complete, in-house industrial fabrication cycle.
-            No outsourcing, no delays.
+            From estimation and design to cutting, welding, coating and erection, every stage
+            of your steel package is handled in our Sharjah workshop. One team, one schedule
+            and one QC record, with no outsourcing between stages.
           </motion.p>
         </div>
       </VideoHero>
@@ -147,58 +96,96 @@ export default function Services() {
 
       <section className="py-20 lg:py-28">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="flex flex-wrap gap-3 mb-6">
-            {categories.map((c) => (
+          <div className="flex flex-wrap gap-3 mb-10">
+            {[{ key: 'all', label: 'All' }, ...SERVICE_GROUPS].map((c) => (
               <button
-                key={c}
-                onClick={() => setFilter(c)}
-                aria-pressed={filter === c}
-                className={`font-mono text-xs uppercase tracking-widest px-4 py-2.5 border transition-colors ${filter === c ? 'bg-white text-graphite border-white' : 'border-panel-line text-steel hover:border-white/50 hover:text-white'}`}
+                key={c.key}
+                onClick={() => setFilter(c.key)}
+                aria-pressed={filter === c.key}
+                className={`font-mono text-xs uppercase tracking-widest px-4 py-2.5 border transition-colors ${filter === c.key ? 'bg-white text-graphite border-white' : 'border-panel-line text-steel hover:border-white/50 hover:text-white'}`}
               >
-                {c === 'all' ? 'All' : c.charAt(0).toUpperCase() + c.slice(1)}
+                {c.label}
               </button>
             ))}
           </div>
-          <div className="grid sm:grid-cols-2 gap-px bg-panel-line border border-panel-line">
-            {services.filter(s => filter === 'all' ? true : s.category === filter).map((s, i) => (
-              <NavLink
-                key={s.title}
-                to={`/services/${s.slug}`}
-                className="bg-graphite p-10 hover:bg-panel transition-colors group block relative"
-              >
-                <motion.div
-                  initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-40px' }} custom={i % 4} variants={fadeUp}
-                >
-                  <div className="flex items-start justify-between mb-6">
-                    <s.icon size={30} className="text-steel-light" strokeWidth={1.5} />
-                    <span className="font-mono text-[10px] text-steel tracking-widest">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                  </div>
-                  <h3 className="font-display uppercase text-2xl text-steel-light mb-3 group-hover:text-white transition-colors">
-                    {s.title}
-                  </h3>
-                  <p className="text-steel text-sm leading-relaxed mb-4">{s.desc}</p>
-                  
-                  <div className="flex items-center justify-between border-t border-panel-line pt-4 mt-6">
-                    <span className="font-mono text-[11px] text-steel/80 uppercase tracking-wide">
-                      {s.spec}
-                    </span>
-                    <span className="font-mono text-[10px] text-steel-light group-hover:text-white uppercase tracking-widest flex items-center gap-1 group-hover:translate-x-1 transition-all">
-                      Details →
-                    </span>
-                  </div>
-                </motion.div>
-              </NavLink>
+          {groups.map((g) => (
+            <div key={g.key} className="mb-14 last:mb-0">
+              <h2 className="font-display uppercase tracking-[0.15em] text-lg text-steel-light mb-5 flex items-center gap-3">
+                <span className="h-px w-8 bg-steel-light" />
+                {g.label}
+              </h2>
+              <div className="grid sm:grid-cols-2 gap-px bg-panel-line border border-panel-line sm:[&>*:last-child:nth-child(odd)]:col-span-2">
+                {SERVICES.filter((s) => s.group === g.key).map((s, i) => {
+                  const Icon = ICONS[s.icon] || Factory
+                  const n = SERVICES.indexOf(s) + 1
+                  return (
+                    <NavLink
+                      key={s.slug}
+                      to={`/services/${s.slug}`}
+                      className="bg-graphite p-10 hover:bg-panel transition-colors group block relative"
+                    >
+                      <motion.div
+                        initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-40px' }} custom={i % 4} variants={fadeUp}
+                      >
+                        <div className="flex items-start justify-between mb-6">
+                          <Icon size={30} className="text-steel-light" strokeWidth={1.5} />
+                          <span className="font-mono text-[10px] text-steel tracking-widest">
+                            {String(n).padStart(2, '0')}
+                          </span>
+                        </div>
+                        <h3 className="font-display uppercase text-2xl text-steel-light mb-3 group-hover:text-white transition-colors">
+                          {s.title}
+                        </h3>
+                        <p className="text-steel text-sm leading-relaxed mb-4">{s.desc}</p>
+
+                        <div className="flex items-center justify-between border-t border-panel-line pt-4 mt-6">
+                          <span className="font-mono text-[11px] text-steel/80 uppercase tracking-wide">
+                            {s.spec}
+                          </span>
+                          <span className="font-mono text-[10px] text-steel-light group-hover:text-white uppercase tracking-widest flex items-center gap-1 group-hover:translate-x-1 transition-all">
+                            Details →
+                          </span>
+                        </div>
+                      </motion.div>
+                    </NavLink>
+                  )
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="pb-20 lg:pb-28">
+        <div className="max-w-4xl mx-auto px-6 lg:px-10">
+          <h2 className="font-display font-extrabold uppercase text-3xl lg:text-4xl text-steel-light">
+            Why use one workshop for every stage?
+          </h2>
+          <p className="mt-5 text-steel text-base leading-relaxed">
+            Every handover between subcontractors adds time and risk. When detailing, cutting,
+            welding and coating happen in one facility, drawings go straight to the CNC machines,
+            quality control follows each piece from cut to dispatch, and you deal with one point
+            of contact for the whole steel package.
+          </p>
+
+          <h2 className="mt-16 font-display font-extrabold uppercase text-3xl lg:text-4xl text-steel-light">
+            Steel fabrication services FAQs
+          </h2>
+          <dl className="mt-6 border-t border-panel-line">
+            {faqs.map((f) => (
+              <div key={f.q} className="border-b border-panel-line py-5">
+                <dt className="font-display uppercase text-base text-steel-light">{f.q}</dt>
+                <dd className="mt-2 text-sm text-steel leading-relaxed">{f.a}</dd>
+              </div>
             ))}
-          </div>
+          </dl>
         </div>
       </section>
 
       <CtaBanner
         heading="Send us a drawing."
         headingAccent="We'll send back a quote."
-        ctaLabel="Get in Touch"
+        ctaLabel="Request a Quote"
       />
     </motion.main>
   )

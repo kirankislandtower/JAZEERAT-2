@@ -49,6 +49,8 @@ export function WordReveal({ children, className = '', delay = 0, stagger = 0.05
           <motion.span variants={child} className="inline-block">
             {word}
           </motion.span>
+          {/* real space for text extraction; invisible in the flex layout */}
+          {index < words.length - 1 ? ' ' : null}
         </span>
       ))}
     </motion.span>
@@ -66,7 +68,7 @@ export function LetterReveal({ children, className = '', delay = 0, stagger = 0.
   
   if (typeof children !== 'string') return <span className={className}>{children}</span>
 
-  const letters = Array.from(children)
+  const words = children.split(' ')
 
   const container = {
     hidden: { opacity: 0 },
@@ -95,17 +97,27 @@ export function LetterReveal({ children, className = '', delay = 0, stagger = 0.
       variants={container}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      className={`inline-flex flex-wrap ${className}`}
+      // inline-block (not inline-flex): flex items are read as separate blocks,
+      // so crawlers saw "P R E C I S I O N" instead of the word.
+      className={`inline-block ${className}`}
       aria-label={children}
     >
-      {letters.map((letter, index) => (
-        <motion.span 
-          key={index} 
-          variants={child} 
-          className="inline-block whitespace-pre"
-        >
-          {letter}
-        </motion.span>
+      {/* letters are grouped per word so a line can only break between words */}
+      {words.map((word, wi) => (
+        <span key={wi}>
+          <span className="inline-block whitespace-nowrap">
+            {Array.from(word).map((letter, li) => (
+              <motion.span
+                key={li}
+                variants={child}
+                className="inline-block whitespace-pre"
+              >
+                {letter}
+              </motion.span>
+            ))}
+          </span>
+          {wi < words.length - 1 ? ' ' : null}
+        </span>
       ))}
     </motion.span>
   )

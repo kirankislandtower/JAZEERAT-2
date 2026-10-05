@@ -89,7 +89,7 @@ export default function ProjectDetail() {
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
       <SEO
-        title={`${project.title} | Steel Fabrication Project`}
+        title={`${project.title}, ${project.location} | JAH Steel Project`}
         description={`${project.title} — ${description} Delivered by Jazeerat Al Hadeed in ${project.location}.`}
         path={`/projects/${slug}`}
         image={gallery[0]?.startsWith('http') ? gallery[0] : `https://jahsteel.ae${gallery[0]}`}
@@ -147,6 +147,17 @@ export default function ProjectDetail() {
           </div>
 
           <div>
+            <dl className="grid gap-px bg-panel-line border border-panel-line mb-10">
+              {[
+                ['Location', project.location],
+              ].map(([label, value]) => (
+                <div key={label} className="bg-graphite p-5">
+                  <dt className="font-mono text-[10px] uppercase tracking-widest text-steel">{label}</dt>
+                  <dd className="mt-1 text-steel-light text-sm">{value}</dd>
+                </div>
+              ))}
+            </dl>
+
             <h2 className="font-mono text-xs uppercase tracking-[0.25em] text-steel-light mb-3">Scope of Work</h2>
             <p className="text-steel text-base leading-relaxed pl-6 border-l-2 border-weld/30 mb-10">
               {project.scope}
@@ -159,8 +170,14 @@ export default function ProjectDetail() {
 
             <div className="border border-panel-line bg-graphite-light p-8 flex flex-col gap-4">
               <h3 className="font-display uppercase text-lg text-steel-light">Explore Related Work</h3>
+              <NavLink to="/services/structural-steel-fabrication" className="text-steel-light hover:text-white transition-colors text-sm font-mono uppercase tracking-widest">
+                Structural steel fabrication in Sharjah →
+              </NavLink>
+              <NavLink to="/services/delivery-installation" className="text-steel-light hover:text-white transition-colors text-sm font-mono uppercase tracking-widest">
+                Steel erection and installation →
+              </NavLink>
               <NavLink to="/services" className="text-steel-light hover:text-white transition-colors text-sm font-mono uppercase tracking-widest">
-                Explore our structural steel fabrication services →
+                All steel fabrication services →
               </NavLink>
               <NavLink to="/projects" className="text-steel-light hover:text-white transition-colors text-sm font-mono uppercase tracking-widest">
                 Browse the full project gallery →

@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { Clock, User, ArrowRight } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import SEO from '../components/SEO'
+import { PAGE_SEO } from '../data/seo'
 import SectionLabel from '../components/SectionLabel'
 import Cutline from '../components/Cutline'
 import TiltImage from '../components/TiltImage'
@@ -57,8 +58,8 @@ export default function Blogs() {
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }} className="bg-graphite">
       <SEO
-        title="Insights & News | Jazeerat Al Hadeed"
-        description="Read our latest insights, case studies, and technical deep dives into structural steel fabrication, CNC processing, and site erection across the MENA region."
+        title={PAGE_SEO['/blogs'].title}
+        description={PAGE_SEO['/blogs'].description}
         path="/blogs"
       />
 
@@ -66,20 +67,20 @@ export default function Blogs() {
       <section className="pt-40 pb-16 lg:pt-48 lg:pb-24 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <motion.div initial="hidden" animate="visible" custom={0} variants={fadeUp}>
-            <SectionLabel index="INSIGHTS">Knowledge Base</SectionLabel>
+            <SectionLabel index="INSIGHTS" as="h1">{PAGE_SEO['/blogs'].h1}</SectionLabel>
           </motion.div>
-          <motion.h1
+          <motion.p
             initial="hidden" animate="visible" custom={1} variants={fadeUp}
             className="font-display font-extrabold uppercase text-5xl sm:text-6xl lg:text-8xl leading-[0.9] text-steel-light max-w-4xl mt-6 mb-8"
           >
             The science of<br />
             <span className="text-white">structural steel.</span>
-          </motion.h1>
+          </motion.p>
           <motion.p
             initial="hidden" animate="visible" custom={2} variants={fadeUp}
             className="text-steel text-lg lg:text-xl max-w-2xl leading-relaxed"
           >
-            Industry news, technical deep dives, and company updates from the team building the region's most critical infrastructure.
+            Guides from our Sharjah workshop on fabrication, codes, coatings and cutting methods, written for contractors and consultants planning steel packages in the UAE.
           </motion.p>
         </div>
       </section>

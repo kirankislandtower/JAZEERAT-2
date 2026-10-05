@@ -8,9 +8,9 @@ const servicesData = [
   {
     icon: Factory,
     num: '01',
-    title: 'Structural Fabrication',
-    short: 'Portal frames, trusses and columns pre-assembled for site-ready installation.',
-    spec: 'Spans up to 30,000mm',
+    title: 'Structural Steel Fabrication',
+    short: 'Portal frames, trusses, columns and beams fabricated and pre-assembled in our workshop for site-ready installation.',
+    spec: 'Fabricated and assembled in Sharjah',
     spanClass: 'md:col-span-2 md:row-span-2',
     image: '/assets/team-in-jah-uniform.webp'
   },
@@ -18,22 +18,22 @@ const servicesData = [
     icon: PenTool,
     num: '02',
     title: 'Design & Detailing',
-    short: 'Shop drawings and structural detailing prepared before a single plate is cut.',
-    spec: 'Tolerance ±0.5mm',
+    short: 'Shop drawings, connection details and material take-offs prepared before a single plate is cut.',
+    spec: 'Detailed before cutting',
     spanClass: 'md:col-span-1 md:row-span-1',
   },
   {
     icon: Flame,
     num: '03',
-    title: 'CNC Plasma & Laser',
-    short: 'High-accuracy plate cutting for structural and architectural steel at production scale.',
-    spec: 'Plate up to 50mm',
+    title: 'CNC Laser & Plasma Cutting',
+    short: 'High-accuracy CNC laser and plasma cutting for structural and architectural steel plate, at production scale.',
+    spec: 'Laser and plasma, in-house',
     spanClass: 'md:col-span-1 md:row-span-1',
   },
   {
     icon: Wrench,
     num: '04',
-    title: 'Machine Workshop',
+    title: 'CNC Machining & Machine Workshop',
     short: 'CNC machining, drilling and boring for precision components and mechanical parts.',
     spec: 'Full workshop, one roof',
     spanClass: 'md:col-span-2 md:row-span-1',
@@ -41,16 +41,16 @@ const servicesData = [
   {
     icon: ShieldCheck,
     num: '05',
-    title: 'Welding & QC',
-    short: 'Certified welders working to code — every joint logged against our QC record.',
-    spec: 'Certified welders on shift',
+    title: 'Welding & Quality Control',
+    short: 'Qualified welders working to code, with every joint logged against our QC record.',
+    spec: 'Every joint logged',
     spanClass: 'md:col-span-1 md:row-span-1',
   },
   {
     icon: Truck,
     num: '06',
-    title: 'Delivery & Install',
-    short: 'Coordinated transport and on-site installation support across the MENA region.',
+    title: 'Steel Delivery & Installation',
+    short: 'Coordinated transport, steel erection and on-site installation support across the UAE and the MENA region.',
     spec: 'Site-coordinated logistics',
     spanClass: 'md:col-span-3 md:row-span-1',
     image: '/assets/project-crane-hoist.webp'
@@ -165,8 +165,8 @@ export default function WhatWeDoSection() {
               <span className="font-mono text-xs tracking-[0.25em] uppercase text-weld"> What We Do</span>
             </div>
             <h2 className="font-display font-extrabold uppercase text-4xl sm:text-5xl md:text-7xl text-white mt-4 md:mt-6 leading-[1] md:leading-[0.9]">
-              <span className="block"><LetterReveal delay={0.1} stagger={0.04}>Precision at</LetterReveal></span>
-              <span className="block"><LetterReveal delay={0.5} stagger={0.04}>Scale.</LetterReveal></span>
+              <span className="block"><LetterReveal delay={0.1} stagger={0.04}>Steel Fabrication Services.</LetterReveal></span>
+              <span className="block"><LetterReveal delay={0.5} stagger={0.04}>Precision at Scale.</LetterReveal></span>
             </h2>
           </motion.div>
           <motion.div variants={fadeLeft}>
@@ -174,7 +174,7 @@ export default function WhatWeDoSection() {
               to="/services"
               className="group inline-flex items-center gap-3 border border-white/20 text-white px-8 py-4 font-mono uppercase tracking-widest text-xs hover:border-weld hover:text-weld transition-all duration-300"
             >
-              All Services
+              View All Services
               <motion.span
                 className="inline-flex"
                 animate={{ x: 0 }}
@@ -209,13 +209,13 @@ export default function WhatWeDoSection() {
           className="mt-12 flex flex-col md:flex-row items-center justify-between border border-panel-line bg-graphite-light p-6 md:p-8"
         >
           <p className="text-steel text-xs md:text-sm font-serif italic border-l-2 border-white pl-4 mb-6 md:mb-0 max-w-sm">
-            From first drawing to final install — all under one roof.
+            From first drawing to final installation: steel fabrication, finishing and erection, all under one roof.
           </p>
           <NavLink
             to="/services"
             className="inline-flex items-center gap-2 font-display uppercase tracking-wider font-semibold text-sm bg-white text-graphite px-8 py-4 hover:bg-graphite-light hover:text-white border border-transparent hover:border-white transition-colors"
           >
-            Explore Capabilities <ArrowUpRight size={16} />
+            Explore Our Capabilities <ArrowUpRight size={16} />
           </NavLink>
         </motion.div>
 

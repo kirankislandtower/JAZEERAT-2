@@ -3,6 +3,7 @@ import { Factory, Wrench, ShieldCheck, Truck, Boxes, Flame } from 'lucide-react'
 import SectionLabel from '../components/SectionLabel'
 import Cutline from '../components/Cutline'
 import SEO from '../components/SEO'
+import { PAGE_SEO } from '../data/seo'
 import VideoHero from '../components/VideoHero'
 import CtaBanner from '../components/CtaBanner'
 
@@ -28,7 +29,7 @@ const facilities = [
   {
     icon: ShieldCheck,
     title: 'Welding Bays',
-    desc: 'Dedicated welding stations with certified welders and multi-process capability.',
+    desc: 'Dedicated welding stations with multi-process capability.',
     image: '/assets/assetsJazeerat/2. site photos /IMG_5998.webp',
   },
   {
@@ -57,8 +58,8 @@ export default function Facilities() {
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
       <SEO
-        title="Workshop Facilities | CNC Fabrication UAE"
-        description="Jazeerat Al Hadeed's integrated workshop facility: CNC plasma & laser cutting, machine workshop, welding bays, surface finishing and logistics — all under one roof in the UAE."
+        title={PAGE_SEO['/facilities'].title}
+        description={PAGE_SEO['/facilities'].description}
         path="/facilities"
       />
       <VideoHero
@@ -69,16 +70,16 @@ export default function Facilities() {
         className="pt-40 pb-20 lg:pt-48 lg:pb-28"
       >
         <div className="max-w-5xl mx-auto px-6 lg:px-10">
-          <SectionLabel index="FACILITIES">Our Facilities</SectionLabel>
-          <motion.h1 initial="hidden" animate="visible" custom={0} variants={fadeUp}
+          <SectionLabel index="FACILITIES" as="h1">{PAGE_SEO['/facilities'].h1}</SectionLabel>
+          <motion.p initial="hidden" animate="visible" custom={0} variants={fadeUp}
             className="font-display font-extrabold uppercase text-5xl sm:text-6xl lg:text-7xl leading-[0.95] text-steel-light"
           >
             Built for precision, capacity and speed.
-          </motion.h1>
+          </motion.p>
           <motion.p initial="hidden" animate="visible" custom={1} variants={fadeUp}
             className="mt-8 max-w-2xl text-steel text-base leading-relaxed"
           >
-            Our facility blends heavy fabrication with precision machining, coating and logistics so steel work is prepared, inspected and dispatched from one workshop.
+            Our workshop in Al Sajaa Industrial Area, Sharjah brings cutting, machining, welding, blasting, coating and dispatch under one roof, so steel moves from raw stock to site-ready assemblies without leaving the facility.
           </motion.p>
         </div>
       </VideoHero>
@@ -88,6 +89,9 @@ export default function Facilities() {
       </div>
 
       <section className="py-20 lg:py-28">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 mb-10">
+          <h2 className="font-display font-extrabold uppercase text-3xl lg:text-4xl text-steel-light">Inside our workshop</h2>
+        </div>
         <div className="max-w-7xl mx-auto px-6 lg:px-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {facilities.map((facility, i) => {
             const Icon = facility.icon
@@ -96,7 +100,7 @@ export default function Facilities() {
                 className="border border-panel-line bg-graphite p-8 hover:border-weld transition-colors"
               >
                 <div className="mb-6 overflow-hidden">
-                  <img src={facility.image} alt={facility.title} loading="lazy" className="h-40 w-full object-cover" />
+                  <img src={facility.image} alt={`${facility.title} at Jazeerat Al Hadeed workshop, Sharjah`} loading="lazy" className="h-40 w-full object-cover" />
                 </div>
                 <div className="flex items-center justify-between gap-4 mb-6">
                   <div>

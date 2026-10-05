@@ -1,4 +1,33 @@
 {
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/services/fabrication-facility",
+      "destination": "/services/structural-steel-fabrication",
+      "permanent": true
+    },
+    {
+      "source": "/services/advanced-machinery",
+      "destination": "/services/plate-bending-rolling",
+      "permanent": true
+    },
+    {
+      "source": "/services/cnc-laser-cutting",
+      "destination": "/services/cnc-laser-plasma-cutting",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.jahsteel.ae"
+        }
+      ],
+      "destination": "https://jahsteel.ae/:path*",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",

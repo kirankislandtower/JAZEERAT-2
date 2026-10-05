@@ -5,6 +5,7 @@ import { motion, useScroll, useSpring } from 'framer-motion'
 import { ArrowLeft, Clock, User, Share2, ArrowRight } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import SEO from '../components/SEO'
+import { SITE_URL, SITE_NAME } from '../data/seo'
 import TiltImage from '../components/TiltImage'
 import Newsletter from '../components/Newsletter'
 import { getCategoryColor } from '../data/blogCategories'
@@ -95,6 +96,21 @@ export default function BlogPost() {
     day: 'numeric'
   })
 
+  const imageUrl = post.image_url?.startsWith('http') ? post.image_url : `${SITE_URL}${post.image_url}`
+  // The company is named as author and publisher; the byline shown on the
+  // page is not repeated here until the named authors are confirmed.
+  const blogPostingJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    image: imageUrl,
+    datePublished: post.created_at,
+    mainEntityOfPage: `${SITE_URL}/blogs/${post.slug}`,
+    author: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
+    publisher: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
+  }
+
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }} className="bg-graphite min-h-screen">
       {/* Fixed elements portaled to <body> — this page is wrapped by
@@ -126,7 +142,8 @@ export default function BlogPost() {
         title={`${post.title} | Jazeerat Al Hadeed Insights`}
         description={post.excerpt}
         path={`/blogs/${post.slug}`}
-        image={post.image_url}
+        image={imageUrl}
+        schema={blogPostingJsonLd}
       />
 
       {/* Immersive Editorial Hero */}

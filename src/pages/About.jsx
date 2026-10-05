@@ -2,13 +2,14 @@ import { useRef, useEffect, useState } from 'react'
 import { motion, useScroll, useTransform, useInView, useSpring } from 'framer-motion'
 import { NavLink } from 'react-router-dom'
 import {
-  Target, Eye, Handshake, Award, Users, Calendar, TrendingUp,
-  ArrowRight, Factory, Wrench, ShieldCheck, Ruler, PenTool, Boxes, ChevronsDown,
+  Target, Eye, Handshake, Award, Calendar, Globe, History,
+  ArrowRight, Factory, Wrench, ShieldCheck, Truck, PenTool, Scissors, ChevronsDown,
   Quote,
 } from 'lucide-react'
 import SectionLabel from '../components/SectionLabel'
 import Cutline from '../components/Cutline'
 import { WordReveal, LetterReveal, LineReveal } from '../components/TypographyAnimations'
+import { PAGE_SEO } from '../data/seo'
 import SEO from '../components/SEO'
 import VideoHero from '../components/VideoHero'
 import Magnetic from '../components/Magnetic'
@@ -17,33 +18,37 @@ import CtaBanner from '../components/CtaBanner'
 
 /* ─── data ───────────────────────────────────────────────── */
 const timeline = [
-  { year: '2019', title: 'Established', desc: 'Jazeerat Al Hadeed is established after acquiring Carlton Steel Works LLC, a Sharjah workshop operating since 1983.' },
-  { year: '2020', title: 'CNC Line Installed', desc: 'In-house CNC plasma and machining capability brought online.' },
-  { year: '2022', title: 'Regional Expansion', desc: 'Fabrication and delivery extended across GCC construction sites.' },
-  { year: '2024', title: 'ISO-Aligned Qc', desc: 'Quality control processes aligned to international fabrication standards.' },
-  { year: 'Today', title: 'Full-Service Workshop', desc: 'A single integrated facility for design, cut, weld, finish and delivery.' },
+  { year: '1983', title: 'Sharjah Workshop', desc: 'Carlton Steel Works LLC, a steel workshop in Sharjah, has been operating since 1983.' },
+  { year: '2019', title: 'Established', desc: 'Jazeerat Al Hadeed is established after acquiring Carlton Steel Works LLC.' },
+  { year: '30+', title: 'Years Of Experience', desc: 'Over 30 years of steel fabrication and machine workshop experience, serving projects across the UAE and MENA region.' },
+  { year: 'Today', title: 'Integrated Workshop', desc: 'Design and detailing, CNC plasma and laser cutting, machining, welding, and delivery and installation from one facility in Sharjah.' },
 ]
 
 const values = [
-  { icon: Target, title: 'Precision', desc: 'Every cut and weld is measured against tolerance, not approximation.' },
-  { icon: Eye, title: 'Transparency', desc: 'Clients see the drawing, the process and the inspection record.' },
+  { icon: Target, title: 'Precision', desc: 'Parts are fabricated to the tolerances shown on the drawing and checked before delivery.' },
+  { icon: Eye, title: 'Transparency', desc: 'Each job is tracked against its drawing and quality control record.' },
   { icon: Handshake, title: 'Reliability', desc: 'Delivery schedules built for construction sites that cannot wait.' },
 ]
 
 const capabilities = [
-  { icon: Factory, title: 'Structural Steel', desc: 'Portal frames, trusses and heavy structural assemblies.', side: 'left' },
-  { icon: Wrench, title: 'Machine Workshop', desc: 'CNC cutting, machining and precision finishing in-house.', side: 'left' },
-  { icon: PenTool, title: 'Design & Detailing', desc: 'Shop drawings and detailing engineered to your structural spec.', side: 'left' },
-  { icon: Boxes, title: 'Custom Fabrication', desc: 'Bespoke steelwork built to client drawings and tolerances.', side: 'right' },
-  { icon: ShieldCheck, title: 'QC & Compliance', desc: 'Every weld and cut logged against international standards.', side: 'right' },
-  { icon: Ruler, title: 'Surface Finishing', desc: 'Shot blasting, priming and coating for MENA climates.', side: 'right' },
+  { icon: Factory, title: 'Structural Steel Fabrication', desc: 'Structural steel components fabricated and assembled for industrial and commercial projects.', side: 'left', to: '/services/structural-steel-fabrication' },
+  { icon: PenTool, title: 'Design & Detailing', desc: 'Shop drawings, connection details and material take-offs prepared before fabrication starts.', side: 'left', to: '/services/design-detailing' },
+  { icon: Scissors, title: 'CNC Plasma & Laser Cutting', desc: 'Structural and architectural steel plate cut on CNC plasma and laser systems.', side: 'left', to: '/services/cnc-laser-plasma-cutting' },
+  { icon: Wrench, title: 'CNC Machining & Machine Workshop', desc: 'In-house machining and machine workshop work for precision steel components.', side: 'right', to: '/facilities' },
+  { icon: ShieldCheck, title: 'Welding & Quality Control', desc: 'Welding to code, with every joint logged against our quality control record.', side: 'right', to: '/services/welding-qc' },
+  { icon: Truck, title: 'Steel Delivery & Installation', desc: 'Transport, crane rigging and structural steel erection across the UAE and MENA region.', side: 'right', to: '/services/delivery-installation' },
 ]
 
 const stats = [
   { icon: Award, value: 30, suffix: '+', label: 'Years Of Experience' },
-  { icon: Users, value: 450, suffix: '+', label: 'Projects Delivered' },
-  { icon: Calendar, value: 6, suffix: '', label: 'Countries Served' },
-  { icon: TrendingUp, value: 98, suffix: '%', label: 'On-Time Delivery' },
+  { icon: History, value: '1983', suffix: '', label: 'Sharjah Workshop Operating Since' },
+  { icon: Calendar, value: '2019', suffix: '', label: 'Jazeerat Al Hadeed Established' },
+  { icon: Globe, value: 'MENA', suffix: '', label: 'UAE & MENA Delivery Region' },
+]
+
+const certifications = [
+  { code: 'ISO 9001:2015', name: 'Quality Management System' },
+  { code: 'ISO 14001:2015', name: 'Environmental Management System' },
 ]
 
 /* ─── mission pillars ─────────────────────────────────────── */
@@ -51,17 +56,17 @@ const missionPillars = [
   {
     number: '01',
     heading: 'Build Without Compromise',
-    body: 'Our mission is to manufacture structural steel that performs precisely as designed — no short-cuts, no substitutions. We hold every joint to the same standard whether the structure is a mezzanine or a portal-frame warehouse.',
+    body: 'Our mission is to fabricate structural steel exactly as it is detailed, whether the job is a small mezzanine or a large industrial structure. We hold every joint to the same quality standard on every project.',
   },
   {
     number: '02',
     heading: 'Empower Every Project',
-    body: 'From the first DXF file to the final coat, we give project teams a single fabrication partner who handles design, cut, weld, blast and delivery — removing the co-ordination overhead that delays sites.',
+    body: 'From design and detailing to delivery, we give project teams one steel fabrication partner for CNC cutting, machining, welding, finishing and installation, reducing the coordination between separate suppliers that delays site work.',
   },
   {
     number: '03',
     heading: 'Raise the Regional Standard',
-    body: 'The MENA construction market deserves fabricators who log tolerances and produce inspection records. We are building that expectation into every delivery so that precision becomes the norm, not the premium.',
+    body: 'The UAE and MENA construction market deserves fabricators who log tolerances and keep inspection records. We are building that expectation into every delivery so that precision becomes the norm, not the premium.',
   },
 ]
 
@@ -138,6 +143,7 @@ function CapabilityItem({ cap, delay, direction }) {
       transition={{ duration: 0.6, delay }}
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
     >
+      <NavLink to={cap.to} className="flex flex-col">
       <div className="flex items-center gap-3 mb-2">
         <motion.div
           className="relative text-white bg-white/5 p-3 rounded-none border border-white/10 group-hover:bg-white/10 transition-colors"
@@ -153,6 +159,7 @@ function CapabilityItem({ cap, delay, direction }) {
       <div className="mt-2 pl-[52px] flex items-center gap-1 text-white text-xs font-mono uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
         View capability <ArrowRight size={12} />
       </div>
+      </NavLink>
     </motion.div>
   )
 }
@@ -162,13 +169,17 @@ function StatCounter({ icon: Icon, value, suffix, label, delay }) {
   const isInView = useInView(ref, { once: false })
   const [animated, setAnimated] = useState(false)
 
-  const spring = useSpring(0, { stiffness: 60, damping: 12 })
+  // Starts at the real value so the page HTML (and search engines) never show
+  // "0"; the count-up from zero only plays once the counter scrolls into view.
+  const spring = useSpring(typeof value === 'number' ? value : 0, { stiffness: 60, damping: 12 })
   const display = useTransform(spring, (v) => Math.floor(v))
+  // years and text values (e.g. "MENA") are shown as-is, not counted up
+  const isNumeric = typeof value === 'number'
 
   useEffect(() => {
-    if (isInView && !animated) { spring.set(value); setAnimated(true) }
-    if (!isInView && animated) { spring.set(0); setAnimated(false) }
-  }, [isInView, value, spring, animated])
+    if (!isNumeric) return
+    if (isInView && !animated) { spring.jump(0); spring.set(value); setAnimated(true) }
+  }, [isInView, value, spring, animated, isNumeric])
 
   return (
     <motion.div
@@ -186,7 +197,7 @@ function StatCounter({ icon: Icon, value, suffix, label, delay }) {
         <Icon size={22} strokeWidth={1.5} />
       </motion.div>
       <div ref={ref} className="font-display font-extrabold text-4xl text-steel-light flex items-end gap-0.5">
-        <motion.span>{display}</motion.span>
+        <motion.span>{isNumeric ? display : value}</motion.span>
         <span className="text-white">{suffix}</span>
       </div>
       <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-steel mt-2">{label}</p>
@@ -334,16 +345,14 @@ const stageImages = [
   '/assets/assetsJazeerat/IMG_8971.webp',
   '/assets/assetsJazeerat/IMG_8972.webp',
   '/assets/assetsJazeerat/IMG_8974.webp',
-  '/assets/assetsJazeerat/IMG_8976.webp',
   '/assets/assetsJazeerat/PHOTO-2026-01-02-08-37-41.webp',
 ]
 
 const stageLabels = [
+  'Sharjah Workshop',
   'Established',
-  'CNC Line Installed',
-  'Regional Expansion',
-  'ISO-Aligned QC',
-  'Full-Service Today',
+  'Years Of Experience',
+  'Integrated Workshop',
 ]
 
 /* ─── MilestoneScroller ──────────────────────────────────── */
@@ -399,7 +408,7 @@ function MilestoneScroller({ timeline }) {
             >
               <img
                 src={src}
-                alt={`Stage ${i + 1}`}
+                alt={`${stageLabels[i] || 'Workshop'} – Jazeerat Al Hadeed steel workshop, Sharjah`}
                 className="w-full h-full object-cover object-center"
                 loading="lazy"
               />
@@ -429,9 +438,10 @@ function MilestoneScroller({ timeline }) {
 
           {/* main heading — always visible */}
           <h2 className="font-display font-bold uppercase text-4xl lg:text-5xl text-steel-light mt-2 max-w-xl flex flex-wrap gap-[0.25em]">
-            <WordReveal delay={0.1}>The foundation of</WordReveal>
-            <WordReveal delay={0.3} className="text-white">steel craft.</WordReveal>
+            <WordReveal delay={0.1}>Our Journey:</WordReveal>
+            <WordReveal delay={0.3} className="text-white">Sharjah Steelwork Since 1983.</WordReveal>
           </h2>
+          <p className="mt-3 mb-4 font-display uppercase tracking-widest text-sm text-steel-light">The foundation of steel craft.</p>
 
           {/* milestone card — swaps per stage */}
           <div className="relative overflow-hidden" style={{ minHeight: 200 }}>
@@ -574,8 +584,8 @@ export default function About() {
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
       <SEO
-        title="About Jazeerat Al Hadeed | Steel Fabrication Company UAE"
-        description="Learn about Jazeerat Al Hadeed, a UAE steel fabrication and engineering company providing structural steel fabrication, machine workshop and related industrial solutions."
+        title={PAGE_SEO['/about'].title}
+        description={PAGE_SEO['/about'].description}
         path="/about"
       />
 
@@ -590,16 +600,16 @@ export default function About() {
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-10 pt-32 pb-24">
           <motion.div initial="hidden" animate="visible" custom={0} variants={fadeUp}>
-            <SectionLabel index="ABOUT">Who We Are</SectionLabel>
+            <SectionLabel index="ABOUT" as="h1">{PAGE_SEO['/about'].h1}</SectionLabel>
           </motion.div>
 
           <motion.div initial="hidden" animate="visible" variants={container} className="mt-2">
             <MaskReveal delay={0.2}>
-              <h1 className="font-display font-extrabold uppercase text-5xl sm:text-6xl lg:text-8xl leading-[0.9] text-steel-light drop-shadow-lg">
+              <p className="font-display font-extrabold uppercase text-5xl sm:text-6xl lg:text-8xl leading-[0.9] text-steel-light drop-shadow-lg">
                 Built on the
                 <br />
                 <span className="text-white">shop floor.</span>
-              </h1>
+              </p>
             </MaskReveal>
 
             <motion.div
@@ -615,9 +625,11 @@ export default function About() {
               custom={2}
               className="mt-8 max-w-xl text-steel-light/80 text-base leading-relaxed"
             >
-              Jazeerat Al Hadeed is an integrated machine workshop and steel fabrication
-              solution provider delivering precision structural steel projects across the
-              MENA region. Our work is judged in millimeters, not marketing.
+              Jazeerat Al Hadeed (JAH Steel) is a steel fabrication company with its head office
+              in Al Qusais, Dubai and its machine workshop in Al Sajaa Industrial Area, Sharjah.
+              We were established in 2019 after acquiring Carlton Steel Works LLC,
+              and today we deliver structural steel fabrication, CNC cutting and machining across
+              the UAE and MENA region. Our work is judged in millimeters, not marketing.
             </motion.p>
 
             <motion.div
@@ -683,7 +695,7 @@ export default function About() {
               variants={fadeUp} custom={1}
               className="font-display font-bold uppercase text-4xl lg:text-5xl text-steel-light max-w-2xl mt-2"
             >
-              One workshop, <span className="text-weld">full capability.</span>
+              One Sharjah workshop, <span className="text-weld">full steel fabrication capability.</span>
             </motion.h2>
             <motion.div
               className="mt-4 h-px bg-weld"
@@ -833,6 +845,24 @@ export default function About() {
             <StatCounter key={s.label} icon={s.icon} value={s.value} suffix={s.suffix} label={s.label} delay={i * 0.1} />
           ))}
         </div>
+
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 mt-10">
+          <h2 className="font-mono text-[11px] uppercase tracking-[0.25em] text-steel mb-4">Certified Management Systems</h2>
+          <div className="grid sm:grid-cols-2 gap-px bg-panel-line border border-panel-line">
+            {certifications.map((c) => (
+              <div key={c.code} className="bg-graphite p-6 flex items-start gap-4">
+                <ShieldCheck size={22} strokeWidth={1.5} className="text-steel-light shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-display uppercase text-xl text-steel-light">{c.code}</p>
+                  <p className="text-sm text-steel mt-1">{c.name}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="text-xs text-steel mt-3">
+            Certified by Otabu Certification for the manufacturing and installation of structural metal parts.
+          </p>
+        </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════
@@ -906,10 +936,11 @@ export default function About() {
             <div className="self-end pt-8 lg:pt-16 border-l border-panel-line pl-8">
               <LineReveal delay={0.3}>
                 <p className="text-steel text-lg leading-relaxed">
-                  We exist to eliminate the gap between engineering intent and fabricated reality.
-                  Every drawing that enters our workshop leaves as a component — measured, tested,
-                  documented and ready for site. This commitment to verifiable precision is not
-                  a marketing statement; it is the operating standard our clients rely on.
+                  We exist to close the gap between engineering drawings and fabricated steel.
+                  Every drawing that enters our Sharjah workshop is detailed, cut, welded and
+                  checked against its quality control record before it leaves for site. Clients
+                  across the UAE and MENA region rely on that discipline for structural steel
+                  fabrication, CNC cutting and machining.
                 </p>
               </LineReveal>
             </div>
@@ -1065,7 +1096,12 @@ export default function About() {
       <MilestoneScroller timeline={timeline} />
 
       {/* ── CTA BANNER ─────────────────────────────────── */}
-      <CtaBanner heading="Have a spec?" headingAccent="Let's cut it." />
+      <CtaBanner
+        eyebrow="Have a spec? Let's cut it."
+        heading="Discuss your"
+        headingAccent="steel fabrication project."
+        ctaLabel="Request a Quote"
+      />
 
     </motion.main>
   )

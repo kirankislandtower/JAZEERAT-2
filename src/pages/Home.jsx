@@ -5,6 +5,7 @@ import {
   ArrowUpRight, ArrowRight, MapPin, ExternalLink,
 } from 'lucide-react'
 import SEO from '../components/SEO'
+import { PAGE_SEO } from '../data/seo'
 import SlidingHero from '../components/SlidingHero'
 import Cutline from '../components/Cutline'
 import SectionLabel from '../components/SectionLabel'
@@ -39,18 +40,16 @@ const DEFAULT_HERO_SLIDES = [
 ]
 
 const process = [
-  { n: '01', title: 'Engineering & Draft', desc: 'Every millimeter calculated. We translate architectural vision into executable shop drawings with zero ambiguity.' },
-  { n: '02', title: 'Precision Cutting', desc: 'Sub-millimeter accuracy at production scale using advanced CNC plasma and laser systems.' },
-  { n: '03', title: 'Fabrication & Welding', desc: 'Code-compliant assembly by certified welders, with exhaustive quality control at every critical joint.' },
-  { n: '04', title: 'Surface Treatment', desc: 'Industrial-grade surface preparation, blasting, and protective coatings engineered for harsh MENA climates.' },
-  { n: '05', title: 'Site Deployment', desc: 'Seamless heavy logistics, site coordination, and structural erection delivered on spec, on time.' },
+  { n: '01', title: 'Engineering & Shop Drawings', desc: 'Every millimeter calculated. We translate architectural and structural designs into executable shop drawings with zero ambiguity.' },
+  { n: '02', title: 'Precision CNC Cutting', desc: 'Accurate CNC plasma and laser cutting at production scale, for structural and architectural steel plate.' },
+  { n: '03', title: 'Fabrication & Welding', desc: 'Code-compliant assembly by qualified welders, with quality control at every critical joint.' },
+  { n: '04', title: 'Surface Treatment & Coatings', desc: 'Industrial-grade surface preparation, blasting and protective coatings engineered for harsh Gulf and MENA climates.' },
+  { n: '05', title: 'Delivery & Steel Erection', desc: 'Heavy logistics, site coordination and structural steel erection, delivered on spec and on time.' },
 ]
 
 const stats = [
   { value: '30+', label: 'Years Of Experience' },
-  { value: '450+', label: 'Structures Delivered' },
-  { value: '±0.5mm', label: 'Tolerance Standard' },
-  { value: 'MENA', label: 'Deployment Range' },
+  { value: 'MENA', label: 'Delivery Across the Region' },
 ]
 
 /* ─── animation variants ─────────────────────────────────── */
@@ -92,6 +91,12 @@ const stagger = {
 }
 
 /* ─── Project Card ───────────────────────────────────────── */
+const PROJECT_ALT = {
+  'Heavy Erection & Lift': 'Heavy structural steel erection and crane lift by Jazeerat Al Hadeed, Dubai',
+  'Compliance Structural Splicing': 'Structural steel splicing and erection project, Riyadh, Saudi Arabia',
+  'Sobha One Facades': 'Architectural steel facade works for a high-rise project in Dubai, by Jazeerat Al Hadeed',
+}
+
 function ProjectCard({ proj, i, active, onClick }) {
   const [hovered, setHovered] = useState(false)
   const isActive = active === i
@@ -107,7 +112,7 @@ function ProjectCard({ proj, i, active, onClick }) {
       <div className={`relative overflow-hidden transition-all duration-700 h-full absolute inset-0 z-0`}>
         <motion.img
           src={proj.image}
-          alt={proj.title}
+          alt={PROJECT_ALT[proj.title] || proj.title}
           className={`w-full object-cover transition-all duration-1000 h-full absolute inset-0`}
           animate={{ scale: hovered && !isActive ? 1.08 : 1 }}
         />
@@ -250,15 +255,15 @@ export default function Home() {
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
       <SEO
-        title="Steel Fabrication Company in Dubai, UAE"
-        description="Jazeerat Al Hadeed is a steel fabrication company in Dubai, UAE, providing structural steel fabrication, steel design and detailing, CNC cutting, welding, machine workshop and installation services."
+        title={PAGE_SEO['/'].title}
+        description={PAGE_SEO['/'].description}
         path="/"
       />
 
       {/* Real, crawlable H1 for SEO — kept visually hidden since the hero's
           rotating headline (rendered as an h2 in SlidingHero) already carries
           the primary visual message. This does not change anything visible. */}
-      <h1 className="sr-only">Steel Fabrication & Engineering Solutions in Dubai, UAE</h1>
+      <h1 className="sr-only">{PAGE_SEO['/'].h1}</h1>
 
       {/* ── HERO — full-width sliding carousel */}
       <SlidingHero slides={slides} />
@@ -280,14 +285,17 @@ export default function Home() {
           <motion.div variants={fadeUp} custom={0}>
             <SectionLabel>Who We Are</SectionLabel>
           </motion.div>
-          <motion.p
+          <motion.h2
             variants={fadeUp} custom={1}
-            className="mt-4 text-steel-light text-base lg:text-lg leading-relaxed max-w-3xl"
+            className="mt-4 font-display font-bold uppercase text-3xl lg:text-4xl text-white"
           >
-            Jazeerat Al Hadeed is a UAE-based steel fabrication and engineering company specializing in
-            structural steel fabrication, steel design and detailing, CNC cutting, machine workshop
-            services, welding, supply and installation. We support industrial, commercial and
-            infrastructure projects across Dubai, the UAE and the wider MENA region.
+            Steel Structure Company in Sharjah, Serving the UAE &amp; MENA
+          </motion.h2>
+          <motion.p
+            variants={fadeUp} custom={2}
+            className="mt-6 text-steel-light text-base lg:text-lg leading-relaxed max-w-3xl"
+          >
+            Jazeerat Al Hadeed is a steel fabrication company in the UAE with more than 30 years of experience. From our integrated workshop in Al Sajaa Industrial Area, Sharjah, we handle structural steel fabrication, steel design and detailing, CNC laser and plasma cutting, machining, welding, surface finishing and supply and installation. Contractors, developers and consultants work with one team from the first shop drawing to final erection, on industrial, commercial and infrastructure projects across Dubai, the wider UAE and the MENA region.
           </motion.p>
         </motion.div>
       </section>
@@ -330,14 +338,14 @@ export default function Home() {
                     <SectionLabel>Recent Projects</SectionLabel>
                   </motion.div>
                   <h2 className="font-display font-bold uppercase text-4xl lg:text-5xl text-steel-light max-w-lg mt-2 flex flex-wrap gap-[0.25em]">
-                    <WordReveal delay={0.1}>Delivered with</WordReveal>
-                    <WordReveal delay={0.3} className="text-white">precision.</WordReveal>
+                    <WordReveal delay={0.1}>Steel Structure Projects,</WordReveal>
+                    <WordReveal delay={0.3} className="text-white">Delivered with Precision.</WordReveal>
                   </h2>
                   <motion.p
                     variants={fadeRight} custom={2}
                     className="mt-3 text-steel text-sm max-w-md leading-relaxed"
                   >
-                    A selection of recent fabrication and erection projects across the Gulf.
+                    Recent structural steel fabrication and erection projects across the UAE, Saudi Arabia and the wider Gulf.
                   </motion.p>
                 </motion.div>
 
@@ -391,10 +399,9 @@ export default function Home() {
                       transition={{ duration: 0.4, ease: 'easeInOut' }}
                     />
                     <div className="relative z-10 flex items-center gap-4">
-                      <span className="font-mono text-[10px] text-steel/60 uppercase tracking-widest">JZH-2026</span>
                       <span className="h-px w-10 bg-panel-line" />
                       <p className="font-display uppercase text-xl text-steel-light group-hover:text-graphite transition-colors duration-300">
-                        Browse all projects across the MENA region
+                        Browse all steel structure projects across the MENA region
                       </p>
                     </div>
                     <div className="relative z-10 flex items-center gap-2 font-display uppercase text-sm font-semibold text-steel-light group-hover:text-graphite transition-colors duration-300">
@@ -492,7 +499,7 @@ export default function Home() {
           </motion.div>
 
           {/* Floating Glassmorphic Cards */}
-          <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6">
             {stats.map((s, i) => (
               <motion.div
                 key={s.label}
@@ -538,7 +545,7 @@ export default function Home() {
                 variants={fadeDown} custom={1}
                 className="font-display font-extrabold uppercase text-4xl sm:text-5xl lg:text-6xl text-steel-light leading-tight"
               >
-                Have a spec?{' '}
+                Have a Spec?{' '}
                 <span className="text-white">Let's cut it.</span>
               </motion.h2>
 
@@ -546,7 +553,7 @@ export default function Home() {
                 variants={fadeDown} custom={2}
                 className="mt-5 text-steel text-base max-w-xl mx-auto leading-relaxed"
               >
-                Send us a drawing and we'll send back a quote — typically within 24 hours.
+                Send us your drawings for structural steel fabrication, CNC cutting or erection and we'll send back a quote, typically within 24 hours.
               </motion.p>
 
               <motion.div

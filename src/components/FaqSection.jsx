@@ -9,31 +9,39 @@ import SectionLabel from './SectionLabel'
 const faqs = [
   {
     q: 'What steel fabrication services does Jazeerat Al Hadeed provide?',
-    a: 'Jazeerat Al Hadeed provides structural steel fabrication, steel design and detailing, CNC plasma and laser cutting, machine workshop services, welding and quality control, surface finishing, and steel delivery and installation from an integrated workshop in Sharjah, UAE.',
+    a: 'Jazeerat Al Hadeed provides structural steel fabrication, steel design and detailing, CNC plasma and laser cutting, CNC machining, welding and quality control, surface finishing and steel delivery and installation, all from one integrated workshop in Sharjah, UAE.',
   },
   {
     q: 'Does Jazeerat Al Hadeed provide structural steel fabrication in Dubai?',
-    a: 'Yes. Jazeerat Al Hadeed is a structural steel fabrication company based in Sharjah, UAE, delivering fabricated steelwork for industrial, commercial and architectural projects, including projects in Dubai.',
+    a: 'Yes. Our head office is on Damascus Street in Al Qusais, Dubai, and our workshop is in Al Sajaa Industrial Area, Sharjah. We fabricate, deliver and erect structural steel for projects across Dubai. Recent Dubai work includes heavy erection and column splicing and architectural steel facade work.',
   },
   {
     q: 'Do you provide steel design and detailing?',
-    a: 'Yes. Our engineering team provides structural design, 3D modeling and detailing using Tekla Structures and AutoCAD, producing fabrication and erection drawings for accurate, code-compliant execution.',
+    a: 'Yes. Our in-house team prepares shop drawings, connection details and material take-offs before fabrication starts, so every member is checked before a single plate is cut.',
   },
   {
     q: 'Do you provide CNC plasma and laser cutting?',
-    a: 'Yes. We operate CNC plasma and laser cutting equipment for precision steel cutting, delivering clean edges and accurate tolerances for structural and architectural components.',
+    a: 'Yes. We cut structural and architectural steel plate on CNC plasma and laser systems, at production scale.',
   },
   {
     q: 'Do you provide welding and quality control?',
-    a: 'Yes. Our welding team follows structured quality control procedures, including inspection at each stage of fabrication, to meet project specifications and applicable standards.',
+    a: 'Yes. Our welders work to code and every joint is logged against our quality control record.',
   },
   {
     q: 'Do you provide steel erection and installation?',
-    a: 'Yes. We provide delivery and site installation services, coordinating transport and erection of fabricated steel components for construction sites.',
+    a: 'Yes. We coordinate transport, crane rigging and structural steel erection on site across the UAE and the MENA region, including recent work in Riyadh, Saudi Arabia.',
   },
   {
     q: 'What industries does Jazeerat Al Hadeed serve?',
-    a: 'Jazeerat Al Hadeed supports industrial, commercial and infrastructure projects — including structural steelwork for construction, architectural facades and heavy erection — across Dubai, the UAE and the wider MENA region.',
+    a: 'We support industrial, commercial, infrastructure and architectural projects, working with main contractors, developers, consultants and plant owners.',
+  },
+  {
+    q: 'How do I choose a steel fabrication company in the UAE?',
+    a: 'Check that the fabricator has in-house detailing, CNC cutting capacity for your plate thickness, certified welders with written QC records, coatings suited to the Gulf climate, its own erection team and recent projects similar to yours.',
+  },
+  {
+    q: 'How quickly can I get a quote for steel fabrication?',
+    a: 'Send us your drawings or specifications and we typically return a quote within 24 hours.',
   },
 ]
 
