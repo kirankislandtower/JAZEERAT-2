@@ -26,8 +26,8 @@ const servicesData = [
     icon: Flame,
     num: '03',
     title: 'CNC Laser & Plasma Cutting',
-    short: 'High-accuracy CNC laser and plasma cutting for structural and architectural steel plate, at production scale.',
-    spec: 'Laser and plasma, in-house',
+    short: 'High-accuracy CNC laser and plasma cutting for structural and architectural steel plate, with cutting and marking on demand.',
+    spec: 'Cutting and marking on demand',
     spanClass: 'md:col-span-1 md:row-span-1',
   },
   {

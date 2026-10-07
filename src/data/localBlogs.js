@@ -14,7 +14,7 @@ export const LOCAL_BLOGS = [
       <p>Structural steel fabrication has historically been a labor-intensive craft, relying heavily on manual layout, marking, and oxy-fuel cutting. However, the rapid acceleration of infrastructure projects in the GCC region has necessitated a technological leap. Today, CNC plasma cutting stands at the center of this transformation, providing the speed and tolerances required for execution classes like EX3.</p>
       
       <h2>Precision at Production Scale</h2>
-      <p>Modern CNC plasma cutters utilize high-definition plasma torches capable of piercing and profiling steel plates up to 50mm thickness. Controlled by advanced software systems, these machines interpret NC1 files directly exported from BIM models (such as Tekla Structures). This direct link from design to fabrication eliminates layout errors and guarantees a length tolerance of within ±0.5mm.</p>
+      <p>Modern CNC plasma cutters utilize high-definition plasma torches capable of piercing and profiling thick steel plate. Controlled by advanced software systems, these machines interpret NC1 files directly exported from BIM models (such as Tekla Structures). This direct link from design to fabrication eliminates layout errors and guarantees a length tolerance of within ±0.5mm.</p>
       
       <blockquote>
         "CNC automation isn't just about cutting faster; it's about integrating the drawing room directly with the cutting bed to eliminate human drafting transfer errors."

@@ -21,7 +21,7 @@ const faqs = [
   },
   {
     q: 'Do you provide CNC plasma and laser cutting?',
-    a: 'Yes. We cut structural and architectural steel plate on CNC plasma and laser systems, at production scale.',
+    a: 'Yes. We cut structural and architectural steel plate on CNC plasma and laser systems, and we offer cutting and marking on demand.',
   },
   {
     q: 'Do you provide welding and quality control?',

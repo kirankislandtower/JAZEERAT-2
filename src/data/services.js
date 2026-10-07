@@ -264,12 +264,12 @@ export const SERVICES = [
     title: 'CNC Laser & Plasma Cutting',
     seoTitle: 'CNC Laser & Plasma Cutting Services in Sharjah | JAH Steel',
     metaDescription:
-      'CNC fiber laser and plasma cutting in Sharjah: clean dross-free edges for gusset plates, base plates and architectural profiles. Quote in 24 hours.',
-    h1: 'CNC Laser & Plasma Cutting Services in Sharjah',
+      'CNC laser and plasma cutting and marking in Sharjah, including cutting on demand. Clean edges for gusset plates, base plates and profiles. Quote in 24 hours.',
+    h1: 'CNC Laser & Plasma Cutting and Marking Services in Sharjah',
     label: 'Cutting capabilities',
-    desc: 'Our CNC laser and plasma cutting delivers high-precision cuts with clean finishes and minimal material waste, enabling the production of complex steel components with superior quality.',
+    desc: 'Our CNC laser and plasma cutting delivers high-precision cuts with clean finishes and minimal material waste, enabling the production of complex steel components with superior quality. We also offer cutting and marking on demand.',
     intro:
-      'We cut mild steel plate with CNC fiber laser and CNC plasma in our Sharjah workshop. Laser gives clean, dross-free edges for gusset plates and architectural profiles; plasma handles thick base plates and structural parts at production speed.',
+      'We cut mild steel plate with CNC fiber laser and CNC plasma in our Sharjah workshop. Laser gives clean, dross-free edges for gusset plates and architectural profiles; plasma handles thicker base plates and structural parts at production speed. We also take cutting and marking work on demand: send your drawings or DXF files and we cut and mark the parts to order.',
     spec: 'High-precision finishes',
     video: '/assets/services-hero.mp4',
     poster: '/assets/assetsJazeerat/IMG_9079.webp',
@@ -279,19 +279,25 @@ export const SERVICES = [
     capabilities: [
       'High-Speed Fiber Laser Cutting',
       'Intricate Architectural Metal Profiles',
-      'Thick Plate Piercing & Slicing',
+      'Plate Piercing & Profiling',
       'Dross-Free Edge Quality',
       'Automated Nesting for Scrap Reduction',
+      'Part Marking',
+      'Cutting on Demand From Your Drawings',
     ],
     machinery: [
       { name: 'High-Power Fiber Lasers', cap: 'Clean-edge cutting of mild steel plate' },
-      { name: 'CNC Plasma Cutting', cap: 'Thick plate at production speed' },
+      { name: 'CNC Plasma Cutting', cap: 'Thicker plate at production speed' },
     ],
     standards: 'ISO 9013 Thermal Cutting Quality',
     faqs: [
       {
         q: 'How thick can you cut?',
         a: 'Laser handles thinner plate and plasma handles thicker plate. Send us your plate thicknesses and we will confirm the right process before we quote.',
+      },
+      {
+        q: 'Do you offer cutting and marking on demand?',
+        a: 'Yes. Send us your drawings or DXF files with the plate thickness and quantities, and we cut and mark the parts to order in our Sharjah workshop.',
       },
       {
         q: 'Laser or plasma: which do I need?',
