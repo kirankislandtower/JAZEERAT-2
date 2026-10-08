@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { Clock, User, ArrowRight } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import SEO from '../components/SEO'
-import { PAGE_SEO } from '../data/seo'
+import { PAGE_SEO, SITE_NAME } from '../data/seo'
 import SectionLabel from '../components/SectionLabel'
 import Cutline from '../components/Cutline'
 import TiltImage from '../components/TiltImage'
@@ -144,7 +144,7 @@ export default function Blogs() {
                       <div className="flex items-center gap-4 mb-6 font-mono text-[11px] tracking-widest uppercase text-steel">
                         <span className="flex items-center gap-1.5"><Clock size={14} className="text-steel-light" /> {featuredPost.read_time}</span>
                         <span className="w-1 h-1 bg-panel-line rounded-full" />
-                        <span className="flex items-center gap-1.5"><User size={14} className="text-steel-light" /> {featuredPost.author}</span>
+                        <span className="flex items-center gap-1.5"><User size={14} className="text-steel-light" /> {featuredPost.author || SITE_NAME}</span>
                       </div>
                       
                       <h2 className="font-display font-extrabold uppercase text-4xl lg:text-6xl text-steel-light mb-6 leading-[1.05] group-hover:text-white transition-colors">

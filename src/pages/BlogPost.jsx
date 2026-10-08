@@ -171,7 +171,7 @@ export default function BlogPost() {
             initial="hidden" animate="visible" variants={fadeUp} custom={2}
             className="flex flex-wrap items-center gap-6 font-mono text-xs tracking-widest uppercase text-steel-light border-t border-white/10 pt-8"
           >
-            <span className="flex items-center gap-2"><User size={14} className="text-steel-light" /> {post.author}</span>
+            <span className="flex items-center gap-2"><User size={14} className="text-steel-light" /> {post.author || SITE_NAME}</span>
             <span className="w-1.5 h-1.5 bg-steel-light rounded-full" />
             <span className="flex items-center gap-2"><Clock size={14} className="text-steel-light" /> {post.read_time}</span>
             <span className="w-1.5 h-1.5 bg-steel-light rounded-full" />
@@ -219,7 +219,7 @@ export default function BlogPost() {
               </div>
               <div>
                 <p className="font-mono text-[10px] uppercase tracking-widest text-steel mb-1">Written by</p>
-                <p className="font-display text-xl uppercase text-steel-light font-bold">{post.author}</p>
+                <p className="font-display text-xl uppercase text-steel-light font-bold">{post.author || SITE_NAME}</p>
               </div>
             </div>
             

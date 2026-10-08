@@ -201,6 +201,15 @@ export default function ServiceDetail() {
               </ul>
             </div>
 
+            {detail.details?.map((d) => (
+              <div key={d.heading}>
+                <h2 className="font-display font-extrabold uppercase text-2xl md:text-3xl text-steel-light">
+                  {d.heading}
+                </h2>
+                <p className="mt-4 text-steel text-base leading-relaxed">{d.body}</p>
+              </div>
+            ))}
+
             <div>
               <h2 className="font-display font-extrabold uppercase text-2xl md:text-3xl text-steel-light">
                 {detail.title} FAQs

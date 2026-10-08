@@ -167,6 +167,13 @@ export default function Services() {
             quality control follows each piece from cut to dispatch, and you deal with one point
             of contact for the whole steel package.
           </p>
+          <p className="mt-4 text-steel text-base leading-relaxed">
+            Working on a project in Dubai? See our{' '}
+            <NavLink to="/steel-fabrication-dubai" className="text-steel-light underline underline-offset-4 hover:text-white transition-colors">
+              steel fabrication company in Dubai
+            </NavLink>{' '}
+            page.
+          </p>
 
           <h2 className="mt-16 font-display font-extrabold uppercase text-3xl lg:text-4xl text-steel-light">
             Steel fabrication services FAQs

@@ -51,4 +51,10 @@ export const PAGE_SEO = {
       'Send your drawings for a steel fabrication quote within 24 hours. Workshop in Al Sajaa Industrial Area, Sharjah. Call or WhatsApp us.',
     h1: 'Request a Steel Fabrication Quote',
   },
+  '/steel-fabrication-dubai': {
+    title: 'Steel Fabrication Company in Dubai | JAH Steel',
+    description:
+      'Steel fabrication company in Dubai with a head office in Al Qusais and a 7,000 m² workshop in Sharjah. Structural steel, CNC cutting, welding and erection.',
+    h1: 'Steel Fabrication Company in Dubai',
+  },
 }

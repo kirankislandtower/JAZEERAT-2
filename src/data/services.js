@@ -52,6 +52,10 @@ export const SERVICES = [
       { name: 'PowerFab', cap: 'Material allocation & tracking' },
     ],
     standards: 'AISC Code of Standard Practice',
+    details: [
+      { heading: 'How our estimation team works', body: 'Every enquiry goes to our estimation team, whether it arrives through the website, email, WhatsApp or a phone call. The estimators work with our design and detailing team and our production team, so the price reflects how the steel will really be fabricated and installed. We use Tekla and Tekla PowerFab to prepare quantities quickly and accurately.' },
+      { heading: 'From quote to production', body: 'When a job is awarded, the same quantities and model pass to detailing and production, so nothing is counted twice. Our project management team then plans the timeline, workforce and materials in Primavera P6 and keeps you updated as the work moves through the workshop.' },
+    ],
     faqs: [
       {
         q: 'What do you need from me to prepare a steel takeoff?',
@@ -64,6 +68,10 @@ export const SERVICES = [
       {
         q: 'How quickly can I get a cost estimate?',
         a: 'Send us your drawings and our team aims to return a cost estimate within 24 hours.',
+      },
+      {
+        q: 'Who prepares the estimate?',
+        a: 'Our estimation engineers prepare it, working with the design and detailing team and the production team so that the quantities and the price match how the job will be built.',
       },
     ],
     related: ['structural-design-engineering', 'design-detailing'],
@@ -99,6 +107,10 @@ export const SERVICES = [
       { name: 'ETABS & SAP2000', cap: 'Seismic & wind load simulations' },
     ],
     standards: 'AISC 360-16 / IBC / ASCE 7',
+    details: [
+      { heading: 'Design with fabrication in mind', body: 'Our design and detailing team studies the scope of each project with the sales and estimation team, then designs the steelwork to fit what the client needs. Because the same company details, fabricates and erects the steel, the design accounts for how each member will be cut, welded, transported and lifted.' },
+      { heading: 'What we design', body: 'We design heavy and light steel structures: pre-engineered buildings, hot rolled steel frames, warehouses, factories, showrooms, cold stores and data centres, as well as storage tanks, silos, platforms and the pipe support structures used in district cooling plants.' },
+    ],
     faqs: [
       {
         q: 'Can you value-engineer an existing steel design?',
@@ -111,6 +123,10 @@ export const SERVICES = [
       {
         q: 'Which design codes do you work to?',
         a: 'We design to AISC 360-16, IBC and ASCE 7, or to the codes named in your project specification.',
+      },
+      {
+        q: 'Do you fabricate and install what you design?',
+        a: 'Yes. We provide design, detailing, supply, fabrication and on-site erection as one service, so one team is responsible from the first drawing to the finished structure.',
       },
     ],
     related: ['design-detailing', 'estimation-takeoff'],
@@ -146,6 +162,10 @@ export const SERVICES = [
       { name: 'AutoCAD', cap: 'Drafting & 2D verification' },
     ],
     standards: 'AISC Code of Standard Practice / BS EN 1090-2',
+    details: [
+      { heading: 'From the model to the shop floor', body: 'Our Tekla draughtsmen build the model and produce the fabrication drawings. Tekla PowerFab links that model to production, so the workshop cuts and assembles from the same information the detailers approved. Our engineers and technicians receive drawings and models on tablets and laptops, which keeps the latest revision in front of the people doing the work.' },
+      { heading: 'What we detail', body: 'We detail structural frames and pre-engineered buildings, and also the miscellaneous steel that takes the most care on site: staircases, handrails and balcony railings, access platforms and catwalks, canopies, roof trusses and cladding support steel.' },
+    ],
     faqs: [
       {
         q: 'What is the difference between shop drawings and erection drawings?',
@@ -158,6 +178,10 @@ export const SERVICES = [
       {
         q: 'Can you detail architecturally exposed steel (AESS)?',
         a: 'Yes. AESS detailing is one of our core capabilities, used on architectural facade and balcony steelwork.',
+      },
+      {
+        q: 'Which software do you use for detailing?',
+        a: 'Our detailing team uses Tekla and Tekla PowerFab for models and fabrication drawings, with AutoCAD for drafting and 2D checks.',
       },
     ],
     related: ['structural-design-engineering', 'cnc-laser-plasma-cutting'],
@@ -193,6 +217,10 @@ export const SERVICES = [
       { name: 'Assembly Bays', cap: 'Fit-up and welding of structural members' },
     ],
     standards: 'ISO 9001:2015 / ISO 14001:2015 certified',
+    details: [
+      { heading: 'Inside our 7,000 m² workshop', body: 'The shop floor is laid out so that every workstation feeds the next, with an integrated machine workshop running alongside fabrication. Our production manager studies the shop drawings, assigns the work and coordinates each station to keep production moving. The team includes certified steel fabricators, machine operators, pipe fitters and third-party certified 6G welders.' },
+      { heading: 'Materials and quality', body: 'Raw materials, tools and consumables come from verified suppliers, and our quality control engineer inspects materials before production starts. An in-house maintenance technician inspects our machinery and equipment on a periodic programme. Our quality management system is certified to ISO 9001:2015.' },
+    ],
     faqs: [
       {
         q: 'What structural steel do you fabricate?',
@@ -205,6 +233,14 @@ export const SERVICES = [
       {
         q: 'How large can the members be?',
         a: 'Send us the member lengths and weights from your drawings and we will confirm handling and transport before we quote.',
+      },
+      {
+        q: 'What kinds of buildings do you fabricate steel for?',
+        a: 'Warehouses, factories, showrooms, cold stores, data centres and district cooling plants, along with storage tanks, silos and pressure vessels.',
+      },
+      {
+        q: 'Can we visit your workshop?',
+        a: 'Yes. Clients are welcome to visit our workshop in Al Sajaa Industrial Area, Sharjah, and see our processes first-hand.',
       },
     ],
     related: ['welding-qc', 'delivery-installation'],
@@ -243,6 +279,10 @@ export const SERVICES = [
       { name: 'Plate Rolling Machines', cap: 'Cylindrical & conical forming' },
     ],
     standards: 'AWS D1.1 / ASME Section IX',
+    details: [
+      { heading: 'Forming and machining under one roof', body: 'Our workshop runs steel rolling machines, pipe bending machines, a lathe and milling machines. Our machine operators carry out general machining work including drilling, rolling, bending, pressing and shearing, along with CNC work.' },
+      { heading: 'Where these parts are used', body: 'Rolled and bent parts go into storage tanks, silos and pressure vessels, pipe supports for district cooling plants, handrails and curved structural members. Because the forming is done in the same facility as fabrication, formed parts move straight to fitting and welding.' },
+    ],
     faqs: [
       {
         q: 'Can you roll plates into cylinders and cones?',
@@ -255,6 +295,10 @@ export const SERVICES = [
       {
         q: 'Do you drill and cope structural beams?',
         a: 'Yes. Our CNC multi-spindle drill line handles high-speed beam drilling and coping.',
+      },
+      {
+        q: 'Do you bend pipe as well as plate?',
+        a: 'Yes. Our workshop has pipe bending machines as well as steel rolling machines for plate.',
       },
     ],
     related: ['cnc-laser-plasma-cutting', 'custom-fabrication'],
@@ -292,6 +336,10 @@ export const SERVICES = [
       { name: 'CNC Plasma Cutting', cap: 'Thicker plate at production speed' },
     ],
     standards: 'ISO 9013 Thermal Cutting Quality',
+    details: [
+      { heading: 'How a cutting order runs', body: 'Send us your drawings or DXF files with the plate thickness and quantities. Our estimation team returns a quote, the parts are nested to reduce scrap, and we cut and mark them to order. Marked parts are easier to identify and assemble, on our shop floor or on yours.' },
+      { heading: 'Part of a complete workshop', body: 'Cut parts do not have to leave the building. They can go straight to bending and rolling, fitting, welding and finishing in the same 7,000 m² facility, which saves the time and handling of moving plate between suppliers.' },
+    ],
     faqs: [
       {
         q: 'How thick can you cut?',
@@ -308,6 +356,10 @@ export const SERVICES = [
       {
         q: 'Do you nest parts to reduce scrap?',
         a: 'Yes. Automated nesting places parts on each sheet to reduce scrap and material cost.',
+      },
+      {
+        q: 'Can cut parts go straight into fabrication?',
+        a: 'Yes. Cutting sits in the same workshop as bending, welding and finishing, so cut and marked parts can move directly to the next stage.',
       },
     ],
     related: ['plate-bending-rolling', 'design-detailing'],
@@ -343,6 +395,10 @@ export const SERVICES = [
       { name: 'Section Bending Rolls', cap: 'Curved structural profiles' },
     ],
     standards: 'AESS Custom Guidelines / AWS D1.1',
+    details: [
+      { heading: 'The kind of custom steelwork we build', body: 'Our custom work includes architectural steel staircases, handrails and balcony railings, access platforms and catwalks, cage ladders, canopies, roof trusses, loading platforms, cladding support structures and filter housings. Each piece is made to the client drawing, not picked from a catalogue.' },
+      { heading: 'From design to installation', body: 'Our design and detailing team models the piece, the workshop fabricates and finishes it, and our own site team installs it. The site team can also produce mock-ups on site, which helps architects and clients approve a detail before the full quantity is made.' },
+    ],
     faqs: [
       {
         q: 'Do you fabricate platforms and catwalks?',
@@ -355,6 +411,10 @@ export const SERVICES = [
       {
         q: 'Do you work with stainless steel and aluminium?',
         a: 'Yes. Our TIG and MIG welding stations handle stainless steel and aluminium as well as mild steel.',
+      },
+      {
+        q: 'Do you install the custom steelwork you fabricate?',
+        a: 'Yes. Our on-site erection and installation team installs what we fabricate and coordinates with the office and the shop floor throughout the project.',
       },
     ],
     related: ['structural-steel-fabrication', 'surface-finishing'],
@@ -390,6 +450,10 @@ export const SERVICES = [
       { name: 'Ultrasonic Testing Equipment', cap: 'Volumetric flaw detection' },
     ],
     standards: 'AWS D1.1 / ASME Section IX',
+    details: [
+      { heading: 'Our welders', body: 'Our welders are highly experienced and third-party certified to 6G, and they are capable of argon, TIG and MIG welding. They work alongside certified steel fabricators and certified pipe fitters, using MIG and arc welding machines in dedicated welding bays.' },
+      { heading: 'Quality built into the process', body: 'Every process in our workshop runs under quality control measures. Our quality control engineer inspects materials before production, and consumables are bought from verified suppliers. Our quality management system is certified to ISO 9001:2015 for the manufacturing and installation of structural metal parts.' },
+    ],
     faqs: [
       {
         q: 'Which welding processes do you use?',
@@ -402,6 +466,10 @@ export const SERVICES = [
       {
         q: 'What weld testing do you carry out?',
         a: 'Critical welds undergo non-destructive testing: ultrasonic (UT), radiography (RT), magnetic particle (MT) and dye penetrant (PT), with mill certificates logged for traceability.',
+      },
+      {
+        q: 'Are your welders certified?',
+        a: 'Yes. Our welders are third-party certified to 6G and are capable of argon, TIG and MIG welding.',
       },
     ],
     related: ['structural-steel-fabrication', 'surface-finishing'],
@@ -436,6 +504,10 @@ export const SERVICES = [
       { name: 'Paint Bays', cap: 'Airless spray application of coating systems' },
     ],
     standards: 'ISO 12944 / SSPC-SP10 / ASTM A123',
+    details: [
+      { heading: 'Finishing before dispatch', body: 'We offer sandblasting and spray painting, and hot-dip galvanizing for steel that needs long-term corrosion protection. Finishing is done after fabrication and before dispatch, so steel reaches site protected and ready to install.' },
+      { heading: 'Working responsibly', body: 'Our environmental management system is certified to ISO 14001:2015. Waste from our processes is recycled where possible, and the rest is removed from the shop floor through periodic housekeeping and scrap removal programmes.' },
+    ],
     faqs: [
       {
         q: 'Painting or galvanizing: which should I choose?',
@@ -444,6 +516,10 @@ export const SERVICES = [
       {
         q: 'What surface preparation do you apply before painting?',
         a: 'Steel is shot blasted to SA 2.5 or SA 3 before coating, then dry film thickness and adhesion are tested.',
+      },
+      {
+        q: 'Do you offer hot-dip galvanizing?',
+        a: 'Yes. Hot-dip galvanizing is one of the finishing services we offer, alongside sandblasting and spray painting.',
       },
     ],
     related: ['welding-qc', 'delivery-installation'],
@@ -479,6 +555,10 @@ export const SERVICES = [
       { name: 'Calibrated Hydraulic Torque Wrenches', cap: 'Bolt pre-tensioning verification' },
     ],
     standards: 'AISC Erection Tolerances',
+    details: [
+      { heading: 'Our site team', body: 'Our on-site erection and installation team handles the installation of the steel we fabricate. The team coordinates with the office and the shop floor, is trained in on-site erection processes, and can also produce on-site mock-ups and carry out maintenance work for clients.' },
+      { heading: 'Planning and safety', body: 'A project manager and a project engineer plan each job in Primavera P6 and give clients regular updates. We deliver regular safety training to our workforce, and an HSE-trained technician coordinates health and safety on site as well as on the shop floor.' },
+    ],
     faqs: [
       {
         q: 'Do you install the steel you fabricate?',
@@ -491,6 +571,14 @@ export const SERVICES = [
       {
         q: 'Can you move over-dimensional steel members?',
         a: 'Yes. We plan and carry out over-dimensional (ODC) transport on heavy flatbed trailers.',
+      },
+      {
+        q: 'Where do you install steel?',
+        a: 'We install across the UAE, including Dubai, Sharjah and Abu Dhabi, and we have supplied fabricated steel to Saudi Arabia.',
+      },
+      {
+        q: 'Do you carry out maintenance work on site?',
+        a: 'Yes. Our site team can carry out maintenance work for clients as well as new installation.',
       },
     ],
     related: ['structural-steel-fabrication', 'welding-qc'],

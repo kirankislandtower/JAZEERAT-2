@@ -17,6 +17,7 @@ const NAV = [
   ['Services', '/services'],
   ['Facilities', '/facilities'],
   ['Projects', '/projects'],
+  ['Steel Fabrication Dubai', '/steel-fabrication-dubai'],
   ['Insights', '/blogs'],
   ['Contact', '/contact'],
 ]
