@@ -245,7 +245,7 @@ export default function Projects() {
               variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } } }}
               className="mt-12 max-w-2xl text-steel text-lg sm:text-xl font-light leading-relaxed"
             >
-              Browse recent fabrication and erection work across the UAE and the GCC, from architectural facade steel in Dubai to industrial frames in Sharjah.
+              Browse recent fabrication and erection work across the UAE and Saudi Arabia, from architectural facade steel in Dubai to industrial frames in Sharjah.
             </motion.p>
           </motion.div>
         </div>

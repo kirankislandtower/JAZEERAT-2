@@ -25,7 +25,7 @@ const faqs = [
   },
   {
     q: 'Do you provide welding and quality control?',
-    a: 'Yes. Our welders work to code and every joint is logged against our quality control record.',
+    a: 'Yes. Certified welders work to code and every joint is logged against our quality control record.',
   },
   {
     q: 'Do you provide steel erection and installation?',

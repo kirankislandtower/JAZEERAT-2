@@ -42,8 +42,8 @@ const servicesData = [
     icon: ShieldCheck,
     num: '05',
     title: 'Welding & Quality Control',
-    short: 'Qualified welders working to code, with every joint logged against our QC record.',
-    spec: 'Every joint logged',
+    short: 'Certified welders working to code, with every joint logged against our QC record.',
+    spec: 'Certified welders on shift',
     spanClass: 'md:col-span-1 md:row-span-1',
   },
   {

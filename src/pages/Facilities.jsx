@@ -29,7 +29,7 @@ const facilities = [
   {
     icon: ShieldCheck,
     title: 'Welding Bays',
-    desc: 'Dedicated welding stations with multi-process capability.',
+    desc: 'Dedicated welding stations with third-party certified 6G welders and multi-process capability.',
     image: '/assets/assetsJazeerat/2. site photos /IMG_5998.webp',
   },
   {
@@ -44,6 +44,29 @@ const facilities = [
     desc: 'Site-ready staging, secure storage and coordinated transport from the workshop.',
     image: '/assets/assetsJazeerat/IMG_8609.webp',
   },
+]
+
+const delivers = [
+  'Design, detailing, supply, fabrication and on-site erection of heavy and light steel structures',
+  'Pre-engineered buildings (PEBs) and hot rolled steel structures',
+  'Warehouses, factories, showrooms, cold stores and data centres',
+  'Storage tanks, silos and pressure vessels',
+  'Pipeline and pipe support works for district cooling plants',
+  'Loading platforms, MEP platforms, riser frames and handrails',
+  'Industrial gratings and sub-station fabrication and installation',
+  'Filter housings and skids for pumps and filter systems',
+  'Sheet metal works',
+  'General machining: lathe, milling, drilling, rolling, bending, pressing, shearing and CNC work',
+  'Hot-dip galvanizing, sandblasting and spray painting',
+]
+
+const machinery = [
+  'Steel rolling machines',
+  'Lathe machine',
+  'Milling machines',
+  'Pipe bending machines',
+  'MIG welding machines',
+  'Arc welding machines',
 ]
 
 const fadeUp = {
@@ -79,7 +102,7 @@ export default function Facilities() {
           <motion.p initial="hidden" animate="visible" custom={1} variants={fadeUp}
             className="mt-8 max-w-2xl text-steel text-base leading-relaxed"
           >
-            Our workshop in Al Sajaa Industrial Area, Sharjah brings cutting, machining, welding, blasting, coating and dispatch under one roof, so steel moves from raw stock to site-ready assemblies without leaving the facility.
+            Our 7,000 m² shop floor in Al Sajaa Industrial Area, Sharjah brings cutting, machining, welding, blasting, coating and dispatch under one roof, so steel moves from raw stock to site-ready assemblies without leaving the facility.
           </motion.p>
         </div>
       </VideoHero>
@@ -115,6 +138,41 @@ export default function Facilities() {
               </motion.div>
             )
           })}
+        </div>
+      </section>
+
+      <section className="pb-20 lg:pb-28">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-12">
+          <div>
+            <h2 className="font-display font-extrabold uppercase text-3xl lg:text-4xl text-steel-light">What our workshop delivers</h2>
+            <ul className="mt-6 space-y-3 text-sm text-steel">
+              {delivers.map((d) => (
+                <li key={d} className="flex items-start gap-3">
+                  <span className="mt-2 h-1.5 w-1.5 bg-weld shrink-0" />
+                  {d}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h2 className="font-display font-extrabold uppercase text-3xl lg:text-4xl text-steel-light">Workshop machinery</h2>
+            <ul className="mt-6 grid sm:grid-cols-2 gap-px bg-panel-line border border-panel-line">
+              {machinery.map((m) => (
+                <li key={m} className="bg-graphite p-5 font-display uppercase text-sm text-steel-light">{m}</li>
+              ))}
+            </ul>
+
+            <h2 className="mt-12 font-display font-extrabold uppercase text-3xl lg:text-4xl text-steel-light">Quality on the shop floor</h2>
+            <p className="mt-5 text-steel text-sm leading-relaxed">
+              Quality control runs through every process. Raw materials, tools and consumables come from verified
+              suppliers, and our quality control engineer inspects materials before production starts. An in-house
+              maintenance technician inspects our machinery, tools and equipment on a periodic programme. Our quality
+              management system is certified to ISO 9001:2015.
+            </p>
+            <p className="mt-4 text-steel text-sm leading-relaxed">
+              Clients are welcome to visit the workshop and see our processes first-hand.
+            </p>
+          </div>
         </div>
       </section>
 

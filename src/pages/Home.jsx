@@ -42,7 +42,7 @@ const DEFAULT_HERO_SLIDES = [
 const process = [
   { n: '01', title: 'Engineering & Shop Drawings', desc: 'Every millimeter calculated. We translate architectural and structural designs into executable shop drawings with zero ambiguity.' },
   { n: '02', title: 'Precision CNC Cutting', desc: 'Accurate CNC plasma and laser cutting at production scale, for structural and architectural steel plate.' },
-  { n: '03', title: 'Fabrication & Welding', desc: 'Code-compliant assembly by qualified welders, with quality control at every critical joint.' },
+  { n: '03', title: 'Fabrication & Welding', desc: 'Code-compliant assembly by certified welders, with quality control at every critical joint.' },
   { n: '04', title: 'Surface Treatment & Coatings', desc: 'Industrial-grade surface preparation, blasting and protective coatings engineered for harsh Gulf and MENA climates.' },
   { n: '05', title: 'Delivery & Steel Erection', desc: 'Heavy logistics, site coordination and structural steel erection, delivered on spec and on time.' },
 ]
@@ -295,7 +295,7 @@ export default function Home() {
             variants={fadeUp} custom={2}
             className="mt-6 text-steel-light text-base lg:text-lg leading-relaxed max-w-3xl"
           >
-            Jazeerat Al Hadeed is a steel fabrication company in the UAE with more than 30 years of experience. From our integrated workshop in Al Sajaa Industrial Area, Sharjah, we handle structural steel fabrication, steel design and detailing, CNC laser and plasma cutting, machining, welding, surface finishing and supply and installation. Contractors, developers and consultants work with one team from the first shop drawing to final erection, on industrial, commercial and infrastructure projects across Dubai, the wider UAE and the MENA region.
+            Jazeerat Al Hadeed is a steel fabrication company in the UAE with more than 30 years of experience. From our integrated workshop in Al Sajaa Industrial Area, Sharjah, we handle structural steel fabrication, steel design and detailing, CNC laser and plasma cutting, machining, certified welding, surface finishing and supply and installation. Contractors, developers and consultants work with one team from the first shop drawing to final erection, on industrial, commercial and infrastructure projects across Dubai, the wider UAE and the MENA region.
           </motion.p>
         </motion.div>
       </section>

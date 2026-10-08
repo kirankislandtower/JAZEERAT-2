@@ -7,10 +7,11 @@ const JSONLD_ORGANIZATION = {
   '@type': 'LocalBusiness',
   name: SITE_NAME,
   legalName: 'Jazeerat Al Hadeed Metalic Cont Ind LLC',
+  parentOrganization: { '@type': 'Organization', name: 'Island Tower Electromechanical Works LLC' },
   alternateName: 'JAHSTEEL',
   foundingDate: '2019',
   description:
-    'Steel fabrication and machine workshop in Al Sajaa Industrial Area, Sharjah, delivering structural steel fabrication, CNC cutting, welding, finishing and erection across the UAE and the GCC.',
+    'Steel fabrication and machine workshop in Al Sajaa Industrial Area, Sharjah, delivering structural steel fabrication, CNC cutting, welding, finishing and erection across the UAE and the MENA region.',
   url: SITE_URL,
   logo: `${SITE_URL}/favicon.svg`,
   image: DEFAULT_IMAGE,
@@ -45,11 +46,7 @@ const JSONLD_ORGANIZATION = {
   ],
   areaServed: [
     { '@type': 'Country', name: 'United Arab Emirates' },
-    { '@type': 'Country', name: 'Oman' },
-    { '@type': 'Country', name: 'Qatar' },
     { '@type': 'Country', name: 'Saudi Arabia' },
-    { '@type': 'Country', name: 'Bahrain' },
-    { '@type': 'Country', name: 'Kuwait' },
   ],
   hasOfferCatalog: {
     '@type': 'OfferCatalog',

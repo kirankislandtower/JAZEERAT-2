@@ -75,7 +75,7 @@ export const SERVICES = [
     title: 'Structural Design & Engineering',
     seoTitle: 'Structural Steel Design & Engineering UAE | JAH Steel',
     metaDescription:
-      'Structural steel design in the UAE: analysis, connection design and value engineering for warehouses, mezzanines, canopies and complex structures.',
+      'Structural steel design in the UAE: analysis, connection design and value engineering for warehouses, platforms, canopies and complex structures.',
     h1: 'Structural Steel Design & Engineering in the UAE',
     label: 'Design capabilities',
     desc: 'Our experienced structural engineers deliver innovative steel design solutions, including structural analysis, complex and iconic structures, and value engineering. We optimize performance, safety, material efficiency, and constructability for successful project execution.',
@@ -174,7 +174,7 @@ export const SERVICES = [
     label: 'Fabrication capabilities',
     desc: 'Our modern fabrication facility combines advanced technology with a skilled workforce of engineers, supervisors, fabricators, welders, and quality inspectors. We deliver high-quality structural steel components through efficient production processes and strict quality control.',
     intro:
-      'We fabricate structural steel for warehouses, industrial buildings, high-rise facades and infrastructure in our workshop in Al Sajaa Industrial Area, Sharjah. Members are cut from Tekla NC files, assembled in heavy-lift bays, welded to code, then blasted and coated before dispatch.',
+      'We fabricate structural steel for warehouses, factories, pre-engineered buildings (PEBs), high-rise facades and district cooling plants in our 7,000 m² workshop in Al Sajaa Industrial Area, Sharjah. Members are cut from Tekla NC files, assembled in heavy-lift bays, welded by certified welders, then blasted and coated before dispatch.',
     spec: 'Modern integrated workshop',
     video: '/assets/services-hero.mp4',
     poster: '/assets/assetsJazeerat/IMG_9087.webp',
@@ -182,7 +182,7 @@ export const SERVICES = [
     overview:
       'Our integrated facility is laid out to keep projects moving. Materials move seamlessly from raw stock to CNC processing, assembly, welding, and finally into our surface treatment bays.',
     capabilities: [
-      'High-Volume Structural Steel Output',
+      'Pre-Engineered Buildings (PEBs) & Hot Rolled Steel Structures',
       'Organised Material Flow From Stock to Dispatch',
       'Dedicated Heavy-Lift Assembly Bays',
       'Non-Destructive Testing (NDT) of Critical Welds',
@@ -196,7 +196,7 @@ export const SERVICES = [
     faqs: [
       {
         q: 'What structural steel do you fabricate?',
-        a: 'Portal frames, trusses, columns, beams, steel decks and heavy structural assemblies, pre-assembled where possible for site-ready installation.',
+        a: 'Heavy and light steel structures: pre-engineered buildings, hot rolled steel frames, trusses, columns and beams, plus pipeline and pipe support works for district cooling plants.',
       },
       {
         q: 'Where is your fabrication workshop?',
@@ -221,7 +221,7 @@ export const SERVICES = [
     label: 'Machining capabilities',
     desc: 'Equipped with CNC laser cutting, press brake, plate rolling, band saw cutting, MIG welding, ARC welding, and supporting fabrication equipment, we ensure precision, efficiency, and consistent quality in every project.',
     intro:
-      'Need plates bent, rolled or drilled to drawing? Our Sharjah workshop runs heavy-duty press brakes, plate rolling machines and a CNC multi-spindle beam drill line, fed directly from Tekla NC files.',
+      'Need plates bent, rolled or drilled to drawing? Our Sharjah workshop handles steel rolling, plate and pipe bending, and drilling, alongside general machining on lathe and milling machines, pressing and shearing.',
     spec: 'Precision CNC & welding tech',
     video: '/assets/services-hero.mp4',
     poster: '/assets/assetsJazeerat/IMG_9084.webp',
@@ -234,6 +234,8 @@ export const SERVICES = [
       'Multi-Axis CNC Beam Drilling',
       'Press-Brake Folding',
       'Band Saw Cutting',
+      'Lathe & Milling Work',
+      'Pipe Bending',
     ],
     machinery: [
       { name: 'CNC Multi-Spindle Drill Line', cap: 'High-speed beam drilling & coping' },
@@ -317,12 +319,12 @@ export const SERVICES = [
     title: 'Custom Steel Fabrication',
     seoTitle: 'Custom Steel Fabrication in UAE | JAH Steel',
     metaDescription:
-      'Custom steel fabrication in the UAE: mezzanines, catwalks, staircases, tanks, hoppers, canopies and architectural metalwork built to your drawings.',
+      'Custom steel fabrication in the UAE: platforms, catwalks, staircases, tanks, hoppers, canopies and architectural metalwork built to your drawings.',
     h1: 'Custom Steel Fabrication in the UAE',
     label: 'Fabrication capabilities',
     desc: 'We provide customized steel fabrication solutions including tanks, platforms, architectural structures, and specialized metal works, delivering durable and precise solutions tailored to client requirements.',
     intro:
-      'Beyond standard frames, we build steelwork to your exact drawing: mezzanines and catwalks, staircases, storage tanks and hoppers, canopies and architectural features. Everything is detailed, fabricated and finished in our Sharjah workshop.',
+      'Beyond standard frames, we build steelwork to your exact drawing: platforms and catwalks, staircases, storage tanks and hoppers, canopies and architectural features. We also build loading and MEP platforms, riser frames, handrails and ladders, industrial gratings, filter housings and skids for pumps and filter systems.',
     spec: 'Bespoke steel solutions',
     video: '/assets/about-hero.mp4',
     poster: '/assets/assetsJazeerat/IMG_9087.webp',
@@ -332,7 +334,7 @@ export const SERVICES = [
     capabilities: [
       'Architectural Canopies & Facades',
       'Industrial Storage Tanks & Hoppers',
-      'Custom Mezzanines & Catwalks',
+      'Custom Platforms & Catwalks',
       'Complex Tubular Structures',
       'Stainless Steel & Aluminum Specialties',
     ],
@@ -343,8 +345,8 @@ export const SERVICES = [
     standards: 'AESS Custom Guidelines / AWS D1.1',
     faqs: [
       {
-        q: 'Do you fabricate mezzanine floors and catwalks?',
-        a: 'Yes. Custom mezzanines and catwalks are part of our bespoke fabrication work, detailed and fabricated in our Sharjah workshop.',
+        q: 'Do you fabricate platforms and catwalks?',
+        a: 'Yes. Loading platforms, MEP platforms, access platforms and catwalks are part of our custom fabrication work, detailed and fabricated in our Sharjah workshop.',
       },
       {
         q: 'Can you make steel staircases and canopies?',
@@ -369,7 +371,7 @@ export const SERVICES = [
     label: 'Fabrication capabilities',
     desc: 'Our qualified welding team applies advanced welding techniques and strict inspection procedures to ensure strong, reliable, and high-quality fabricated structures that meet project specifications and industry standards.',
     intro:
-      'Every joint we weld is planned, done and checked to code. Our welders work to approved procedures in our Sharjah workshop, while inspectors check fit-up, pre-heat and each pass before NDT confirms the weld.',
+      'Every joint we weld is planned, done and checked to code. Our third-party certified 6G welders, skilled in argon, TIG and MIG welding, work to approved procedures in our Sharjah workshop, while inspectors check fit-up, pre-heat and each pass before NDT confirms the weld.',
     spec: 'Strict inspection protocols',
     video: '/assets/services-hero.mp4',
     poster: '/assets/assetsJazeerat/IMG_9084.webp',
@@ -416,7 +418,7 @@ export const SERVICES = [
     label: 'Finishing capabilities',
     desc: 'We provide professional surface protection solutions including industrial painting, protective coatings, and hot-dip galvanizing (HDG) to enhance durability, corrosion resistance, and long-term performance.',
     intro:
-      'Steel in the UAE faces strong UV, high humidity and coastal salt, so surface protection decides how long a structure lasts. We blast steel in our Sharjah workshop and apply epoxy and polyurethane paint systems, intumescent fire protection, or coordinate hot-dip galvanizing, then test film thickness and adhesion before dispatch.',
+      'Steel in the UAE faces strong UV, high humidity and coastal salt, so surface protection decides how long a structure lasts. We offer sandblasting and spray painting, and apply epoxy and polyurethane paint systems, or coordinate hot-dip galvanizing, then test film thickness and adhesion before dispatch.',
     spec: 'Protective coatings & HDG',
     video: '/assets/contact-hero.mp4',
     poster: '/assets/assetsJazeerat/IMG_9079.webp',
@@ -426,7 +428,6 @@ export const SERVICES = [
     capabilities: [
       'Steel Shot Blasting (SA 2.5 / SA 3)',
       'Airless Spray Application of Epoxies & PU',
-      'Intumescent Fireproofing Coatings',
       'Hot-Dip Galvanizing (HDG) Coordination',
       'Dry Film Thickness (DFT) & Adhesion Testing',
     ],
@@ -443,10 +444,6 @@ export const SERVICES = [
       {
         q: 'What surface preparation do you apply before painting?',
         a: 'Steel is shot blasted to SA 2.5 or SA 3 before coating, then dry film thickness and adhesion are tested.',
-      },
-      {
-        q: 'Do you apply fire protection coatings?',
-        a: 'Yes. We apply intumescent fireproofing coatings on structural steel.',
       },
     ],
     related: ['welding-qc', 'delivery-installation'],

@@ -152,7 +152,7 @@ export default function SiteVisitSection({
               <span className="text-steel-light">in Action</span>
             </h2>
             <p className="mt-4 text-steel text-base lg:text-lg max-w-xl mx-auto leading-relaxed">
-              A real look inside our Sharjah fabrication facility: the CNC machines, the welders and the precision behind every steel structure we deliver.
+              A real look inside our Sharjah fabrication facility: the CNC machines, the certified welders and the precision behind every steel structure we deliver.
             </p>
           </motion.div>
 

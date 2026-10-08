@@ -25,9 +25,24 @@ const timeline = [
 ]
 
 const values = [
-  { icon: Target, title: 'Precision', desc: 'Parts are fabricated to the tolerances shown on the drawing and checked before delivery.' },
-  { icon: Eye, title: 'Transparency', desc: 'Each job is tracked against its drawing and quality control record.' },
-  { icon: Handshake, title: 'Reliability', desc: 'Delivery schedules built for construction sites that cannot wait.' },
+  { icon: Handshake, title: 'Teamwork', desc: 'Each person takes responsibility for their work, and teams collaborate to deliver accurate solutions.' },
+  { icon: ShieldCheck, title: 'Quality', desc: 'Capable machinery, established processes and an efficient team stand behind every delivery.' },
+  { icon: Target, title: 'Value', desc: 'A customer-centric company that offers competitive pricing and value for money.' },
+  { icon: Eye, title: 'Innovation', desc: 'We look for the most efficient solution for each client and keep improving our processes.' },
+  { icon: Award, title: 'Integrity', desc: 'Honest, open and transparent in all our dealings. The trust of our clients comes first.' },
+]
+
+const missionVision = [
+  { label: 'Our Mission', text: 'To become a leader in the industrial construction industry serving the MENA region through automation, seamless collaboration, continuous improvement, commitment and rapid customisation.' },
+  { label: 'Our Vision', text: 'To become a global leader in the industrial construction industry and the first choice for all our clients.' },
+]
+
+const teams = [
+  { title: 'Sales & Estimation', desc: 'Enquiries go straight to our estimation team, who work with design and production to prepare a quick, accurate quote using Tekla and Tekla PowerFab.' },
+  { title: 'Design & Detailing', desc: 'Our designers and Tekla draughtsmen study the project scope and produce the BIM models and fabrication drawings.' },
+  { title: 'Project Management', desc: 'A project manager and project engineer plan timelines and resources in Primavera P6 and keep clients updated.' },
+  { title: 'Production', desc: 'A production manager coordinates every workstation. The team includes machine operators, steel fabricators, pipe fitters and third-party certified 6G welders.' },
+  { title: 'Site Erection & Installation', desc: 'Our site team handles on-site erection and installation, and can produce on-site mock-ups and carry out maintenance work.' },
 ]
 
 const capabilities = [
@@ -56,7 +71,7 @@ const missionPillars = [
   {
     number: '01',
     heading: 'Build Without Compromise',
-    body: 'Our mission is to fabricate structural steel exactly as it is detailed, whether the job is a small mezzanine or a large industrial structure. We hold every joint to the same quality standard on every project.',
+    body: 'Our mission is to fabricate structural steel exactly as it is detailed, whether the job is a small platform or a large industrial structure. We hold every joint to the same quality standard on every project.',
   },
   {
     number: '02',
@@ -629,7 +644,8 @@ export default function About() {
               in Al Qusais, Dubai and its machine workshop in Al Sajaa Industrial Area, Sharjah.
               We were established in 2019 after acquiring Carlton Steel Works LLC,
               and today we deliver structural steel fabrication, CNC cutting and machining across
-              the UAE and MENA region. Our work is judged in millimeters, not marketing.
+              the UAE and MENA region. We are part of Island Tower Electromechanical Works LLC.
+              Our work is judged in millimeters, not marketing.
             </motion.p>
 
             <motion.div
@@ -798,7 +814,7 @@ export default function About() {
             <SectionLabel>What Drives the Work</SectionLabel>
           </motion.div>
 
-          <div className="grid sm:grid-cols-3 gap-px bg-panel-line mt-12 border border-panel-line">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-px bg-panel-line mt-12 border border-panel-line">
             {values.map((v, i) => {
               const Icon = v.icon
               return (
@@ -862,6 +878,39 @@ export default function About() {
           <p className="text-xs text-steel mt-3">
             Certified by Otabu Certification for the manufacturing and installation of structural metal parts.
           </p>
+        </div>
+      </section>
+
+      {/* ── MISSION, VISION & TEAMS ───────────────────── */}
+      <section className="py-20 lg:py-28">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="grid md:grid-cols-2 gap-px bg-panel-line border border-panel-line">
+            {missionVision.map((m) => (
+              <div key={m.label} className="bg-graphite p-8 lg:p-10">
+                <h2 className="font-mono text-[11px] uppercase tracking-[0.25em] text-steel mb-4">{m.label}</h2>
+                <p className="font-display text-xl lg:text-2xl text-steel-light leading-snug">{m.text}</p>
+              </div>
+            ))}
+          </div>
+
+          <h2 className="mt-16 font-display font-bold uppercase text-3xl lg:text-4xl text-steel-light">
+            The teams behind <span className="text-white">every steel package.</span>
+          </h2>
+          <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-panel-line border border-panel-line">
+            {teams.map((t, i) => (
+              <div key={t.title} className="bg-graphite p-8">
+                <p className="font-mono text-[10px] text-steel tracking-widest">{String(i + 1).padStart(2, '0')}</p>
+                <h3 className="mt-2 font-display uppercase text-xl text-steel-light">{t.title}</h3>
+                <p className="mt-3 text-sm text-steel leading-relaxed">{t.desc}</p>
+              </div>
+            ))}
+            <div className="bg-graphite p-8 flex flex-col justify-center">
+              <p className="font-mono text-[10px] text-steel tracking-widest uppercase">Group</p>
+              <p className="mt-2 text-sm text-steel-light leading-relaxed">
+                Jazeerat Al Hadeed is part of Island Tower Electromechanical Works LLC, under the same ownership and management.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 

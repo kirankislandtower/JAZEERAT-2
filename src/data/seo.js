@@ -34,10 +34,10 @@ export const PAGE_SEO = {
     h1: 'Our Steel Fabrication Workshop in Sharjah',
   },
   '/projects': {
-    title: 'Structural Steel Projects in the UAE & GCC | JAH Steel',
+    title: 'Structural Steel Projects in UAE & Saudi Arabia | JAH Steel',
     description:
-      'Steel fabrication and erection projects by Jazeerat Al Hadeed across the UAE and the GCC, from high-rise facade steel in Dubai to industrial frames in Sharjah.',
-    h1: 'Steel Fabrication Projects in the UAE and GCC',
+      'Steel fabrication and erection projects by Jazeerat Al Hadeed in the UAE and Saudi Arabia, from high-rise facade steel in Dubai to industrial frames in Sharjah.',
+    h1: 'Steel Fabrication Projects in the UAE and Saudi Arabia',
   },
   '/blogs': {
     title: 'Steel Fabrication Guides & Insights | JAH Steel',
