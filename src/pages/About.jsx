@@ -830,11 +830,7 @@ export default function About() {
                 >
                   <div className="absolute inset-0 bg-weld/0 group-hover:bg-weld/[0.03] transition-colors pointer-events-none" />
 
-                  <motion.div
-                    whileHover={{ rotate: 360, transition: { duration: 0.6 } }}
-                  >
-                    <Icon size={28} className="text-weld mb-6" strokeWidth={1.5} />
-                  </motion.div>
+                  <Icon size={28} className="text-weld mb-6" strokeWidth={1.5} />
                   <h3 className="font-display uppercase text-2xl text-steel-light mb-3 group-hover:text-weld transition-colors">
                     {v.title}
                   </h3>
