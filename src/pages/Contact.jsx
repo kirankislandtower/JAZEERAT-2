@@ -164,25 +164,6 @@ export default function Contact() {
                 </button>
               </form>
             )}
-
-            <div className="mt-14 border border-panel-line p-8">
-              <h2 className="font-display uppercase text-2xl text-steel-light">What to send for a fast quote</h2>
-              <ul className="mt-5 grid sm:grid-cols-2 gap-x-8 gap-y-3 text-sm text-steel">
-                {[
-                  'Drawings or specifications (PDF, DWG or IFC)',
-                  'Steel grade, if specified',
-                  'Approximate tonnage or quantities',
-                  'Finish required (paint system or galvanizing)',
-                  'Site location',
-                  'Required delivery date',
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <span className="mt-2 h-1.5 w-1.5 bg-weld shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
           </motion.div>
 
           <motion.div
