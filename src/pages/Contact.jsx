@@ -177,7 +177,7 @@ export default function Contact() {
               { icon: Phone, label: 'Phone', value: '+971 54 305 8357', link: 'tel:+971543058357' },
               { icon: Phone, label: 'Phone 2', value: '+971 55 145 3288', link: 'tel:+971551453288' },
               { icon: Mail, label: 'Email', value: 'info@jahsteel.ae', link: 'mailto:info@jahsteel.ae' },
-              { icon: Clock, label: 'Hours', value: 'Sat – Thu, 07:00 – 18:00', link: null },
+              { icon: Clock, label: 'Hours', value: 'Mon – Fri, 08:30 – 18:00 · Sat, 08:30 – 14:00 · Sun closed', link: null },
             ].map((c) => {
               const content = (
                 <>

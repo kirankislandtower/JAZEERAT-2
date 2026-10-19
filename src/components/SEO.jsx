@@ -16,6 +16,15 @@ const JSONLD_ORGANIZATION = {
   logo: `${SITE_URL}/favicon.svg`,
   image: DEFAULT_IMAGE,
   telephone: '+971 54 305 8357',
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '08:30',
+      closes: '18:00',
+    },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Saturday', opens: '08:30', closes: '14:00' },
+  ],
   contactPoint: [
     { '@type': 'ContactPoint', telephone: '+971 54 305 8357', contactType: 'sales' },
     { '@type': 'ContactPoint', telephone: '+971 55 145 3288', contactType: 'sales' },
