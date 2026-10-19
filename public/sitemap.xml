@@ -161,6 +161,13 @@
 
   <!-- Individual Blogs -->
   <url>
+    <loc>https://jahsteel.ae/blogs/laser-vs-plasma-cutting-steel</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
     <loc>https://jahsteel.ae/blogs/cnc-plasma-cutting-heavy-fabrication</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
