@@ -11,6 +11,7 @@ import Cutline from '../components/Cutline'
 import { WordReveal, LetterReveal, LineReveal } from '../components/TypographyAnimations'
 import { PAGE_SEO } from '../data/seo'
 import SEO from '../components/SEO'
+import IslandTowerGroup from '../components/IslandTowerGroup'
 import VideoHero from '../components/VideoHero'
 import Magnetic from '../components/Magnetic'
 import MaskReveal from '../components/MaskReveal'
@@ -156,16 +157,12 @@ function CapabilityItem({ cap, delay, direction }) {
       whileInView={{ x: 0, opacity: 1 }}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.6, delay }}
-      whileHover={{ y: -4, transition: { duration: 0.2 } }}
     >
       <NavLink to={cap.to} className="flex flex-col">
       <div className="flex items-center gap-3 mb-2">
-        <motion.div
-          className="relative text-white bg-white/5 p-3 rounded-none border border-white/10 group-hover:bg-white/10 transition-colors"
-          whileHover={{ rotate: [0, -8, 8, -4, 0], transition: { duration: 0.4 } }}
-        >
+        <div className="relative text-white bg-white/5 p-3 rounded-none border border-white/10 group-hover:bg-white/10 transition-colors">
           <Icon size={20} strokeWidth={1.5} />
-        </motion.div>
+        </div>
         <h3 className="font-display uppercase text-lg text-steel-light group-hover:text-white transition-colors">
           {cap.title}
         </h3>
@@ -203,14 +200,10 @@ function StatCounter({ icon: Icon, value, suffix, label, delay }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay }}
-      whileHover={{ y: -5, transition: { duration: 0.2 } }}
     >
-      <motion.div
-        className="w-14 h-14 border border-panel-line flex items-center justify-center mb-4 text-white group-hover:border-white/50 transition-colors"
-        whileHover={{ rotate: 360, transition: { duration: 0.8 } }}
-      >
+      <div className="w-14 h-14 border border-panel-line flex items-center justify-center mb-4 text-white group-hover:border-white/50 transition-colors">
         <Icon size={22} strokeWidth={1.5} />
-      </motion.div>
+      </div>
       <div ref={ref} className="font-display font-extrabold text-4xl text-steel-light flex items-end gap-0.5">
         <motion.span>{isNumeric ? display : value}</motion.span>
         <span className="text-white">{suffix}</span>
@@ -309,14 +302,8 @@ function TeamCard({ member, index }) {
             {/* subtle weld glow overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-graphite-light/80 to-transparent" />
             {/* animated corner bracket */}
-            <motion.div
-              className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-white/50"
-              whileHover={{ scale: 1.2 }}
-            />
-            <motion.div
-              className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-white/50"
-              whileHover={{ scale: 1.2 }}
-            />
+            <div className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-white/50" />
+            <div className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-white/50" />
           </div>
 
           {/* info */}
@@ -582,8 +569,6 @@ export default function About() {
 
   const y1 = useTransform(scrollYProgress, [0, 1], [150, -150])
   const y2 = useTransform(scrollYProgress, [0, 1], [-150, 150])
-  const rot1 = useTransform(scrollYProgress, [0, 1], [0, 18])
-  const rot2 = useTransform(scrollYProgress, [0, 1], [0, -18])
 
   /* horizontal scroll for team strip */
   const teamContainerRef = useRef(null)
@@ -644,7 +629,7 @@ export default function About() {
               in Al Qusais, Dubai and its machine workshop in Al Sajaa Industrial Area, Sharjah.
               We were established in 2019 after acquiring Carlton Steel Works LLC,
               and today we deliver structural steel fabrication, CNC cutting and machining across
-              the UAE and MENA region. We are part of Island Tower Group.
+              the UAE and MENA region. We are part of <IslandTowerGroup />.
               Our work is judged in millimeters, not marketing.
             </motion.p>
 
@@ -691,11 +676,11 @@ export default function About() {
       >
         <motion.div
           className="absolute top-16 left-8 w-60 h-60 rounded-full bg-weld/5 blur-3xl pointer-events-none"
-          style={{ y: y1, rotate: rot1 }}
+          style={{ y: y1 }}
         />
         <motion.div
           className="absolute bottom-16 right-8 w-72 h-72 rounded-full bg-weld/5 blur-3xl pointer-events-none"
-          style={{ y: y2, rotate: rot2 }}
+          style={{ y: y2 }}
         />
 
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
@@ -748,7 +733,6 @@ export default function About() {
 
                 <motion.div
                   className="overflow-hidden border border-panel-line"
-                  whileHover={{ scale: 1.03, transition: { duration: 0.3 } }}
                 >
                   <img
                     src="/assets/assetsJazeerat/IMG_8964.webp"
@@ -825,7 +809,6 @@ export default function About() {
                   viewport={{ once: true }}
                   custom={i}
                   variants={fadeUp}
-                  whileHover={{ y: -4, transition: { duration: 0.2 } }}
                   className="bg-graphite p-10 hover:bg-panel transition-colors group relative overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-weld/0 group-hover:bg-weld/[0.03] transition-colors pointer-events-none" />
@@ -903,7 +886,7 @@ export default function About() {
             <div className="bg-graphite p-8 flex flex-col justify-center">
               <p className="font-mono text-[10px] text-steel tracking-widest uppercase">Group</p>
               <p className="mt-2 text-sm text-steel-light leading-relaxed">
-                Jazeerat Al Hadeed is part of Island Tower Group, under the same ownership and management.
+                Jazeerat Al Hadeed is part of <IslandTowerGroup />, under the same ownership and management.
               </p>
             </div>
           </div>
@@ -1061,14 +1044,10 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: team.length * 0.1 }}
-              whileHover={{ y: -4 }}
             >
-              <motion.div
-                className="w-16 h-16 border border-panel-line group-hover:border-weld/50 flex items-center justify-center text-weld transition-colors"
-                whileHover={{ rotate: 90, transition: { duration: 0.3 } }}
-              >
+              <div className="w-16 h-16 border border-panel-line group-hover:border-weld/50 flex items-center justify-center text-weld transition-colors">
                 <span className="text-3xl font-display font-thin">+</span>
-              </motion.div>
+              </div>
               <p className="font-display uppercase text-lg text-steel group-hover:text-weld transition-colors">
                 Join Our Team
               </p>

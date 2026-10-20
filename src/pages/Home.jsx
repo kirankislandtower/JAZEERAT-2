@@ -510,7 +510,6 @@ export default function Home() {
                 custom={i}
                 variants={fadeUp}
                 className="bg-white/5 backdrop-blur-md border border-white/10 p-6 lg:p-8 text-center lg:text-left group hover:bg-white/10 transition-colors shadow-2xl flex flex-col justify-center"
-                whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.3 } }}
               >
                 {/* sleek micro-accent line */}
                 <div className="w-12 h-[2px] bg-white/30 mb-8 group-hover:bg-white group-hover:w-20 transition-all duration-300" />
