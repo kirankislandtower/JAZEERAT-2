@@ -139,7 +139,7 @@ export default function DubaiSteelFabrication() {
             </p>
             <p className="mt-4 text-steel text-base leading-relaxed">
               Our recent Dubai work includes heavy steel erection and column splicing, architectural facade steel
-              and warehouse loading canopies. We are part of Island Tower Electromechanical Works LLC, and we
+              and warehouse loading canopies. We are part of Island Tower Group, and we
               have more than 30 years of steel fabrication experience behind us.
             </p>
             <div className="mt-8 grid sm:grid-cols-2 gap-px bg-panel-line border border-panel-line">

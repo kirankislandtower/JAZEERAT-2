@@ -644,7 +644,7 @@ export default function About() {
               in Al Qusais, Dubai and its machine workshop in Al Sajaa Industrial Area, Sharjah.
               We were established in 2019 after acquiring Carlton Steel Works LLC,
               and today we deliver structural steel fabrication, CNC cutting and machining across
-              the UAE and MENA region. We are part of Island Tower Electromechanical Works LLC.
+              the UAE and MENA region. We are part of Island Tower Group.
               Our work is judged in millimeters, not marketing.
             </motion.p>
 
@@ -903,7 +903,7 @@ export default function About() {
             <div className="bg-graphite p-8 flex flex-col justify-center">
               <p className="font-mono text-[10px] text-steel tracking-widest uppercase">Group</p>
               <p className="mt-2 text-sm text-steel-light leading-relaxed">
-                Jazeerat Al Hadeed is part of Island Tower Electromechanical Works LLC, under the same ownership and management.
+                Jazeerat Al Hadeed is part of Island Tower Group, under the same ownership and management.
               </p>
             </div>
           </div>

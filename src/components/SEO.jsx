@@ -7,7 +7,7 @@ const JSONLD_ORGANIZATION = {
   '@type': 'LocalBusiness',
   name: SITE_NAME,
   legalName: 'Jazeerat Al Hadeed Metalic Cont Ind LLC',
-  parentOrganization: { '@type': 'Organization', name: 'Island Tower Electromechanical Works LLC' },
+  parentOrganization: { '@type': 'Organization', name: 'Island Tower Group' },
   alternateName: 'JAHSTEEL',
   foundingDate: '2019',
   description:
