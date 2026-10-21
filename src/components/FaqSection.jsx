@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Plus } from 'lucide-react'
+import { NavLink } from 'react-router-dom'
 import SectionLabel from './SectionLabel'
 
 // Answers are grounded only in services and facts already published
@@ -14,6 +15,7 @@ const faqs = [
   {
     q: 'Does Jazeerat Al Hadeed provide structural steel fabrication in Dubai?',
     a: 'Yes. Our head office is on Damascus Street in Al Qusais, Dubai, and our workshop is in Al Sajaa Industrial Area, Sharjah. We fabricate, deliver and erect structural steel for projects across Dubai. Recent Dubai work includes heavy erection and column splicing and architectural steel facade work.',
+    link: { to: '/steel-fabrication-dubai', label: 'Steel fabrication in Dubai' },
   },
   {
     q: 'Do you provide steel design and detailing?',
@@ -89,6 +91,14 @@ function FaqItem({ faq, index, open, onToggle }) {
           >
             <p className="text-steel text-sm lg:text-base leading-relaxed pb-6 max-w-3xl">
               {faq.a}
+              {faq.link && (
+                <>
+                  {' '}
+                  <NavLink to={faq.link.to} className="text-steel-light underline underline-offset-4 hover:text-white transition-colors">
+                    {faq.link.label} →
+                  </NavLink>
+                </>
+              )}
             </p>
           </motion.div>
         )}

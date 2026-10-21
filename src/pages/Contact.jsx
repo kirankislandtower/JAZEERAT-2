@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { NavLink } from 'react-router-dom'
 import { Phone, Mail, MapPin, Clock, ArrowUpRight, Check, MessageCircle } from 'lucide-react'
 import SectionLabel from '../components/SectionLabel'
 import SEO from '../components/SEO'
@@ -24,8 +25,34 @@ const LOCATIONS = [
   { label: 'Workshop', address: 'Al Sajaa Industrial Area, Sharjah, UAE', query: 'Al Sajaa Industrial Area, Sharjah, UAE' },
 ]
 
+// Web3Forms access key: every enquiry is also emailed to the inbox this key
+// was created for. The key is public by design (it can only send to that one
+// address). Leave empty to save enquiries to Supabase only.
+const WEB3FORMS_KEY = 'c5cf07b2-e0aa-48f8-9bdb-5fd37081d422'
+
+async function emailEnquiry(form) {
+  if (!WEB3FORMS_KEY) return false
+  const res = await fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify({
+      access_key: WEB3FORMS_KEY,
+      subject: `New website enquiry from ${form.name}${form.company ? ` (${form.company})` : ''}`,
+      from_name: 'jahsteel.ae website',
+      replyto: form.email,
+      name: form.name,
+      email: form.email,
+      phone: form.phone || 'Not given',
+      company: form.company || 'Not given',
+      message: form.message,
+    }),
+  })
+  const data = await res.json().catch(() => ({}))
+  return res.ok && data.success !== false
+}
+
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', phone: '', company: '', message: '' })
+  const [form, setForm] = useState({ name: '', email: '', phone: '', company: '', message: '', botcheck: '' })
   const [sent, setSent] = useState(false)
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
@@ -34,30 +61,39 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    // Hidden honeypot field: real visitors never fill it, spam bots do.
+    if (form.botcheck) return
     setIsSubmitting(true)
 
-    try {
-      const { error } = await supabase.from('enquiries').insert([
+    // Save to Supabase and email the team at the same time. The enquiry
+    // counts as received if either one succeeds.
+    const [saved, emailed] = await Promise.all([
+      supabase.from('enquiries').insert([
         {
           name: form.name,
           email: form.email,
           company: form.company,
           message: form.phone ? `Phone / WhatsApp: ${form.phone}\n\n${form.message}` : form.message
         }
-      ])
+      ]).then(({ error }) => {
+        if (error) console.error(error)
+        return !error
+      }).catch((err) => {
+        console.error(err)
+        return false
+      }),
+      emailEnquiry(form).catch((err) => {
+        console.error(err)
+        return false
+      }),
+    ])
 
-      if (!error) {
-        setSent(true)
-      } else {
-        console.error(error)
-        alert("Something went wrong saving to database. Please try again.")
-      }
-    } catch (err) {
-      console.error(err)
-      alert("Network error. Please check your connection and try again.")
-    } finally {
-      setIsSubmitting(false)
+    if (saved || emailed) {
+      setSent(true)
+    } else {
+      alert("Something went wrong sending your request. Please try again, or email us at info@jahsteel.ae.")
     }
+    setIsSubmitting(false)
   }
 
   return (
@@ -116,6 +152,10 @@ export default function Contact() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-8">
+                <input
+                  type="text" name="botcheck" value={form.botcheck} onChange={handleChange}
+                  tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden"
+                />
                 <div className="grid sm:grid-cols-2 gap-8">
                   <div>
                     <label className="font-mono text-[11px] text-steel uppercase tracking-widest">Name <span className="text-weld">*</span></label>
@@ -212,6 +252,13 @@ export default function Contact() {
       <section className="pb-24 lg:pb-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <h2 className="font-display font-extrabold uppercase text-3xl lg:text-4xl text-steel-light">Find us</h2>
+          <p className="mt-3 text-steel text-sm">
+            Working on a project in Dubai? See our{' '}
+            <NavLink to="/steel-fabrication-dubai" className="text-steel-light underline underline-offset-4 hover:text-white transition-colors">
+              steel fabrication services in Dubai
+            </NavLink>
+            .
+          </p>
           <div className="mt-8 grid md:grid-cols-2 gap-6">
             {LOCATIONS.map((l) => (
               <div key={l.label} className="border border-panel-line">

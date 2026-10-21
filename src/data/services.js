@@ -257,7 +257,7 @@ export const SERVICES = [
     label: 'Machining capabilities',
     desc: 'Equipped with CNC laser cutting, press brake, plate rolling, band saw cutting, MIG welding, ARC welding, and supporting fabrication equipment, we ensure precision, efficiency, and consistent quality in every project.',
     intro:
-      'Need plates bent, rolled or drilled to drawing? Our Sharjah workshop handles steel rolling, plate and pipe bending, and drilling, alongside general machining on lathe and milling machines, pressing and shearing.',
+      'Need plates bent, rolled or drilled to drawing? Our Sharjah workshop handles steel plate and sheet rolling, cone and reducer rolling, plate and pipe bending, and drilling, alongside general machining on lathe and milling machines, pressing and shearing.',
     spec: 'Precision CNC & welding tech',
     video: '/assets/services-hero.mp4',
     poster: '/assets/assetsJazeerat/IMG_9084.webp',
@@ -286,7 +286,7 @@ export const SERVICES = [
     faqs: [
       {
         q: 'Can you roll plates into cylinders and cones?',
-        a: 'Yes. Our plate rolling machines form both cylindrical and conical shapes for tanks, hoppers and structural parts.',
+        a: 'Yes. Our plate rolling machines form both cylindrical and conical shapes, including cone reducers, for tanks, hoppers and structural parts.',
       },
       {
         q: 'Can you work directly from my DXF or NC files?',

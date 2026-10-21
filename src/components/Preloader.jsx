@@ -37,7 +37,7 @@ function V1_LogoSplash({ onDone }) {
         <img src="/favicon.png" alt="JAH Logo" className="w-16 h-16 object-contain" />
         <div className="text-center">
           <p className="font-display font-bold uppercase text-white text-xl tracking-[0.3em]">JAZEERAT AL HADEED</p>
-          <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-white/40 mt-1">Metallic Cont Ind LLC</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-white/40 mt-1">Metalic Cont Ind LLC</p>
         </div>
       </motion.div>
 
@@ -227,7 +227,7 @@ function V4_Typewriter({ onDone }) {
           className="mt-8 h-px bg-[#d62f22] origin-left"
           transition={{ ease: 'linear', duration: 0.07 }}
         />
-        <p className="font-mono text-[10px] uppercase tracking-[0.5em] text-white/20 mt-3">Metallic Cont Ind LLC</p>
+        <p className="font-mono text-[10px] uppercase tracking-[0.5em] text-white/20 mt-3">Metalic Cont Ind LLC</p>
       </motion.div>
     </motion.div>
   )
