@@ -23,19 +23,21 @@ const template = readFileSync(join(DIST, 'index.html'), 'utf8')
 const esc = (s) =>
   String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 
+// Tagged data-prerender so the app can drop them once Helmet renders its own
+// copies (React 19 hoists Helmet's tags instead of reusing these).
 function headFor({ path, title, description, image = DEFAULT_IMAGE }) {
   const url = SITE_URL + path
   return [
-    `<title>${esc(title)}</title>`,
-    `<meta name="description" content="${esc(description)}" data-rh="true" />`,
-    `<link rel="canonical" href="${esc(url)}" data-rh="true" />`,
-    `<meta property="og:type" content="website" data-rh="true" />`,
-    `<meta property="og:site_name" content="${esc(SITE_NAME)}" data-rh="true" />`,
-    `<meta property="og:title" content="${esc(title)}" data-rh="true" />`,
-    `<meta property="og:description" content="${esc(description)}" data-rh="true" />`,
-    `<meta property="og:url" content="${esc(url)}" data-rh="true" />`,
-    `<meta property="og:image" content="${esc(image)}" data-rh="true" />`,
-    `<meta name="twitter:card" content="summary_large_image" data-rh="true" />`,
+    `<title data-prerender>${esc(title)}</title>`,
+    `<meta name="description" content="${esc(description)}" data-prerender />`,
+    `<link rel="canonical" href="${esc(url)}" data-prerender />`,
+    `<meta property="og:type" content="website" data-prerender />`,
+    `<meta property="og:site_name" content="${esc(SITE_NAME)}" data-prerender />`,
+    `<meta property="og:title" content="${esc(title)}" data-prerender />`,
+    `<meta property="og:description" content="${esc(description)}" data-prerender />`,
+    `<meta property="og:url" content="${esc(url)}" data-prerender />`,
+    `<meta property="og:image" content="${esc(image)}" data-prerender />`,
+    `<meta name="twitter:card" content="summary_large_image" data-prerender />`,
   ].join('\n    ')
 }
 
