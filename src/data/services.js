@@ -250,10 +250,10 @@ export const SERVICES = [
     icon: 'wrench',
     group: 'cutting',
     title: 'Plate Bending, Rolling & Drilling',
-    seoTitle: 'Plate Bending & Rolling Services in Sharjah | JAH Steel',
+    seoTitle: 'Plate, Cone & Reducer Rolling Services in Sharjah | JAH Steel',
     metaDescription:
-      'Press brake bending, plate rolling and CNC beam drilling in Sharjah for structural and custom steel parts. Send a drawing for a quote.',
-    h1: 'Plate Bending, Rolling & Drilling Services in Sharjah',
+      'Plate rolling, cone and reducer rolling, plate and pipe bending and CNC beam drilling in our Sharjah workshop. Send a drawing for a quote.',
+    h1: 'Plate, Cone & Reducer Rolling, Bending & Drilling in Sharjah',
     label: 'Machining capabilities',
     desc: 'Equipped with CNC laser cutting, press brake, plate rolling, band saw cutting, MIG welding, ARC welding, and supporting fabrication equipment, we ensure precision, efficiency, and consistent quality in every project.',
     intro:
