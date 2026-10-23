@@ -250,14 +250,14 @@ export const SERVICES = [
     icon: 'wrench',
     group: 'cutting',
     title: 'Plate Bending, Rolling & Drilling',
-    seoTitle: 'Plate, Cone & Reducer Rolling Services in Sharjah | JAH Steel',
+    seoTitle: 'Plate Rolling, Bending & Cone Supply in Sharjah | JAH Steel',
     metaDescription:
-      'Plate rolling, cone and reducer rolling, plate and pipe bending and CNC beam drilling in our Sharjah workshop. Send a drawing for a quote.',
-    h1: 'Plate, Cone & Reducer Rolling, Bending & Drilling in Sharjah',
+      'Plate rolling, plate and pipe bending and CNC beam drilling in Sharjah, plus cones and reducers supplied to your drawing. Send a drawing for a quote.',
+    h1: 'Plate Bending, Rolling & Drilling Services in Sharjah',
     label: 'Machining capabilities',
     desc: 'Equipped with CNC laser cutting, press brake, plate rolling, band saw cutting, MIG welding, ARC welding, and supporting fabrication equipment, we ensure precision, efficiency, and consistent quality in every project.',
     intro:
-      'Need plates bent, rolled or drilled to drawing? Our Sharjah workshop handles steel plate and sheet rolling, cone and reducer rolling, plate and pipe bending, and drilling, alongside general machining on lathe and milling machines, pressing and shearing.',
+      'Need plates bent, rolled or drilled to drawing? Our Sharjah workshop handles steel rolling, plate and pipe bending, and drilling, alongside general machining on lathe and milling machines, pressing and shearing. We can also supply cones and reducers rolled to your drawing through a specialist rolling partner.',
     spec: 'Precision CNC & welding tech',
     video: '/assets/services-hero.mp4',
     poster: '/assets/assetsJazeerat/IMG_9084.webp',
@@ -276,7 +276,7 @@ export const SERVICES = [
     machinery: [
       { name: 'CNC Multi-Spindle Drill Line', cap: 'High-speed beam drilling & coping' },
       { name: 'Heavy-Duty Press Brakes', cap: 'Complex plate folding & forming' },
-      { name: 'Plate Rolling Machines', cap: 'Cylindrical & conical forming' },
+      { name: 'Plate Rolling Machines', cap: 'Cylindrical forming' },
     ],
     standards: 'AWS D1.1 / ASME Section IX',
     details: [
@@ -285,8 +285,12 @@ export const SERVICES = [
     ],
     faqs: [
       {
-        q: 'Can you roll plates into cylinders and cones?',
-        a: 'Yes. Our plate rolling machines form both cylindrical and conical shapes, including cone reducers, for tanks, hoppers and structural parts.',
+        q: 'Can you roll plates into cylinders?',
+        a: 'Yes. Our plate rolling machines form cylindrical shapes for tanks, silos and structural parts.',
+      },
+      {
+        q: 'Can you supply cones and reducers?',
+        a: 'Yes. We supply concentric and eccentric cones and reducers rolled to your drawing through a specialist rolling partner, as part of your steel package. Send the drawing and we will confirm sizes and lead time.',
       },
       {
         q: 'Can you work directly from my DXF or NC files?',
