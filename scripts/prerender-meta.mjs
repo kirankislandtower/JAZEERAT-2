@@ -13,6 +13,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { PAGE_SEO, SITE_URL, SITE_NAME } from '../src/data/seo.js'
 import { SERVICES } from '../src/data/services.js'
+import { clipText } from '../src/lib/clipText.js'
 import { LOCAL_BLOGS } from '../src/data/localBlogs.js'
 import { slugify } from '../src/lib/slugify.js'
 
@@ -91,14 +92,14 @@ const routes = [
   ...SERVICES.map((s) => ({ path: `/services/${s.slug}`, title: s.seoTitle, description: s.metaDescription })),
   ...blogs.map((b) => ({
     path: `/blogs/${b.slug}`,
-    title: `${b.title} | Jazeerat Al Hadeed Insights`,
+    title: `${b.title} | JAH Steel`,
     description: b.excerpt,
     image: absolute(b.image_url),
   })),
   ...dbProjects.map((p) => ({
     path: `/projects/${slugify(p.title)}`,
     title: `${p.title}, ${p.location} | JAH Steel Project`,
-    description: `${p.title} — ${p.description || p.scope} Delivered by Jazeerat Al Hadeed in ${p.location}.`,
+    description: clipText(`${p.title}, ${p.location}: ${p.description || p.scope}`),
     image: absolute(p.gallery?.[0] || p.image_url),
   })),
 ]

@@ -8,6 +8,7 @@ import Cutline from '../components/Cutline'
 import CtaBanner from '../components/CtaBanner'
 import { supabase } from '../lib/supabase'
 import { slugify } from '../lib/slugify'
+import { clipText } from '../lib/clipText'
 
 const iconMap = { Factory, Home, Truck, ShieldCheck, Layers }
 
@@ -90,7 +91,7 @@ export default function ProjectDetail() {
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
       <SEO
         title={`${project.title}, ${project.location} | JAH Steel Project`}
-        description={`${project.title} — ${description} Delivered by Jazeerat Al Hadeed in ${project.location}.`}
+        description={clipText(`${project.title}, ${project.location}: ${description}`)}
         path={`/projects/${slug}`}
         image={gallery[0]?.startsWith('http') ? gallery[0] : `https://jahsteel.ae${gallery[0]}`}
       />

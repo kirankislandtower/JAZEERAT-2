@@ -139,7 +139,7 @@ export default function BlogPost() {
       )}
 
       <SEO
-        title={`${post.title} | Jazeerat Al Hadeed Insights`}
+        title={`${post.title} | JAH Steel`}
         description={post.excerpt}
         path={`/blogs/${post.slug}`}
         image={imageUrl}
