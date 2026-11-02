@@ -143,6 +143,14 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Export -->
+  <url>
+    <loc>https://jahsteel.ae/steel-fabrication-export</loc>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Contact -->
   <url>
     <loc>https://jahsteel.ae/contact</loc>

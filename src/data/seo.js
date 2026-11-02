@@ -57,4 +57,10 @@ export const PAGE_SEO = {
       'Steel fabrication company in Dubai with a head office in Al Qusais and a 7,000 m² workshop in Sharjah. Structural steel, CNC cutting, welding and erection.',
     h1: 'Steel Fabrication Company in Dubai',
   },
+  '/steel-fabrication-export': {
+    title: 'Steel Fabrication Export from the UAE | JAH Steel',
+    description:
+      'Structural steel fabricated in Sharjah and exported to the USA, India, Africa and the GCC, shipped by routes that avoid the Strait of Hormuz. Quote in 24 hours.',
+    h1: 'Steel Fabrication Export from the UAE',
+  },
 }
