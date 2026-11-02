@@ -24,16 +24,35 @@ const Blogs = lazy(() => import('./pages/Blogs'))
 const BlogPost = lazy(() => import('./pages/BlogPost'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
+// The intro animation adds about 3 seconds before any content shows. Play it
+// only when a visitor opens the home page, and only once per browser session,
+// so people arriving on a blog or service page from Google or LinkedIn see the
+// content straight away.
+function shouldShowPreloader() {
+  if (window.location.pathname !== '/') return false
+  try {
+    if (sessionStorage.getItem('jah-intro-seen')) return false
+    sessionStorage.setItem('jah-intro-seen', '1')
+  } catch {
+    // storage blocked: still show it once on the home page
+  }
+  return true
+}
+
+// Decided once when the app loads (not inside the component, where React's
+// strict mode would run it twice).
+const SHOW_INTRO = shouldShowPreloader()
+
 function App() {
   const location = useLocation()
-  const [preloaderDone, setPreloaderDone] = useState(false)
+  const [preloaderDone, setPreloaderDone] = useState(!SHOW_INTRO)
 
   // 🌊 Lenis smooth scroll — runs globally for all pages
   useLenis()
 
   return (
     <MotionConfig reducedMotion="user">
-      {/* ── Preloader overlay (only on first visit) */}
+      {/* ── Preloader overlay (home page, once per session) */}
       <AnimatePresence>
         {!preloaderDone && (
           <Preloader onDone={() => setPreloaderDone(true)} />
