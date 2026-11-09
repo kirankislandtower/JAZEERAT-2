@@ -12,7 +12,8 @@ const servicesData = [
     short: 'Portal frames, trusses, columns and beams fabricated and pre-assembled in our workshop for site-ready installation.',
     spec: 'Fabricated and assembled in Sharjah',
     spanClass: 'md:col-span-2 md:row-span-2',
-    image: '/assets/team-in-jah-uniform.webp'
+    image: '/assets/team-in-jah-uniform.webp',
+    slug: 'structural-steel-fabrication',
   },
   {
     icon: PenTool,
@@ -21,6 +22,7 @@ const servicesData = [
     short: 'Shop drawings, connection details and material take-offs prepared before a single plate is cut.',
     spec: 'Detailed before cutting',
     spanClass: 'md:col-span-1 md:row-span-1',
+    slug: 'design-detailing',
   },
   {
     icon: Flame,
@@ -29,6 +31,7 @@ const servicesData = [
     short: 'High-accuracy CNC laser and plasma cutting for structural and architectural steel plate, with cutting and marking on demand.',
     spec: 'Cutting and marking on demand',
     spanClass: 'md:col-span-1 md:row-span-1',
+    slug: 'cnc-laser-plasma-cutting',
   },
   {
     icon: Wrench,
@@ -37,6 +40,7 @@ const servicesData = [
     short: 'CNC machining, drilling and boring for precision components and mechanical parts.',
     spec: 'Full workshop, one roof',
     spanClass: 'md:col-span-2 md:row-span-1',
+    slug: 'plate-bending-rolling',
   },
   {
     icon: ShieldCheck,
@@ -45,6 +49,7 @@ const servicesData = [
     short: 'Certified welders working to code, with every joint logged against our QC record.',
     spec: 'Certified welders on shift',
     spanClass: 'md:col-span-1 md:row-span-1',
+    slug: 'welding-qc',
   },
   {
     icon: Truck,
@@ -53,7 +58,8 @@ const servicesData = [
     short: 'Coordinated transport, steel erection and on-site installation support across the UAE and the MENA region.',
     spec: 'Site-coordinated logistics',
     spanClass: 'md:col-span-3 md:row-span-1',
-    image: '/assets/project-crane-hoist.webp'
+    image: '/assets/project-crane-hoist.webp',
+    slug: 'delivery-installation',
   },
 ]
 
@@ -91,65 +97,70 @@ function ServiceCard({ svc }) {
   const Icon = svc.icon
 
   return (
-    <motion.div
-      variants={fadeUp}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      className={`relative group overflow-hidden cursor-pointer bg-graphite border border-panel-line transition-all duration-500 hover:border-white/30 ${svc.spanClass || ''}`}
+    <NavLink
+      to={`/services/${svc.slug}`}
+      className={`block h-full group ${svc.spanClass || ''}`}
     >
-      {/* Liquid Glass Background Reveal */}
-      {svc.image && (
-        <div className="absolute inset-0 z-0">
-          <img src={svc.image} alt={svc.title} loading="lazy" className="w-full h-full object-cover opacity-20 group-hover:opacity-70 transition-transform duration-[1.5s] ease-out group-hover:scale-110 blur-[4px] group-hover:blur-none" />
-          <div className="absolute inset-0 bg-graphite/80 backdrop-blur-md group-hover:backdrop-blur-none transition-all duration-[1s]" />
-          <div className="absolute inset-0 bg-gradient-to-t from-graphite via-graphite/40 to-transparent" />
-        </div>
-      )}
-
-      {/* Default hover glow if no image */}
-      {!svc.image && (
-        <motion.div
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(255,255,255,0.05),transparent_70%)]"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: hovered ? 1 : 0 }}
-          transition={{ duration: 0.7 }}
-        />
-      )}
-
-      <div
-        className="relative z-10 p-8 lg:p-10 flex flex-col h-full min-h-[340px]"
+      <motion.div
+        variants={fadeUp}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        className="relative overflow-hidden cursor-pointer bg-graphite border border-panel-line transition-all duration-500 hover:border-white/30 h-full"
       >
-        {/* Top Header Row */}
-        <div className="flex items-start justify-between mb-12">
+        {/* Liquid Glass Background Reveal */}
+        {svc.image && (
+          <div className="absolute inset-0 z-0">
+            <img src={svc.image} alt={svc.title} loading="lazy" className="w-full h-full object-cover opacity-20 group-hover:opacity-70 transition-transform duration-[1.5s] ease-out group-hover:scale-110 blur-[4px] group-hover:blur-none" />
+            <div className="absolute inset-0 bg-graphite/80 backdrop-blur-md group-hover:backdrop-blur-none transition-all duration-[1s]" />
+            <div className="absolute inset-0 bg-gradient-to-t from-graphite via-graphite/40 to-transparent" />
+          </div>
+        )}
+
+        {/* Default hover glow if no image */}
+        {!svc.image && (
           <motion.div
-            className="text-steel-light bg-white/5 p-3 relative border border-white/5 group-hover:text-white group-hover:border-white/30 group-hover:bg-white/10 transition-all duration-500"
-          >
-            <Icon size={24} strokeWidth={1} />
-          </motion.div>
-          <span className="font-display text-[10px] text-steel/30 tracking-[0.4em] uppercase group-hover:text-white/60 transition-colors duration-500">Step {svc.num}</span>
-        </div>
+            className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(255,255,255,0.05),transparent_70%)]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: hovered ? 1 : 0 }}
+            transition={{ duration: 0.7 }}
+          />
+        )}
 
-        <div className="mt-auto">
-          <h3 className="font-display uppercase text-2xl lg:text-3xl font-bold text-steel-light mb-4 group-hover:text-white transition-colors duration-300">
-            {svc.title}
-          </h3>
-          <p className="text-steel/80 text-sm leading-relaxed mb-8 max-w-sm font-serif italic">
-            {svc.short}
-          </p>
-
-          {/* Hairline Divider & Spec */}
-          <div className="pt-5 border-t border-panel-line flex items-center justify-between group-hover:border-white/20 transition-colors duration-500">
-            <span className="font-mono text-[10px] text-steel/60 uppercase tracking-widest">{svc.spec}</span>
+        <div
+          className="relative z-10 p-8 lg:p-10 flex flex-col h-full min-h-[340px]"
+        >
+          {/* Top Header Row */}
+          <div className="flex items-start justify-between mb-12">
             <motion.div
-              animate={{ x: hovered ? 6 : 0, opacity: hovered ? 1 : 0.3 }}
-              transition={{ duration: 0.3 }}
+              className="text-steel-light bg-white/5 p-3 relative border border-white/5 group-hover:text-white group-hover:border-white/30 group-hover:bg-white/10 transition-all duration-500"
             >
-              <ArrowRight size={14} className="text-white" />
+              <Icon size={24} strokeWidth={1} />
             </motion.div>
+            <span className="font-display text-[10px] text-steel/30 tracking-[0.4em] uppercase group-hover:text-white/60 transition-colors duration-500">Step {svc.num}</span>
+          </div>
+
+          <div className="mt-auto">
+            <h3 className="font-display uppercase text-2xl lg:text-3xl font-bold text-steel-light mb-4 group-hover:text-white transition-colors duration-300">
+              {svc.title}
+            </h3>
+            <p className="text-steel/80 text-sm leading-relaxed mb-8 max-w-sm font-serif italic">
+              {svc.short}
+            </p>
+
+            {/* Hairline Divider & Spec */}
+            <div className="pt-5 border-t border-panel-line flex items-center justify-between group-hover:border-white/20 transition-colors duration-500">
+              <span className="font-mono text-[10px] text-steel/60 uppercase tracking-widest">{svc.spec}</span>
+              <motion.div
+                animate={{ x: hovered ? 6 : 0, opacity: hovered ? 1 : 0.3 }}
+                transition={{ duration: 0.3 }}
+              >
+                <ArrowRight size={14} className="text-white" />
+              </motion.div>
+            </div>
           </div>
         </div>
-      </div>
-    </motion.div>
+      </motion.div>
+    </NavLink>
   )
 }
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Phone } from 'lucide-react'
 import Logo from './Logo'
 
 const links = [
@@ -62,7 +62,7 @@ export default function Navbar() {
           ))}
           <NavLink
             to="/contact"
-            className="font-display uppercase tracking-wide text-sm font-semibold bg-white text-graphite px-5 py-2.5 hover:bg-steel-light transition-colors"
+            className="font-display uppercase tracking-wide text-sm font-semibold bg-white text-graphite px-5 py-2.5 hover:bg-steel-light transition-colors whitespace-nowrap"
           >
             Request a Quote
           </NavLink>
@@ -150,16 +150,26 @@ export default function Navbar() {
                 </div>
                 <div className="flex flex-col gap-1 text-xs font-mono text-steel uppercase tracking-widest truncate">
                   <span className="text-white/30 mb-1">Phone</span>
-                  <a href="tel:+971000000000" className="hover:text-white transition-colors truncate">+971 00 000 0000</a>
+                  <a href="tel:+971543058357" className="hover:text-white transition-colors truncate font-semibold">+971 54 305 8357</a>
+                  <a href="tel:+971551453288" className="hover:text-white transition-colors truncate text-[11px] text-steel/70">+971 55 145 3288</a>
                 </div>
               </div>
-              <NavLink
-                to="/contact"
-                onClick={() => setOpen(false)}
-                className="flex items-center justify-center w-full font-display uppercase tracking-wider text-sm font-semibold bg-white text-graphite px-5 py-4 rounded-full hover:bg-steel-light transition-colors"
-              >
-                Request a Quote
-              </NavLink>
+              <div className="flex flex-col gap-3">
+                <a
+                  href="tel:+971543058357"
+                  className="flex items-center justify-center gap-2 w-full font-display uppercase tracking-wider text-sm font-semibold bg-weld text-white px-5 py-3.5 rounded-full hover:bg-[#b8261a] transition-colors"
+                >
+                  <Phone size={16} />
+                  Call Us Directly
+                </a>
+                <NavLink
+                  to="/contact"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center justify-center w-full font-display uppercase tracking-wider text-sm font-semibold bg-white text-graphite px-5 py-3.5 rounded-full hover:bg-steel-light transition-colors"
+                >
+                  Request a Quote
+                </NavLink>
+              </div>
             </motion.div>
           </motion.div>
         )}

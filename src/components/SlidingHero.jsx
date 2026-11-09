@@ -209,49 +209,56 @@ export default function SlidingHero({ slides }) {
         <div className="max-w-4xl mx-auto flex flex-col items-center justify-center pt-16">
 
           {/* Minimalist Tag Badge */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`tag-${index}`}
-              initial={{ opacity: 0, y: -15, filter: 'blur(6px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              exit={{ opacity: 0, y: 15, filter: 'blur(6px)' }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-6 sm:mb-8 max-w-full"
-            >
-              <span className="w-2 h-2 rounded-full bg-weld animate-pulse shrink-0" />
-              <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.2em] sm:tracking-[0.35em] text-white/90 font-semibold truncate">
-                {allSlides[index].tag || 'GCC REGIONAL FABRICATION'}
-              </span>
-            </motion.div>
-          </AnimatePresence>
+          {(() => {
+            const activeSlide = allSlides[index] || allSlides[0] || {}
+            return (
+              <>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={`tag-${index}`}
+                    initial={{ opacity: 0, y: -15, filter: 'blur(6px)' }}
+                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                    exit={{ opacity: 0, y: 15, filter: 'blur(6px)' }}
+                    transition={{ duration: 0.6 }}
+                    className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-6 sm:mb-8 max-w-full"
+                  >
+                    <span className="w-2 h-2 rounded-full bg-weld animate-pulse shrink-0" />
+                    <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.2em] sm:tracking-[0.35em] text-white/90 font-semibold truncate">
+                      {activeSlide.tag || 'GCC REGIONAL FABRICATION'}
+                    </span>
+                  </motion.div>
+                </AnimatePresence>
 
-          {/* Centered Headline with Thinner Font & Vertical Fading White Gradient */}
-          <AnimatePresence mode="wait">
-            <motion.h2
-              key={`h2-${index}`}
-              initial={{ opacity: 0, y: 24, filter: 'blur(12px)', scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)', scale: 1 }}
-              exit={{ opacity: 0, y: -20, filter: 'blur(12px)', scale: 1.02 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="font-display font-medium uppercase text-3xl sm:text-5xl md:text-6xl lg:text-[4.2rem] leading-[1.1] sm:leading-[1.08] tracking-[0.03em] sm:tracking-[0.04em] text-transparent bg-clip-text bg-gradient-to-b from-white via-white/95 to-white/35 drop-shadow-[0_4px_30px_rgba(0,0,0,0.6)] max-w-4xl px-2"
-            >
-              {allSlides[index].caption}
-            </motion.h2>
-          </AnimatePresence>
+                {/* Centered Headline with Thinner Font & Vertical Fading White Gradient */}
+                <AnimatePresence mode="wait">
+                  <motion.h2
+                    key={`h2-${index}`}
+                    initial={{ opacity: 0, y: 24, filter: 'blur(12px)', scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)', scale: 1 }}
+                    exit={{ opacity: 0, y: -20, filter: 'blur(12px)', scale: 1.02 }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    className="font-display font-medium uppercase text-3xl sm:text-5xl md:text-6xl lg:text-[4.2rem] leading-[1.1] sm:leading-[1.08] tracking-[0.03em] sm:tracking-[0.04em] text-transparent bg-clip-text bg-gradient-to-b from-white via-white/95 to-white/35 drop-shadow-[0_4px_30px_rgba(0,0,0,0.6)] max-w-4xl px-2"
+                  >
+                    {activeSlide.caption || ''}
+                  </motion.h2>
+                </AnimatePresence>
 
-          {/* Subtitle */}
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={`sub-${index}`}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.7, delay: 0.15 }}
-              className="mt-4 sm:mt-6 text-steel-light/90 text-sm sm:text-lg md:text-xl leading-relaxed max-w-2xl font-body px-2"
-            >
-              {allSlides[index].sub}
-            </motion.p>
-          </AnimatePresence>
+                {/* Subtitle */}
+                <AnimatePresence mode="wait">
+                  <motion.p
+                    key={`sub-${index}`}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.7, delay: 0.15 }}
+                    className="mt-4 sm:mt-6 text-steel-light/90 text-sm sm:text-lg md:text-xl leading-relaxed max-w-2xl font-body px-2"
+                  >
+                    {activeSlide.sub || ''}
+                  </motion.p>
+                </AnimatePresence>
+              </>
+            )
+          })()}
 
           {/* Floating Glassmorphic Action Bar (Responsive Mobile/Desktop) */}
           <motion.div

@@ -10,6 +10,7 @@ import Cutline from '../components/Cutline'
 import TiltImage from '../components/TiltImage'
 import Newsletter from '../components/Newsletter'
 import { getCategoryColor } from '../data/blogCategories'
+import { LOCAL_BLOGS } from '../data/localBlogs'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 36 },
@@ -33,12 +34,13 @@ export default function Blogs() {
           .order('created_at', { ascending: false })
         
         if (!error && data && data.length > 0) {
-          setBlogs(data)
+          const combined = [...data, ...LOCAL_BLOGS.filter(b => !data.some(d => d.slug === b.slug))]
+          setBlogs(combined)
         } else {
-          setBlogs([])
+          setBlogs(LOCAL_BLOGS)
         }
-      } catch (err) {
-        setBlogs([])
+      } catch {
+        setBlogs(LOCAL_BLOGS)
       }
       setLoading(false)
     }

@@ -204,7 +204,7 @@ export default function Home() {
           setProjects(projData.map((p, idx) => {
             return {
               ...p,
-              image: p.image_url,
+              image: p.image_url || p.image || '/assets/assetsJazeerat/mild-steel-fabrication-works.webp',
               tag: idx === 0 ? 'Fabrication' : idx === 1 ? 'Erection' : 'Architectural'
             }
           }))

@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { useParams, NavLink, useNavigate } from 'react-router-dom'
 import { motion, useScroll, useSpring } from 'framer-motion'
-import { ArrowLeft, Clock, User, Share2, ArrowRight } from 'lucide-react'
+import { ArrowLeft, Clock, User, Share2, ArrowRight, Phone, MessageCircle, ArrowUpRight } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import SEO from '../components/SEO'
 import { SITE_URL, SITE_NAME } from '../data/seo'
 import TiltImage from '../components/TiltImage'
 import Newsletter from '../components/Newsletter'
 import { getCategoryColor } from '../data/blogCategories'
+import { LOCAL_BLOGS } from '../data/localBlogs'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -35,7 +36,9 @@ export default function BlogPost() {
   })
 
   const handleShare = () => {
-    navigator.clipboard.writeText(window.location.href)
+    if (navigator?.clipboard?.writeText) {
+      navigator.clipboard.writeText(window.location.href).catch(() => {})
+    }
     setShared(true)
     setTimeout(() => setShared(false), 2000)
   }
@@ -43,7 +46,7 @@ export default function BlogPost() {
   useEffect(() => {
     async function loadPost() {
       try {
-        // Fetch main post
+        // Fetch main post from Supabase
         const { data, error } = await supabase
           .from('blogs')
           .select('*')
@@ -64,15 +67,29 @@ export default function BlogPost() {
           if (relatedData && relatedData.length > 0) {
             setRelatedPosts(relatedData)
           } else {
-            setRelatedPosts([])
+            // fallback to local related posts if needed
+            setRelatedPosts(LOCAL_BLOGS.filter(b => b.slug !== slug).slice(0, 3))
           }
+        } else {
+          // Check LOCAL_BLOGS fallback before 404
+          const localPost = LOCAL_BLOGS.find(b => b.slug === slug)
+          if (localPost) {
+            setPost(localPost)
+            setRelatedPosts(LOCAL_BLOGS.filter(b => b.slug !== slug).slice(0, 3))
+          } else {
+            navigate('/not-found')
+            return
+          }
+        }
+      } catch {
+        const localPost = LOCAL_BLOGS.find(b => b.slug === slug)
+        if (localPost) {
+          setPost(localPost)
+          setRelatedPosts(LOCAL_BLOGS.filter(b => b.slug !== slug).slice(0, 3))
         } else {
           navigate('/not-found')
           return
         }
-      } catch (err) {
-        navigate('/not-found')
-        return
       }
       setLoading(false)
     }
@@ -183,6 +200,41 @@ export default function BlogPost() {
       {/* Article Content */}
       <article className="py-20 lg:py-28 bg-graphite-light">
         <div className="max-w-3xl mx-auto px-6 lg:px-10">
+
+          {/* Top Quick Call CTA Bar */}
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            custom={0}
+            className="mb-10 p-4 sm:p-5 bg-graphite border border-panel-line rounded-lg flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl"
+          >
+            <div className="flex items-center gap-3 text-center sm:text-left">
+              <span className="w-2.5 h-2.5 rounded-full bg-weld animate-pulse shrink-0 hidden sm:block" />
+              <p className="font-display uppercase text-xs sm:text-sm text-steel-light font-medium tracking-wide">
+                Need steel fabrication in UAE? <span className="text-white font-bold">Call our team directly.</span>
+              </p>
+            </div>
+            <div className="flex items-center gap-2.5 shrink-0 w-full sm:w-auto">
+              <a
+                href="tel:+971543058357"
+                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 bg-weld hover:bg-[#b8261a] text-white px-4 py-2.5 font-display uppercase tracking-wider text-xs font-bold transition-colors rounded shadow-md"
+              >
+                <Phone size={13} className="animate-pulse" />
+                <span>Call Us</span>
+              </a>
+              <a
+                href="https://wa.me/971543058357"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 bg-[#25D366] hover:bg-[#20ba59] text-white px-3.5 py-2.5 text-xs font-display uppercase tracking-wider font-bold transition-colors rounded shadow-md"
+                aria-label="WhatsApp"
+              >
+                <MessageCircle size={14} />
+                <span>WhatsApp</span>
+              </a>
+            </div>
+          </motion.div>
           
           <motion.div 
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={0}
@@ -207,6 +259,51 @@ export default function BlogPost() {
               first-letter:text-6xl first-letter:font-display first-letter:font-bold first-letter:text-weld first-letter:float-left first-letter:mr-4 first-letter:mt-2"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
+
+          {/* Bottom High-Converting Call CTA Box */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            custom={0}
+            className="mt-16 p-8 sm:p-10 bg-graphite border border-weld/30 rounded-xl relative overflow-hidden shadow-2xl"
+          >
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-weld via-white/50 to-weld" />
+            <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+              <div className="max-w-xl">
+                <span className="font-mono text-[11px] uppercase tracking-widest text-weld font-bold">Direct Estimation &amp; Workshop</span>
+                <h3 className="font-display uppercase text-2xl sm:text-3xl font-extrabold text-white mt-2 mb-3">
+                  Need steel fabrication in UAE? Call us.
+                </h3>
+                <p className="text-steel text-sm sm:text-base leading-relaxed">
+                  Speak directly with our engineering and estimating team in Sharjah. Whether you need structural fabrication, CNC cutting, or on-site erection across the UAE, we respond quickly with transparent pricing.
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row md:flex-col gap-3 w-full md:w-auto shrink-0">
+                <a
+                  href="tel:+971543058357"
+                  className="inline-flex items-center justify-center gap-2 bg-weld hover:bg-[#b8261a] text-white px-6 py-3.5 font-display uppercase tracking-wide text-xs font-bold transition-colors shadow-lg"
+                >
+                  <Phone size={15} /> Call Us Now
+                </a>
+                <a
+                  href="https://wa.me/971543058357"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba59] text-white px-6 py-3.5 font-display uppercase tracking-wide text-xs font-bold transition-colors shadow-md"
+                >
+                  <MessageCircle size={15} /> Chat on WhatsApp
+                </a>
+                <NavLink
+                  to="/contact"
+                  className="inline-flex items-center justify-center gap-2 border border-panel-line text-steel-light hover:text-white hover:border-white px-6 py-3 font-display uppercase tracking-wide text-xs font-semibold transition-colors"
+                >
+                  Request a Quote <ArrowUpRight size={14} />
+                </NavLink>
+              </div>
+            </div>
+          </motion.div>
 
           {/* Footer Share actions */}
           <motion.div 

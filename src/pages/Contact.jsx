@@ -211,8 +211,8 @@ export default function Contact() {
             className="lg:col-span-2 space-y-6"
           >
             {[
-              { icon: MapPin, label: 'Head Office', value: 'Damascus Street, Al Qusais, Dubai, UAE', link: null },
-              { icon: MapPin, label: 'Workshop', value: 'P.O. Box 61204, Al Sajaa Industrial Area, Sharjah, UAE', link: null },
+              { icon: MapPin, label: 'Head Office', value: 'Damascus Street, Al Qusais, Dubai, UAE', link: 'https://maps.google.com/?q=Damascus+Street,+Al+Qusais,+Dubai,+UAE' },
+              { icon: MapPin, label: 'Workshop', value: 'P.O. Box 61204, Al Sajaa Industrial Area, Sharjah, UAE', link: 'https://maps.google.com/?q=Al+Sajaa+Industrial+Area,+Sharjah,+UAE' },
               { icon: MessageCircle, label: 'WhatsApp', value: '+971 54 305 8357', link: 'https://wa.me/971543058357' },
               { icon: Phone, label: 'Phone', value: '+971 54 305 8357', link: 'tel:+971543058357' },
               { icon: Phone, label: 'Phone 2', value: '+971 55 145 3288', link: 'tel:+971551453288' },
@@ -240,7 +240,7 @@ export default function Contact() {
                   {content}
                 </a>
               ) : (
-                <div key={c.label} className="group border border-panel-line p-6 flex items-start gap-4 hover:border-weld/50 transition-colors">
+                <div key={c.label} className="border border-panel-line/60 p-6 flex items-start gap-4 bg-white/[0.01]">
                   {content}
                 </div>
               )
