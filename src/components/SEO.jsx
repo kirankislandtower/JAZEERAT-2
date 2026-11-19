@@ -1,78 +1,7 @@
 import { Helmet } from 'react-helmet-async'
-import { SITE_URL, SITE_NAME, DEFAULT_TITLE } from '../data/seo'
-const DEFAULT_IMAGE = `${SITE_URL}/assets/assetsJazeerat/sobha-one-element-tower-dubai.webp`
+import { SITE_URL, SITE_NAME, TITLE_BRAND, DEFAULT_TITLE, DEFAULT_IMAGE, PAGE_SEO } from '../data/seo'
+import { ORGANIZATION_SCHEMA } from '../data/schema'
 
-const JSONLD_ORGANIZATION = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: SITE_NAME,
-  legalName: 'Jazeerat Al Hadeed Metalic Cont Ind LLC',
-  parentOrganization: { '@type': 'Organization', name: 'Island Tower Group' },
-  alternateName: 'JAHSTEEL',
-  foundingDate: '2019',
-  description:
-    'Steel fabrication and machine workshop in Al Sajaa Industrial Area, Sharjah, delivering structural steel fabrication, CNC cutting, welding, finishing and erection across the UAE and the MENA region.',
-  url: SITE_URL,
-  logo: `${SITE_URL}/favicon.svg`,
-  image: DEFAULT_IMAGE,
-  telephone: '+971 54 305 8357',
-  openingHoursSpecification: [
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      opens: '08:30',
-      closes: '18:00',
-    },
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Saturday', opens: '08:30', closes: '14:00' },
-  ],
-  contactPoint: [
-    { '@type': 'ContactPoint', telephone: '+971 54 305 8357', contactType: 'sales' },
-    { '@type': 'ContactPoint', telephone: '+971 55 145 3288', contactType: 'sales' },
-  ],
-  email: 'info@jahsteel.ae',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'Al Sajaa Industrial Area',
-    postOfficeBoxNumber: '61204',
-    addressLocality: 'Sharjah',
-    addressRegion: 'Sharjah',
-    addressCountry: 'AE',
-  },
-  // The workshop above is the primary address; the head office is listed as
-  // a second location.
-  location: [
-    {
-      '@type': 'Place',
-      name: 'Jazeerat Al Hadeed Head Office',
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: 'Damascus Street, Al Qusais',
-        addressLocality: 'Dubai',
-        addressRegion: 'Dubai',
-        addressCountry: 'AE',
-      },
-    },
-  ],
-  areaServed: [
-    { '@type': 'Country', name: 'United Arab Emirates' },
-    { '@type': 'Country', name: 'Saudi Arabia' },
-  ],
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'Steel Fabrication Services',
-    itemListElement: [
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Structural Steel Fabrication' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Steel Detailing & Shop Drawings' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'CNC Laser & Plasma Cutting' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Welding & Quality Control' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Surface Finishing & Galvanizing' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Steel Erection & Installation' } },
-    ],
-  },
-  sameAs: [
-    'https://www.linkedin.com/company/jahsteel/',
-  ],
-}
 
 /**
  * SEO component — add to the top of every page component.
@@ -89,15 +18,18 @@ export default function SEO({
   title,
   description,
   path = '',
-  image = DEFAULT_IMAGE,
+  // Static pages can set their own share image in PAGE_SEO (src/data/seo.js).
+  image = PAGE_SEO[path]?.image ? `${SITE_URL}${PAGE_SEO[path].image}` : DEFAULT_IMAGE,
   noIndex = false,
   schema,
+  type = 'website',
+  publishedTime,
 }) {
   // If the title already spells out the brand name (e.g. "About Jazeerat Al
   // Hadeed | ..."), use it exactly as given instead of appending the brand
   // suffix a second time.
   const fullTitle = title
-    ? (title.includes(SITE_NAME) || title.includes('JAH Steel') ? title : `${title} | ${SITE_NAME}`)
+    ? (title.includes(SITE_NAME) || title.includes(TITLE_BRAND) ? title : `${title} | ${TITLE_BRAND}`)
     : DEFAULT_TITLE
   const canonicalUrl = `${SITE_URL}${path}`
   const extraSchemas = schema ? (Array.isArray(schema) ? schema : [schema]) : []
@@ -111,7 +43,8 @@ export default function SEO({
       {noIndex && <meta name="robots" content="noindex, nofollow" />}
 
       {/* ── Open Graph (Facebook / LinkedIn / WhatsApp) ── */}
-      <meta property="og:type" content="website" />
+      <meta property="og:type" content={type} />
+      {type === 'article' && publishedTime && <meta property="article:published_time" content={publishedTime} />}
       <meta property="og:site_name" content={SITE_NAME} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
@@ -134,7 +67,7 @@ export default function SEO({
 
       {/* ── JSON-LD Structured Data ── */}
       <script type="application/ld+json">
-        {JSON.stringify(JSONLD_ORGANIZATION)}
+        {JSON.stringify(ORGANIZATION_SCHEMA)}
       </script>
       {extraSchemas.map((obj, i) => (
         <script key={i} type="application/ld+json">{JSON.stringify(obj)}</script>

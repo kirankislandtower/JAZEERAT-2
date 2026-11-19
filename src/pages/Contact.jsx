@@ -7,6 +7,7 @@ import SEO from '../components/SEO'
 import { PAGE_SEO } from '../data/seo'
 import VideoHero from '../components/VideoHero'
 import { supabase } from '../lib/supabase'
+import { trackLead } from '../lib/trackLeads'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -90,6 +91,7 @@ export default function Contact() {
 
     if (saved || emailed) {
       setSent(true)
+      trackLead('lead_form')
     } else {
       alert("Something went wrong sending your request. Please try again, or email us at info@jahsteel.ae.")
     }

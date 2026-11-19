@@ -5,6 +5,7 @@ import { motion, useScroll, useSpring } from 'framer-motion'
 import { ArrowLeft, Clock, User, Share2, ArrowRight, Phone, MessageCircle, ArrowUpRight } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import SEO from '../components/SEO'
+import { blogPostingSchemas } from '../data/schema'
 import { SITE_URL, SITE_NAME } from '../data/seo'
 import TiltImage from '../components/TiltImage'
 import Newsletter from '../components/Newsletter'
@@ -116,17 +117,7 @@ export default function BlogPost() {
   const imageUrl = post.image_url?.startsWith('http') ? post.image_url : `${SITE_URL}${post.image_url}`
   // The company is named as author and publisher; the byline shown on the
   // page is not repeated here until the named authors are confirmed.
-  const blogPostingJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
-    headline: post.title,
-    description: post.excerpt,
-    image: imageUrl,
-    datePublished: post.created_at,
-    mainEntityOfPage: `${SITE_URL}/blogs/${post.slug}`,
-    author: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
-    publisher: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
-  }
+  const blogPostingJsonLd = blogPostingSchemas({ ...post, image_url: imageUrl })
 
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }} className="bg-graphite min-h-screen">
@@ -161,6 +152,8 @@ export default function BlogPost() {
         path={`/blogs/${post.slug}`}
         image={imageUrl}
         schema={blogPostingJsonLd}
+        type="article"
+        publishedTime={post.created_at}
       />
 
       {/* Immersive Editorial Hero */}

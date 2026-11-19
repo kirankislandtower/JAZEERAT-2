@@ -10,6 +10,7 @@ import Cutline from '../components/Cutline'
 import SectionLabel from '../components/SectionLabel'
 import { SERVICES_BY_SLUG, SERVICE_SLUG_ALIASES } from '../data/services'
 import { SITE_URL } from '../data/seo'
+import { serviceSchemas } from '../data/schema'
 
 const ICONS = { ruler: Ruler, pen: PenTool, factory: Factory, wrench: Wrench, flame: Flame, boxes: Boxes, shield: ShieldCheck, truck: Truck }
 
@@ -57,28 +58,7 @@ export default function ServiceDetail() {
   }
 
   const Icon = ICONS[detail.icon] || Factory
-  const pageUrl = `${SITE_URL}/services/${slug}`
-  const schema = [
-    {
-      '@context': 'https://schema.org',
-      '@type': 'Service',
-      name: detail.title,
-      serviceType: detail.title,
-      description: detail.metaDescription,
-      url: pageUrl,
-      areaServed: { '@type': 'Country', name: 'United Arab Emirates' },
-      provider: { '@type': 'LocalBusiness', name: 'Jazeerat Al Hadeed', url: SITE_URL },
-    },
-    {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: detail.faqs.map((f) => ({
-        '@type': 'Question',
-        name: f.q,
-        acceptedAnswer: { '@type': 'Answer', text: f.a },
-      })),
-    },
-  ]
+  const schema = serviceSchemas(detail)
 
   return (
     <motion.main
@@ -92,6 +72,7 @@ export default function ServiceDetail() {
         description={detail.metaDescription}
         path={`/services/${slug}`}
         schema={schema}
+        image={`${SITE_URL}${detail.poster}`}
       />
 
       <VideoHero
