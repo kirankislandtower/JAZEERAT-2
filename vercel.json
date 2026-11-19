@@ -1,5 +1,6 @@
 {
   "cleanUrls": true,
+  "trailingSlash": false,
   "redirects": [
     {
       "source": "/services/fabrication-facility",
@@ -30,8 +31,12 @@
   ],
   "rewrites": [
     {
-      "source": "/(.*)",
-      "destination": "/"
+      "source": "/blogs/:slug",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/projects/:slug",
+      "destination": "/app-shell"
     }
   ],
   "headers": [

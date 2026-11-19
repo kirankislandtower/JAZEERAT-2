@@ -5,11 +5,14 @@ import { HelmetProvider } from 'react-helmet-async'
 import { Analytics } from '@vercel/analytics/react'
 import './index.css'
 import App from './App.jsx'
+import { installLeadTracking } from './lib/trackLeads'
 
 // The build writes per-page title/description/canonical/OG tags into each
 // HTML file for crawlers and link previews. Helmet adds the same tags once the
 // app renders, so remove the static copies to avoid duplicates.
 document.querySelectorAll('head [data-prerender]').forEach((el) => el.remove())
+
+installLeadTracking()
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
