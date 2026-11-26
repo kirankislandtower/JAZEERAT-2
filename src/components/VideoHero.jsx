@@ -11,6 +11,8 @@ import WeldingCanvas from './WeldingCanvas'
  *  - showSparks : boolean to enable the welding canvas (default: false)
  *  - className  : classes for padding/layout
  *  - pageKey    : optional key to fetch dynamic media from Supabase ('about', 'services', etc.)
+ *  - image      : optional still image to use instead of a video
+ *  - imageAlt   : alt text for the still image
  *  - children   : the text/button content
  */
 const VideoHero = forwardRef(({
@@ -19,10 +21,12 @@ const VideoHero = forwardRef(({
   showSparks = false,
   className = '',
   pageKey,
+  image,
+  imageAlt = 'Hero Background',
   children,
 }, ref) => {
-  const [mediaUrl, setMediaUrl] = useState(videoSrc)
-  const [isImage, setIsImage] = useState(false)
+  const [mediaUrl, setMediaUrl] = useState(image || videoSrc)
+  const [isImage, setIsImage] = useState(Boolean(image))
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -70,7 +74,8 @@ const VideoHero = forwardRef(({
         <img
           className="absolute inset-0 w-full h-full object-cover"
           src={isImage ? mediaUrl : poster}
-          alt="Hero Background"
+          alt={imageAlt}
+          fetchPriority="high"
         />
       )}
 
