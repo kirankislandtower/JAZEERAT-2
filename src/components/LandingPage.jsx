@@ -61,7 +61,7 @@ function CardGrid({ items, cols = 'lg:grid-cols-3', pad = 'p-8', titleSize = 'te
   )
 }
 
-export default function LandingPage({ path, pageKey, label, heroLine1, heroLine2, video, poster, primaryCta, secondaryCta, cta }) {
+export default function LandingPage({ path, pageKey, label, heroLine1, heroLine2, video, poster, image, imageAlt, primaryCta, secondaryCta, cta }) {
   const seo = PAGE_SEO[path]
   const page = LANDING_PAGES[path]
 
@@ -69,7 +69,7 @@ export default function LandingPage({ path, pageKey, label, heroLine1, heroLine2
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
       <SEO title={seo.title} description={seo.description} path={path} schema={faqSchema(page.faqs.items)} />
 
-      <VideoHero pageKey={pageKey} videoSrc={video} poster={poster} showSparks={false} className="pt-40 pb-20 lg:pt-48 lg:pb-28">
+      <VideoHero pageKey={pageKey} videoSrc={video} poster={poster} image={image} imageAlt={imageAlt} showSparks={false} className="pt-40 pb-20 lg:pt-48 lg:pb-28">
         <div className="max-w-5xl mx-auto px-6 lg:px-10">
           <motion.div initial="hidden" animate="visible" custom={0} variants={fadeUp}>
             <SectionLabel index={label} as="h1">{seo.h1}</SectionLabel>

@@ -78,7 +78,7 @@ export const PAGE_SEO = {
     description:
       'Steel structure erection in Abu Dhabi: fabricated in our Sharjah workshop, delivered in phases and installed by our own crews. Quote in 24 hours.',
     h1: 'Steel Structure Erection in Abu Dhabi',
-    image: '/assets/assetsJazeerat/IMG_9087.webp',
+    image: '/assets/abu-dhabi-skyline.webp',
   },
 }
 
