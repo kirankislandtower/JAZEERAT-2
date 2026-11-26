@@ -20,7 +20,8 @@
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from 'node:fs'
 import { dirname, join } from 'node:path'
-import { PAGE_SEO, SITE_URL, SITE_NAME, DEFAULT_IMAGE } from '../src/data/seo.js'
+import { PAGE_SEO, SITE_URL, SITE_NAME, DEFAULT_IMAGE, withBrand } from '../src/data/seo.js'
+import { LANDING_PAGES, faqSchema } from '../src/data/landingPages.js'
 import { SERVICES } from '../src/data/services.js'
 import { ORGANIZATION_SCHEMA, serviceSchemas, blogPostingSchemas, breadcrumbSchema } from '../src/data/schema.js'
 import { clipText } from '../src/lib/clipText.js'
@@ -153,6 +154,28 @@ const projects = dbProjects.map((p) => ({ ...p, slug: slugify(p.title) }))
 const fmtDate = (d) => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
 const day = (d) => new Date(d).toISOString().slice(0, 10)
 
+// Full body for the location / market landing pages, from the same data the
+// React pages render, so crawlers see the whole page and not just the H1.
+function landingMain(page) {
+  const cards = (items) => items.map((r) => `<h3>${esc(r.title)}</h3><p>${esc(r.desc)}</p>`).join('')
+  return (
+    `<p>${esc(page.intro)}</p>` +
+    section(
+      page.about.heading,
+      page.about.paragraphs.map((p) => `<p>${esc(p)}</p>`).join('') +
+        list((page.about.addresses || []).map(([l, v]) => `${esc(l)}: ${esc(v)}`)),
+    ) +
+    (page.list ? section(page.list.heading, list(page.list.items.map(esc))) : '') +
+    (page.markets ? section(page.markets.heading, cards(page.markets.items)) : '') +
+    (page.process ? section(page.process.heading, cards(page.process.items)) : '') +
+    (page.servicesHeading
+      ? section(page.servicesHeading, list(SERVICES.map((s) => `${link(`/services/${s.slug}`, s.title)}: ${esc(s.metaDescription)}`)))
+      : '') +
+    section(page.reasons.heading, cards(page.reasons.items)) +
+    section(page.faqs.heading, page.faqs.items.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join(''))
+  )
+}
+
 // ── Routes ──────────────────────────────────────────────────────────────────
 // Page-specific body content for the static pages listed in PAGE_SEO.
 const staticExtras = {
@@ -176,8 +199,13 @@ const routes = [
     title: s.title,
     description: s.description,
     image: absolute(s.image) || DEFAULT_IMAGE,
-    schemas: path === '/' ? [] : [breadcrumbSchema([['Home', '/'], [s.h1 || s.title, path]])],
-    main: `<h1>${esc(s.h1 || s.title)}</h1><p>${esc(s.description)}</p>${staticExtras[path]?.() || ''}`,
+    schemas: [
+      ...(path === '/' ? [] : [breadcrumbSchema([['Home', '/'], [s.h1 || s.title, path]])]),
+      ...(LANDING_PAGES[path] ? [faqSchema(LANDING_PAGES[path].faqs.items)] : []),
+    ],
+    main: LANDING_PAGES[path]
+      ? `<h1>${esc(s.h1 || s.title)}</h1>${landingMain(LANDING_PAGES[path])}`
+      : `<h1>${esc(s.h1 || s.title)}</h1><p>${esc(s.description)}</p>${staticExtras[path]?.() || ''}`,
     priority: path === '/' ? '1.0' : '0.8',
     changefreq: path === '/blogs' || path === '/' ? 'weekly' : 'monthly',
     lastmod: path === '/blogs' || path === '/' ? blogs[0] && day(blogs[0].created_at) : undefined,
@@ -208,7 +236,7 @@ const routes = [
     const more = blogs.filter((x) => x.slug !== b.slug).slice(0, 3)
     return {
       path: `/blogs/${b.slug}`,
-      title: `${b.title} | JAH Steel`,
+      title: withBrand(b.title),
       description: b.excerpt,
       image,
       type: 'article',
@@ -229,11 +257,17 @@ const routes = [
     const description = p.description || p.scope
     return {
       path: `/projects/${p.slug}`,
-      title: `${p.title}, ${p.location} | JAH Steel Project`,
+      title: withBrand(`${p.title}, ${p.location}`),
       description: clipText(`${p.title}, ${p.location}: ${description}`),
       image: absolute(p.gallery?.[0] || p.image_url) || DEFAULT_IMAGE,
       schemas: [breadcrumbSchema([['Home', '/'], ['Projects', '/projects'], [p.title, `/projects/${p.slug}`]])],
-      main: `<h1>${esc(p.title)}</h1><p>${esc(p.location)} · ${esc(p.scope)}</p><p>${esc(description)}</p>`,
+      main:
+        `<h1>${esc(p.title)}</h1><p>${esc(p.location)} · ${esc(p.scope)}</p><p>${esc(description)}</p>` +
+        section(
+          'More projects',
+          list(projects.filter((x) => x.slug !== p.slug).map((x) => `${link(`/projects/${x.slug}`, x.title)}, ${esc(x.location)}`)),
+        ) +
+        section('Related services', list(SERVICES.slice(0, 6).map((x) => link(`/services/${x.slug}`, x.title)))),
       priority: '0.6',
       changefreq: 'monthly',
     }
@@ -287,6 +321,35 @@ writeFileSync(
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`,
 )
 console.log(`prerender-meta: sitemap has ${routes.length} URLs`)
+
+// llms.txt: a short plain-Markdown summary of the company and its key pages
+// for AI assistants (proposed standard, see llmstxt.org). Rebuilt each deploy.
+const llms = [
+  `# ${SITE_NAME} (JAH Steel)`,
+  '',
+  `> ${ORGANIZATION_SCHEMA.description}`,
+  '',
+  'Workshop: Al Sajaa Industrial Area, Sharjah, UAE. Head office: Damascus Street, Al Qusais, Dubai, UAE.',
+  'Phone / WhatsApp: +971 54 305 8357. Email: info@jahsteel.ae. Quotes typically within 24 hours.',
+  'Part of Island Tower Group. Quality and environmental systems certified to ISO 9001:2015 and ISO 14001:2015.',
+  '',
+  '## Services',
+  ...SERVICES.map((s) => `- [${s.title}](${SITE_URL}/services/${s.slug}): ${s.metaDescription}`),
+  '',
+  '## Areas served',
+  ...['/steel-fabrication-dubai', '/steel-structure-erection-abu-dhabi', '/steel-fabrication-export'].map(
+    (p) => `- [${PAGE_SEO[p].h1}](${SITE_URL}${p}): ${PAGE_SEO[p].description}`,
+  ),
+  '',
+  '## Company',
+  ...['/about', '/facilities', '/projects', '/contact'].map((p) => `- [${PAGE_SEO[p].h1}](${SITE_URL}${p})`),
+  '',
+  '## Latest articles',
+  ...blogs.slice(0, 10).map((b) => `- [${b.title}](${SITE_URL}/blogs/${b.slug})`),
+  '',
+].join('\n')
+writeFileSync(join(DIST, 'llms.txt'), llms)
+console.log('prerender-meta: wrote llms.txt')
 
 // Every HTML file in dist should be a known route, the 404 page or the shell.
 const known = new Set(routes.map((r) => (r.path === '/' ? 'index.html' : `${r.path.slice(1)}.html`)))

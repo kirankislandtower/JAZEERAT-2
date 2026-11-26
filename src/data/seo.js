@@ -13,7 +13,7 @@ export const DEFAULT_DESCRIPTION =
 
 export const PAGE_SEO = {
   '/': {
-    title: 'Structural Steel Fabrication Company in UAE | Jazeerat Al Hadeed',
+    title: 'Structural Steel Fabrication in UAE | Jazeerat Al Hadeed',
     description:
       'Sharjah-based steel fabrication company: structural steel, CNC laser & plasma cutting, machining and erection across Dubai, the UAE and MENA. Quote in 24h.',
     h1: 'Structural Steel Fabrication Company in the UAE',
@@ -28,7 +28,7 @@ export const PAGE_SEO = {
   '/services': {
     title: 'Steel Fabrication Services in Sharjah & Dubai | JAH Steel',
     description:
-      'Ten in-house services: estimation, structural design, Tekla detailing, CNC laser cutting, fabrication, welding & QC, galvanizing and erection across the UAE.',
+      'Ten in-house services: estimation, design, Tekla detailing, CNC laser cutting, fabrication, welding & QC, galvanizing and erection across the UAE.',
     h1: 'Steel Fabrication & Engineering Services in the UAE',
     image: '/assets/assetsJazeerat/IMG_9087.webp',
   },
@@ -42,7 +42,7 @@ export const PAGE_SEO = {
   '/projects': {
     title: 'Structural Steel Projects in UAE & Saudi Arabia | JAH Steel',
     description:
-      'Steel fabrication and erection projects by Jazeerat Al Hadeed in the UAE and Saudi Arabia, from high-rise facade steel in Dubai to industrial frames in Sharjah.',
+      'Steel fabrication and erection projects in the UAE and Saudi Arabia, from high-rise facade steel in Dubai to industrial frames in Sharjah.',
     h1: 'Steel Fabrication Projects in the UAE and Saudi Arabia',
     image: '/assets/project-sobha-rendering.webp',
   },
@@ -69,8 +69,20 @@ export const PAGE_SEO = {
   '/steel-fabrication-export': {
     title: 'Steel Fabrication Export from the UAE | JAH Steel',
     description:
-      'Structural steel fabricated in Sharjah and exported to the USA, India, Africa and the GCC, shipped by routes that avoid the Strait of Hormuz. Quote in 24 hours.',
+      'Structural steel fabricated in Sharjah and exported to the USA, India, Africa and the GCC, by routes that avoid the Strait of Hormuz. Quote in 24 hours.',
     h1: 'Steel Fabrication Export from the UAE',
     image: '/assets/assetsJazeerat/mild-steel-fabrication-works.webp',
   },
+  '/steel-structure-erection-abu-dhabi': {
+    title: 'Steel Structure Erection in Abu Dhabi | JAH Steel',
+    description:
+      'Steel structure erection in Abu Dhabi: fabricated in our Sharjah workshop, delivered in phases and installed by our own crews. Quote in 24 hours.',
+    h1: 'Steel Structure Erection in Abu Dhabi',
+    image: '/assets/assetsJazeerat/IMG_9087.webp',
+  },
 }
+
+// Search results cut titles at roughly 60 characters. Append the brand only
+// when it still fits; otherwise the page's own title carries the keywords.
+export const withBrand = (title, max = 60) =>
+  `${title} | ${TITLE_BRAND}`.length <= max ? `${title} | ${TITLE_BRAND}` : title

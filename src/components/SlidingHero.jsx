@@ -62,7 +62,7 @@ const HeroVideo = ({ src, isActive, isAdjacent, animate, transition, style }) =>
       muted
       loop
       playsInline
-      preload="auto"
+      preload={isActive ? 'auto' : 'metadata'}
       animate={animate}
       transition={transition}
       style={style}
@@ -70,18 +70,27 @@ const HeroVideo = ({ src, isActive, isAdjacent, animate, transition, style }) =>
   )
 }
 
+function prefersStillHero() {
+  if (typeof window === 'undefined') return true
+  const saveData = navigator.connection?.saveData === true
+  return saveData || window.matchMedia('(max-width: 768px)').matches
+}
+
 export default function SlidingHero({ slides }) {
   const allSlides = slides || []
   const [index, setIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
+  // Phones (and data-saver connections) get the poster image instead of the
+  // hero video. Read the media query on the first render: starting from
+  // `false` made phones begin downloading the full video before switching.
+  const [isMobile, setIsMobile] = useState(() => prefersStillHero())
   const startX = useRef(0)
   const isPointerDown = useRef(false)
   const containerRef = useRef(null)
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.matchMedia('(max-width: 768px)').matches)
+      setIsMobile(prefersStillHero())
     }
     checkMobile()
     window.addEventListener('resize', checkMobile, { passive: true })
