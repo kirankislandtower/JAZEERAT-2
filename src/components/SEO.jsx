@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async'
-import { SITE_URL, SITE_NAME, TITLE_BRAND, DEFAULT_TITLE, DEFAULT_IMAGE, PAGE_SEO } from '../data/seo'
+import { SITE_URL, SITE_NAME, TITLE_BRAND, DEFAULT_TITLE, DEFAULT_IMAGE, PAGE_SEO, withBrand } from '../data/seo'
 import { ORGANIZATION_SCHEMA } from '../data/schema'
 
 
@@ -29,7 +29,7 @@ export default function SEO({
   // Hadeed | ..."), use it exactly as given instead of appending the brand
   // suffix a second time.
   const fullTitle = title
-    ? (title.includes(SITE_NAME) || title.includes(TITLE_BRAND) ? title : `${title} | ${TITLE_BRAND}`)
+    ? (title.includes(SITE_NAME) || title.includes(TITLE_BRAND) ? title : withBrand(title))
     : DEFAULT_TITLE
   const canonicalUrl = `${SITE_URL}${path}`
   const extraSchemas = schema ? (Array.isArray(schema) ? schema : [schema]) : []

@@ -147,7 +147,7 @@ export default function BlogPost() {
       )}
 
       <SEO
-        title={`${post.title} | JAH Steel`}
+        title={post.title}
         description={post.excerpt}
         path={`/blogs/${post.slug}`}
         image={imageUrl}

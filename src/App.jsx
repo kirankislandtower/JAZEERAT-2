@@ -19,6 +19,7 @@ const ProjectDetail = lazy(() => import('./pages/ProjectDetail'))
 const Contact = lazy(() => import('./pages/Contact'))
 const DubaiSteelFabrication = lazy(() => import('./pages/DubaiSteelFabrication'))
 const ExportSteelFabrication = lazy(() => import('./pages/ExportSteelFabrication'))
+const AbuDhabiSteelErection = lazy(() => import('./pages/AbuDhabiSteelErection'))
 // const Team = lazy(() => import('./pages/Team'))
 const ServiceDetail = lazy(() => import('./pages/ServiceDetail'))
 const Blogs = lazy(() => import('./pages/Blogs'))
@@ -74,6 +75,7 @@ function App() {
               <Route path="/facilities" element={<PageTransition><Facilities /></PageTransition>} />
               <Route path="/steel-fabrication-dubai" element={<PageTransition><DubaiSteelFabrication /></PageTransition>} />
               <Route path="/steel-fabrication-export" element={<PageTransition><ExportSteelFabrication /></PageTransition>} />
+              <Route path="/steel-structure-erection-abu-dhabi" element={<PageTransition><AbuDhabiSteelErection /></PageTransition>} />
               <Route path="/projects" element={<PageTransition><Projects /></PageTransition>} />
               <Route path="/projects/:slug" element={<PageTransition><ProjectDetail /></PageTransition>} />
               {/* <Route path="/team" element={<PageTransition><Team /></PageTransition>} /> */}

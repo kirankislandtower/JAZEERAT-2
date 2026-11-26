@@ -52,13 +52,26 @@ export default function SiteVisitSection({
 
   // Preload just enough metadata to show the real duration on the thumbnail
   // badge, without waiting for the user to open the modal first.
+  // Deferred until the page has finished loading so it never competes with
+  // the hero image for bandwidth.
   useEffect(() => {
-    const probe = document.createElement('video')
-    probe.preload = 'metadata'
-    probe.src = videoSrc
+    let probe
     const onMeta = () => setDuration(probe.duration)
-    probe.addEventListener('loadedmetadata', onMeta)
-    return () => probe.removeEventListener('loadedmetadata', onMeta)
+    const start = () => {
+      probe = document.createElement('video')
+      probe.preload = 'metadata'
+      probe.src = videoSrc
+      probe.addEventListener('loadedmetadata', onMeta)
+    }
+    let timer
+    const schedule = () => { timer = setTimeout(start, 3000) }
+    if (document.readyState === 'complete') schedule()
+    else window.addEventListener('load', schedule, { once: true })
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener('load', schedule)
+      probe?.removeEventListener('loadedmetadata', onMeta)
+    }
   }, [videoSrc])
 
   // Track progress

@@ -533,7 +533,7 @@ export const SERVICES = [
     icon: 'truck',
     group: 'site',
     title: 'Steel Erection & Installation',
-    seoTitle: 'Steel Structure Erection in Dubai, Abu Dhabi & UAE | JAH Steel',
+    seoTitle: 'Steel Structure Erection & Installation in UAE | JAH Steel',
     metaDescription:
       'Steel structure erection in Dubai, Abu Dhabi and across the UAE: phased delivery, crane lifting, bolting and installation by our own erection teams.',
     h1: 'Steel Structure Erection & Installation in the UAE',

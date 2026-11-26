@@ -90,7 +90,7 @@ export default function ProjectDetail() {
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
       <SEO
-        title={`${project.title}, ${project.location} | JAH Steel Project`}
+        title={`${project.title}, ${project.location}`}
         description={clipText(`${project.title}, ${project.location}: ${description}`)}
         path={`/projects/${slug}`}
         image={gallery[0]?.startsWith('http') ? gallery[0] : `https://jahsteel.ae${gallery[0]}`}
