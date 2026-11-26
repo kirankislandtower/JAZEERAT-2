@@ -10,6 +10,7 @@ export default function AbuDhabiSteelErection() {
       heroLine2="Erected in Abu Dhabi."
       image="/assets/abu-dhabi-skyline.webp"
       imageAlt="Abu Dhabi skyline with the Etihad Towers on the Corniche"
+      imagePosition="72% center"
       poster="/assets/abu-dhabi-skyline.webp"
       primaryCta="Request a Quote"
       secondaryCta={{ to: '/services/delivery-installation', label: 'Erection & Installation Service' }}

@@ -13,6 +13,7 @@ import WeldingCanvas from './WeldingCanvas'
  *  - pageKey    : optional key to fetch dynamic media from Supabase ('about', 'services', etc.)
  *  - image      : optional still image to use instead of a video
  *  - imageAlt   : alt text for the still image
+ *  - imagePosition : CSS object-position for the still image (default 'center')
  *  - children   : the text/button content
  */
 const VideoHero = forwardRef(({
@@ -23,6 +24,7 @@ const VideoHero = forwardRef(({
   pageKey,
   image,
   imageAlt = 'Hero Background',
+  imagePosition = 'center',
   children,
 }, ref) => {
   const [mediaUrl, setMediaUrl] = useState(image || videoSrc)
@@ -75,6 +77,7 @@ const VideoHero = forwardRef(({
           className="absolute inset-0 w-full h-full object-cover"
           src={isImage ? mediaUrl : poster}
           alt={imageAlt}
+          style={{ objectPosition: imagePosition }}
           fetchPriority="high"
         />
       )}
@@ -82,6 +85,11 @@ const VideoHero = forwardRef(({
       {/* ── LAYER 2: dark gradient scrim for text readability ── */}
       <div className="absolute inset-0 bg-gradient-to-b from-graphite/65 via-graphite/45 to-graphite/88 pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-to-r from-graphite/55 via-transparent to-transparent pointer-events-none" />
+      {/* Photos are brighter than the hero videos: darken the left/text side
+          further so the intro copy keeps its contrast over the image. */}
+      {isImage && (
+        <div className="absolute inset-0 bg-gradient-to-r from-graphite/80 via-graphite/45 to-graphite/10 lg:via-graphite/30 lg:to-transparent pointer-events-none" />
+      )}
 
       {/* ── LAYER 3: optional welding spark canvas ── */}
       {showSparks && (
