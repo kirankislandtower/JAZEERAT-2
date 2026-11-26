@@ -10,6 +10,14 @@ import { SERVICES } from './services.js'
 
 export const ISLAND_TOWER = 'Island Tower Group'
 
+// Short proof points shown under the hero buttons on the landing pages.
+export const TRUST_POINTS = [
+  '7,000 m² Sharjah workshop',
+  'ISO 9001 & 14001 certified',
+  '6G certified welders',
+  'Quote in 24 hours',
+]
+
 export const LANDING_PAGES = {
   '/steel-fabrication-dubai': {
     intro:

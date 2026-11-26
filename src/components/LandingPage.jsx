@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import { motion } from 'framer-motion'
 import { NavLink } from 'react-router-dom'
-import { ArrowRight, MapPin } from 'lucide-react'
+import { ArrowRight, MapPin, Check } from 'lucide-react'
 import SectionLabel from './SectionLabel'
 import Cutline from './Cutline'
 import SEO from './SEO'
@@ -10,7 +10,7 @@ import VideoHero from './VideoHero'
 import CtaBanner from './CtaBanner'
 import { PAGE_SEO } from '../data/seo'
 import { SERVICES } from '../data/services'
-import { LANDING_PAGES, ISLAND_TOWER, faqSchema } from '../data/landingPages'
+import { LANDING_PAGES, ISLAND_TOWER, TRUST_POINTS, faqSchema } from '../data/landingPages'
 
 // Shared layout for the location / market landing pages
 // (/steel-fabrication-dubai, /steel-structure-erection-abu-dhabi,
@@ -101,6 +101,18 @@ export default function LandingPage({ path, pageKey, label, heroLine1, heroLine2
               {secondaryCta.label}
             </NavLink>
           </motion.div>
+          <motion.ul
+            initial="hidden" animate="visible" custom={4} variants={fadeUp}
+            className="mt-10 grid grid-cols-2 gap-x-4 gap-y-3 sm:flex sm:flex-wrap sm:gap-x-6 font-mono text-[10px] sm:text-[11px] uppercase tracking-widest text-steel-light"
+            aria-label="Why JAH Steel"
+          >
+            {TRUST_POINTS.map((t) => (
+              <li key={t} className="flex items-center gap-2">
+                <Check size={14} className="text-weld shrink-0" aria-hidden="true" />
+                {t}
+              </li>
+            ))}
+          </motion.ul>
         </div>
       </VideoHero>
 

@@ -22,6 +22,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from 
 import { dirname, join } from 'node:path'
 import { PAGE_SEO, SITE_URL, SITE_NAME, DEFAULT_IMAGE, withBrand } from '../src/data/seo.js'
 import { LANDING_PAGES, faqSchema } from '../src/data/landingPages.js'
+import { STATIC_BODIES } from '../src/data/staticBodies.js'
 import { SERVICES } from '../src/data/services.js'
 import { ORGANIZATION_SCHEMA, serviceSchemas, blogPostingSchemas, breadcrumbSchema } from '../src/data/schema.js'
 import { clipText } from '../src/lib/clipText.js'
@@ -176,6 +177,20 @@ function landingMain(page) {
   )
 }
 
+// Body text for /about, /facilities and /contact (see src/data/staticBodies.js).
+function staticBody(sections) {
+  return sections
+    .map((sec) => {
+      const html =
+        (sec.paragraphs || []).map((p) => `<p>${esc(p)}</p>`).join('') +
+        list((sec.list || []).map(esc)) +
+        (sec.cards || []).map((c) => `<h3>${esc(c.title)}</h3><p>${esc(c.desc)}</p>`).join('') +
+        list((sec.links || []).map(([href, text]) => link(href, text)))
+      return sec.heading ? section(sec.heading, html) : html
+    })
+    .join('')
+}
+
 // ── Routes ──────────────────────────────────────────────────────────────────
 // Page-specific body content for the static pages listed in PAGE_SEO.
 const staticExtras = {
@@ -205,7 +220,9 @@ const routes = [
     ],
     main: LANDING_PAGES[path]
       ? `<h1>${esc(s.h1 || s.title)}</h1>${landingMain(LANDING_PAGES[path])}`
-      : `<h1>${esc(s.h1 || s.title)}</h1><p>${esc(s.description)}</p>${staticExtras[path]?.() || ''}`,
+      : STATIC_BODIES[path]
+        ? `<h1>${esc(s.h1 || s.title)}</h1>${staticBody(STATIC_BODIES[path])}`
+        : `<h1>${esc(s.h1 || s.title)}</h1><p>${esc(s.description)}</p>${staticExtras[path]?.() || ''}`,
     priority: path === '/' ? '1.0' : '0.8',
     changefreq: path === '/blogs' || path === '/' ? 'weekly' : 'monthly',
     lastmod: path === '/blogs' || path === '/' ? blogs[0] && day(blogs[0].created_at) : undefined,
